@@ -1,0 +1,9 @@
+Name und Rechtsform des Unternehmens
+Adresse des Unternehmens
+Kontaktdaten, einschließlich E-Mail-Adresse und Telefonnummer
+Handelsregisternummer und das Registergericht
+Umsatzsteuer-Identifikationsnummer, falls vorhanden
+Informationen über die zuständige Aufsichtsbehörde, falls zutreffend
+Berufsbezeichnung und Kammer, falls zutreffend
+Allgemeine Geschäftsbedingungen (AGB), falls vorhanden
+Datenschutzerklärung
