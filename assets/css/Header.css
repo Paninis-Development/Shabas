@@ -2,6 +2,35 @@
     text-align: center;
     padding: 20px;
 }
+.logo-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.dropdown-container {
+    display: flex;
+    justify-content: flex-end;
+}
 #headercontainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #03061B;
+}
+
+.navbar {
+    background-color: #03061B;
+    overflow: hidden;
+}
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
 }

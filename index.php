@@ -1,3 +1,7 @@
+<?php 
+include_once __DIR__ . '../config/config.php';
+
+?>
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
     <head>
@@ -9,8 +13,8 @@
         <main class="container">
         <div class="bg-body-tertiary p-5 rounded">
             <?php
-            include_once('scripts/function/function.php');
-            getSite('Startseite');
+            include('./scripts/Startseite.php');
+
             ?>
         </div>
         </main>
