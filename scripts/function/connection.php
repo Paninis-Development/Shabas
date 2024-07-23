@@ -90,7 +90,6 @@ class DatabaseConnection
         $randomBytes = random_bytes(64);
         $token = bin2hex($randomBytes);
         $sha256Token = hash('sha256', $token);
-
         $hashedPassword = $this->hash_password($password);
         
         try

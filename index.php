@@ -10,14 +10,12 @@ include_once __DIR__ . '../config/config.php';
     </script>
     </head>
     <body>
-        <main class="container">
-        <div class="bg-body-tertiary p-5 rounded">
+       
             <?php
             include('./scripts/Startseite.php');
 
             ?>
-        </div>
-        </main>
+
         <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

@@ -4,25 +4,16 @@ include_once('./function/function.php');
 
 include_once __DIR__ . '/../config/config.php';
 date_default_timezone_set('UTC');
-// $date = date('Y/m/d');
-//datepicker
-// $ben_id = $_SESSION['ben_id'];
+
 if (isset($_POST['date'])) {
     $date = $_POST['date'];
     setcookie("DateCookie", $date, time() + 1000, "/");
 } else if (isset($_COOKIE['DateCookie'])) {
-    // Retrieve the value of the cookie
     $cookieValue = $_COOKIE['DateCookie'];
-    $date = $cookieValue; // Output the value of the cookie
+    $date = $cookieValue;
 } else {
     $date = date('Y-m-d', strtotime('+1 days'));
 }
-
-// $db = new DatabaseConnection();
-// $appointment = $db->getAppointment();
-// echo $appointment;
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +24,9 @@ if (isset($_POST['date'])) {
     <title>Termin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="./assets/css/Termin.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <header>
     <?php include(BASE_DIR . '/scripts/Header.php'); ?>
@@ -43,28 +37,25 @@ if (isset($_POST['date'])) {
         <?php
         // Fetch dates from your database
         $dates = getOpeningDays(); // replace this with your function to fetch dates
+
+        // Convert PHP array to JavaScript array
+        $datesArray = json_encode($dates);
         ?>
 
         <script>
-            // Pass PHP dates array to JavaScript array
-            var enableDays = <?php echo json_encode($dates); ?>;
+            $(function() {
+                var openingDates = <?php echo $datesArray; ?>;
 
-            function disableDates(date) {
-                var formattedDate = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                return [enableDays.indexOf(formattedDate) != -1];
-            }
-
-            jQuery(function() {
-                jQuery("#datePicker").datepicker({
-                    beforeShowDay: disableDates,
-                    minDate: new Date('<?php echo date('Y-m-d'); ?>'),
-                    dateFormat: 'yy-mm-dd'
+                $("#datePicker").datepicker({
+                    beforeShowDay: function(date) {
+                        var formattedDate = $.datepicker.formatDate('yy-mm-dd', date);
+                        return [openingDates.indexOf(formattedDate) != -1];
+                    }
                 });
             });
         </script>
-        <input type="date" name="date" id="datePicker" min="<?php echo date('Y-m-d'); ?>" style="border: 1px solid black; padding: 10px; margin: 10px;">
 
-        <!-- <input type="date" name="date" id="datePicker" value="<?php echo $date; ?>" min="<?php echo date('Y-m-d', strtotime('+7 days')); ?>" max="<?php echo date('Y-m-d', strtotime('+3 weeks')); ?>" style=" border: 1px solid black; padding: 10px; margin: 10px;"> -->
+        <input type="date" name="date" id="datePicker" value="<?php echo $date; ?>" min="<?php echo date('Y-m-d'); ?>" style="border: 1px solid black; padding: 10px; margin: 10px;">
 
         <select name="myComboBox">
             <?php
@@ -85,12 +76,14 @@ if (isset($_POST['date'])) {
                 $openingTime->add($interval);
             }
             ?>
-
-
         </select>
         <input type="submit" value="Submit">
     </form>
-
+    <script>
+        document.getElementById('datePicker').addEventListener('change', function() {
+            document.getElementById('dateForm').submit();
+        });
+    </script>
 </body>
 
-</html>
+</htm

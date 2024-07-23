@@ -13,8 +13,7 @@ include_once __DIR__ . '/../config/config.php';
     <link href="assets/css/Startseite.css" rel="stylesheet">
 </head>
 <header>
-    <?php include(BASE_DIR . './scripts/Header.php');
- ?>
+    <?php include(BASE_DIR . './scripts/Header.php'); ?>
 </header>
 
 <body>
