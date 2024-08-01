@@ -1,5 +1,5 @@
 <?php 
-include_once __DIR__ . '../config/config.php';
+// include_once __DIR__ . '../config/config.php';
 
 ?>
 <!doctype html>
@@ -12,7 +12,7 @@ include_once __DIR__ . '../config/config.php';
     <body>
        
             <?php
-            include('./scripts/Startseite.php');
+            include('./Startseite.php');
 
             ?>
 

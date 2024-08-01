@@ -1,14 +1,14 @@
 <?php
-require_once('connection.php');
+require_once('./connection.php');
 
-function getSite($site)
-{
-    if(isset($_GET['site'])){
-        include_once('scripts/'.$_GET['site'].'.php');
-    } else{
-        include_once('scripts/'.$site.'.php');
-    }
-}
+// function getSite($site)
+// {
+//     if(isset($_GET['site'])){
+//         include_once('scripts/'.$_GET['site'].'.php');
+//     } else{
+//         include_once('scripts/'.$site.'.php');
+//     }
+// }
 
 function checkUserData(){
     if(isset($_POST['login'])){
@@ -57,6 +57,23 @@ function isAdmin(){
     return ($result['rolle_idrolle'] == 1);
 
 }
+
+function checkUser($email, $password) {
+
+
+$db = new DatabaseConnection();
+$query= 'SELECT * FROM admin WHERE Username = ? AND Password = ?';
+
+    $validEmail = "";  
+    $validPassword = "password123";
+
+    if ($email === $validEmail && $password === $validPassword) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 function getOpeningDays() {
     $db = new DatabaseConnection();
