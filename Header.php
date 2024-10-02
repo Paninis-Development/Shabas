@@ -30,7 +30,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Admin Panel</a>
+                    <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+                        <a class="nav-link" href="admin_panel.php">Admin Panel</a>
+                    <?php else: ?>
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="<?php $loggedIn ?>">Admin Panel</a>
+                    <?php endif; ?>
                 </li>
             </ul>
         </div>
@@ -41,8 +45,6 @@
             document.getElementById("Impressum-Section").open = true;
         }
     </script>
-
-
 </body>
 
 </html>

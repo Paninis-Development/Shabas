@@ -1,19 +1,25 @@
 <?php
+session_start();
+require_once ('./function.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $email = $_POST['email'] ?? '';
   $password = $_POST['password'] ?? '';
-echo "asdfjkaslf";
-  // $isValid = checkUser($email, $password);
+
+  $isValid = checkUser($email, $password);
 
   if ($isValid) {
+      $_SESSION['loggedin'] = true; // Set session variable for login status
+      $_SESSION['user_email'] = $email; // Optional: store user email or other info
       $message = "Login successful!";
-      // Redirect or perform actions upon successful login.
+      header('Location: index.php'); // Redirect to the homepage or admin panel
+      exit;
   } else {
       $message = "Invalid email or password.";
   }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

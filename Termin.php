@@ -1,21 +1,34 @@
 <?php
 include_once('./connection.php');
 include_once('./function.php');
-// phpinfo();
 
-// include_once __DIR__ . '/../config/config.php';
-// date_default_timezone_set('UTC');
+// Get the available opening days
+$allowedDates = getOpeningDays();
 
-// if (isset($_POST['date'])) {
-//     $date = $_POST['date'];
-//     setcookie("DateCookie", $date, time() + 1000, "/");
-// } else if (isset($_COOKIE['DateCookie'])) {
-//     $cookieValue = $_COOKIE['DateCookie'];
-//     $date = $cookieValue;
-// } else {
-//     $date = date('Y-m-d', strtotime('+1 days'));
-// }
+// Check if a date was submitted and sanitize the input
+$selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Sanitize form inputs
+    $date = htmlspecialchars($_POST['date']);
+    $slot = htmlspecialchars($_POST['timeSlot']); // Assuming timeSlot is the name of the select field
+    $name = htmlspecialchars($_POST['customer_name']);
+    $email = htmlspecialchars($_POST['customer_email']);
+    $phone = htmlspecialchars($_POST['customer_phone']);
+    
+    // Extract start and end times from the selected slot
+    list($startTime, $endTime) = explode('-', $slot);
+
+    // Save the appointment
+    if (saveAppointment($date, $startTime, $endTime, $name, $email, $phone)) {
+        echo "Appointment saved successfully!";
+    } else {
+        echo "Error saving appointment!";
+    }
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +42,7 @@ include_once('./function.php');
         #combobox {
             display: none;
         }
+
         #nameAndEmail {
             display: none;
         }
@@ -40,71 +54,99 @@ include_once('./function.php');
 </header>
 
 <body>
-    <form action="">
-        <input type="text" id="datepicker" placeholder="Select a date" class="placeholder">
+
+    <!-- Debugging: Output the value of the selected date -->
+    <?php
+    if ($selectedDate) {
+        echo "<p>Debug: Selected Date = " . $selectedDate . "</p>"; // Debugging output
+    }
+    ?>
+
+    <form action="" method="GET">
+        <!-- The datepicker input field -->
+        <input type="text" id="datepicker" name="date" placeholder="Select a date" class="placeholder" value="<?php echo $selectedDate; ?>" required>
+
+        <!-- Time slot combobox -->
         <div id="combobox">
-            <label for="options">Choose an option:</label>
             <select id="options">
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                <?php
+                if ($selectedDate) {
+                    if (strtotime($selectedDate)) {
+                        $times = getOpeningClosingTime($selectedDate);
+                       
+                        if (!empty($times)) {
+                            // Generate time slots with availability check
+                            $timeSlots = generateTimeSlotsWithAvailability($times['openTime'], $times['closeTime'], $selectedDate);
+                
+                            foreach ($timeSlots as $slot) {
+                                echo $slot;
+                            }
+                        } else {
+                            echo "<option value='no-time'>No opening hours available</option>";
+                        }
+                    } else {
+                        echo "<option value='invalid-date'>Invalid date format</option>";
+                    }
+                } else {
+                    echo "<option value=''>Please select a date</option>";
+                }
+                
+                ?>
             </select>
         </div>
+
+        <!-- Name and email fields -->
         <div id="nameAndEmail">
-            <form>
-                <div class="form-group">
-                    <label for="customerNameForm">Customer Name</label>
-                    <input type="text" class="form-control" id="customerNameForm" placeholder="Name *" required>
-                </div>
-                <div class="form-group">
-                    <label for="customerMailForm">Customer Mail</label>
-                    <input type="email" class="form-control" id="customerMailForm" placeholder="Email *" required>
-                </div>
-                <div class="form-group">
-                    <label for="customerPhoneNrForm">Customer phone number</label>
-                    <input type="text" class="form-control" id="customerPhoneNrForm" placeholder="Phone Number">
-                </div>
+            <div class="form-group">
+                <label for="customerNameForm">Customer Name</label>
+                <input type="text" class="form-control" id="customerNameForm" placeholder="Name *" required>
+            </div>
+            <div class="form-group">
+                <label for="customerMailForm">Customer Mail</label>
+                <input type="email" class="form-control" id="customerMailForm" placeholder="Email *" required>
+            </div>
+            <div class="form-group">
+                <label for="customerPhoneNrForm">Customer phone number</label>
+                <input type="text" class="form-control" id="customerPhoneNrForm" placeholder="Phone Number">
+            </div>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                // Check if jQuery and jQuery UI are loaded
-                if (typeof jQuery === 'undefined') {
-                    console.error("jQuery not loaded");
-                } else {
-                    console.log("jQuery loaded");
-                }
-
-                if (typeof jQuery.ui === 'undefined') {
-                    console.error("jQuery UI not loaded");
-                } else {
-                    console.log("jQuery UI loaded");
-                }
-
-                const allowedDates = ['2024-08-02', '2024-08-07'];
-
-                function enableSpecificDates(date) {
-                    const formattedDate = $.datepicker.formatDate('yy-mm-dd', date);
-                    if (allowedDates.includes(formattedDate)) {
-                        return [true, "", "Available"];
-                    }
-                    return [false, "", "Unavailable"];
-                }
-
-                $("#datepicker").datepicker({
-                    beforeShowDay: enableSpecificDates,
-                    dateFormat: 'yy-mm-dd',
-                    onSelect: function(dateText, inst) {
-                        $('#combobox').show();
-                        $('#nameAndEmail').show();
-                    }
-                });
-            });
-        </script>
         <input type="submit" value="Submit Form">
     </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const allowedDates = <?php echo json_encode($allowedDates); ?>;
+            const selectedDate = "<?php echo $selectedDate; ?>"; // Get the selected date from PHP
+
+            // Function to enable only specific dates
+            function enableSpecificDates(date) {
+                const formattedDate = $.datepicker.formatDate('yy-mm-dd', date);
+                if (allowedDates.includes(formattedDate)) {
+                    return [true, "", "Available"];
+                }
+                return [false, "", "Unavailable"];
+            }
+
+            // Initialize the datepicker
+            $("#datepicker").datepicker({
+                beforeShowDay: enableSpecificDates,
+                dateFormat: 'yy-mm-dd',
+                onSelect: function(dateText, inst) {
+                    // Auto-submit the form when a date is selected
+                    $('form').submit();
+                }
+            });
+
+            // If a date is already selected, show the combobox and name/email fields
+            if (selectedDate) {
+                $('#combobox').show();
+                $('#nameAndEmail').show();
+            }
+        });
+    </script>
 </body>
 
 </html>
