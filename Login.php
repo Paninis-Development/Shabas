@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once ('./function.php');
+require_once('./function.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $email = $_POST['email'] ?? '';
@@ -9,13 +9,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $isValid = checkUser($email, $password);
 
   if ($isValid) {
-      $_SESSION['loggedin'] = true; // Set session variable for login status
-      $_SESSION['user_email'] = $email; // Optional: store user email or other info
-      $message = "Login successful!";
-      header('Location: index.php'); // Redirect to the homepage or admin panel
-      exit;
+    $_SESSION['loggedin'] = true; // Set session variable for login status
+    $_SESSION['user_email'] = $email; // Optional: store user email or other info
+    $message = "Login successful!";
+    header('Location: index.php'); // Redirect to the homepage or admin panel
+    exit;
   } else {
-      $message = "Invalid email or password.";
+    $message = "Invalid email or password.";
   }
 }
 ?>
@@ -45,7 +45,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               <div class="card-body p-5 text-center">
 
                 <div class="mb-md-5 mt-md-4 pb-5">
-
+                  <a class="logo" href="./index.php">
+                    <?php $imagePath = '/assets/images/shababs-logo.jpg'; ?>
+                    <img src="<?php echo $imagePath; ?>" alt="Logo" style="width:100px;height:100px;" />
+                  </a>
+                  <style>
+                    img {
+                      margin-bottom: 15px;
+                    }
+                  </style>
                   <h2 class="fw-bold mb-2 text-uppercase">Shababs Chef</h2>
                   <p class="text-white-50 mb-5">Gib deine Anmeldedaten ein G!!</p>
 

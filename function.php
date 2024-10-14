@@ -154,26 +154,22 @@ function getOpeningClosingTime($date)
 
 function generateTimeSlotsWithAvailability($openTime, $closeTime, $date) {
     $slots = [];
-    $interval = 40 * 60; // 40 minutes in seconds
+    $interval = 45 * 60; // 45 minutes in seconds
     $startTime = strtotime($openTime);
     $endTime = strtotime($closeTime);
 
     while ($startTime < $endTime) {
-        $slotStart = date("H:i",   $startTime);
+        $slotStart = date("H:i", $startTime);
         $slotEnd = date("H:i", $startTime + $interval);
 
         // Check if the time slot is available
         if (isSlotAvailable($date, $slotStart, $slotEnd)) {
             $slots[] = "<option value='$slotStart-$slotEnd'>$slotStart - $slotEnd</option>";
-            echo "true";
         } else {
             // Slot is taken, disable the option
             $slots[] = "<option value='$slotStart-$slotEnd' disabled>$slotStart - $slotEnd (Taken)</option>";
-            echo "false";
         }
-        
 
-    
         // Move to the next time slot
         $startTime += $interval;
     }
@@ -182,13 +178,19 @@ function generateTimeSlotsWithAvailability($openTime, $closeTime, $date) {
 }
 
 
+
 function isSlotAvailable($date, $startTime, $endTime) {
     $db = new DatabaseConnection();
     
     // Query to check if any appointment overlaps with the selected time slot on the specified date
-    $query = "SELECT COUNT(*) as count FROM appointments 
-              WHERE appointment_date = ? 
-              AND (start_time < ? AND end_time > ?)";
+    $query = "SELECT COUNT(*) as count 
+    FROM appointments 
+    WHERE appointment_date = ? 
+    AND (
+        (start_time < ? AND end_time > ?)  -- Appointment wraps around the slot
+        OR (start_time >= ? AND start_time < ?) -- Slot starts during an appointment
+        OR (end_time > ? AND end_time <= ?) -- Slot ends during an appointment
+    )";
     
     // The time range you want to check
     $params = array($date, $endTime, $startTime);

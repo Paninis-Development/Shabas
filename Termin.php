@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Date Picker</title>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="assets/css/Termin.css" rel="stylesheet">
     <style>
         #combobox {
             display: none;
@@ -57,10 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <!-- Debugging: Output the value of the selected date -->
     <?php
-    if ($selectedDate) {
-        echo "<p>Debug: Selected Date = " . $selectedDate . "</p>"; // Debugging output
-    }
-    ?>
+    // if ($selectedDate) {
+    //     echo "<p>Debug: Selected Date = " . $selectedDate . "</p>"; // Debugging output
+    // }
+    // ?>
 
     <form action="" method="GET">
         <!-- The datepicker input field -->
@@ -68,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <!-- Time slot combobox -->
         <div id="combobox">
-            <select id="options">
+            <select id="options" required>
                 <?php
                 if ($selectedDate) {
                     if (strtotime($selectedDate)) {
