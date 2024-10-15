@@ -52,7 +52,8 @@ function checkUser($email, $password)
     $array = array($email);
     $stmt = $db->makeStatement($query, $array);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    // hash pw for new pw
+    // echo password_hash($password, PASSWORD_DEFAULT);
     // Check if the user exists
     if ($result) {
         // Fetch the hashed password from the database
@@ -64,7 +65,7 @@ function checkUser($email, $password)
             return true;
         }
     }
-$loggedIn = false;
+    $loggedIn = false;
     // Return false if the user doesn't exist or the password is incorrect
     return false;
 }
@@ -72,7 +73,7 @@ $loggedIn = false;
 
 function getOpeningDays()
 {
-    $db = new DatabaseConnection();   
+    $db = new DatabaseConnection();
 
 
     $query = "Select opening_date from openinghours;";
@@ -118,7 +119,7 @@ function getClosingTime($date)
 
 function getOpeningClosingTime($date)
 {
-   
+
     $db = new DatabaseConnection();
     $query = "SELECT open_time, close_time FROM openinghours WHERE opening_date = ?;";
     $array = array($date);
@@ -152,7 +153,8 @@ function getOpeningClosingTime($date)
 // }
 
 
-function generateTimeSlotsWithAvailability($openTime, $closeTime, $date) {
+function generateTimeSlotsWithAvailability($openTime, $closeTime, $date)
+{
     $slots = [];
     $interval = 45 * 60; // 45 minutes in seconds
     $startTime = strtotime($openTime);
@@ -179,9 +181,10 @@ function generateTimeSlotsWithAvailability($openTime, $closeTime, $date) {
 
 
 
-function isSlotAvailable($date, $startTime, $endTime) {
+function isSlotAvailable($date, $startTime, $endTime)
+{
     $db = new DatabaseConnection();
-    
+
     // Query to check if any appointment overlaps with the selected time slot on the specified date
     $query = "SELECT COUNT(*) as count 
     FROM appointments 
@@ -191,28 +194,80 @@ function isSlotAvailable($date, $startTime, $endTime) {
         OR (start_time >= ? AND start_time < ?) -- Slot starts during an appointment
         OR (end_time > ? AND end_time <= ?) -- Slot ends during an appointment
     )";
-    
+
     // The time range you want to check
     $params = array($date, $endTime, $startTime);
-    
+
     $stmt = $db->makeStatement($query, $params);
-    
+
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
     // If count > 0, the slot is taken
     return $result['count'] == 0;
 }
 
-function saveAppointment($date, $startTime, $endTime, $name, $email, $phone) {
+function saveAppointment($date, $startTime, $endTime, $name, $email, $phone)
+{
     $db = new DatabaseConnection();
 
     // Insert the appointment into the database
     $query = "INSERT INTO appointments (appointment_date, start_time, end_time, customer_name, customer_email, customer_phone) 
               VALUES (?, ?, ?, ?, ?, ?)";
-    
+
     $params = array($date, $startTime, $endTime, $name, $email, $phone);
-    
+
     $stmt = $db->makeStatement($query, $params);
 
     return $stmt;
+}
+
+function getAppointmentDetails($date)
+{
+    $db = new DatabaseConnection();
+
+    $query = "SELECT appointment_date , start_time , end_time , customer_email , customer_phone FROM appointment WHERE appointment_date = ?";
+
+    if ($date !== null){
+        $stmt = $db->makeStatementArray($query, $date);
+        return $stmt;
+    } else {
+        return null;            
+    }
+
+
+    // $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// $stmt = $this->con->prepare("SELECT appointment_date , start_time , end_time , customer_email , customer_phone FROM appointment WHERE appointment_date = $date");
+
+// $stmt->execute();
+
+// // holen aller gerichte
+// $appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// if ($appointments != null) {
+//     return $appointments;
+// } else {
+//     return false;
+// }
+
+function saveOpeningHours($date, $openingTime, $closingTime) {
+    global $pdo;
+
+    try {
+        // Insert the opening hours into the openinghours table
+        $query = "INSERT INTO openinghours (opening_date, open_time, close_time) VALUES (:date, :opening_time, :closing_time)";
+        $stmt = $pdo->prepare($query);
+
+        // Bind parameters
+        $stmt->bindParam(':date', $date);
+        $stmt->bindParam(':opening_time', $openingTime);
+        $stmt->bindParam(':closing_time', $closingTime);
+
+        // Execute the query
+        return $stmt->execute();
+    } catch (PDOException $e) {
+        // Log or handle errors
+        return false;
+    }
 }

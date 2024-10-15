@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['loggedin'] = true; // Set session variable for login status
     $_SESSION['user_email'] = $email; // Optional: store user email or other info
     $message = "Login successful!";
-    header('Location: index.php'); // Redirect to the homepage or admin panel
+    header('Location: adminPage.php'); // Redirect to the homepage or admin panel
     exit;
   } else {
     $message = "Invalid email or password.";

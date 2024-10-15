@@ -33,9 +33,9 @@
                 </li>
                 <li class="nav-item">
                     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-                        <a class="nav-link" href="admin_panel.php">Admin Panel</a>
+                        <a class="nav-link" href="adminPage.php">Admin Panel</a>
                     <?php else: ?>
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="<?php $loggedIn ?>">Admin Panel</a>
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="<?php $loggedin ?>">Admin Panel</a>
                     <?php endif; ?>
                 </li>
             </ul>

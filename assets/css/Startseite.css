@@ -14,8 +14,12 @@ td {
     width: 50%;
     margin: auto;
     border: 1px solid black;
-}
+    text-align: center;
 
+}
+tr{
+    text-align: left;
+}
 
 
 /* Pulse animation */
@@ -73,3 +77,19 @@ h2 {
     text-align: center;
 }
 
+#Öffnungszeiten-Section {
+    padding-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin: auto;
+    max-width: 1000px;
+    
+}
+
+#carouselExampleSlidesOnly {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    max-width: 70%;
+}

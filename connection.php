@@ -26,21 +26,21 @@ class DatabaseConnection
     }
 
 
-    function getAppointment()
-    {
-        $stmt = $this->con->prepare("SELECT * from Appointment");
+    // function getAppointmentDetails($date)
+    // {
+    //     $stmt = $this->con->prepare("SELECT appointment_date , start_time , end_time , customer_email , customer_phone FROM appointment WHERE appointment_date = $date");
 
-        $stmt->execute();
+    //     $stmt->execute();
 
-        // holen aller gerichte
-        $appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //     // holen aller gerichte
+    //     $appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        if ($appointments != null) {
-            return $appointments;
-        } else {
-            return false;
-        }
-    }
+    //     if ($appointments != null) {
+    //         return $appointments;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     function checkUser($email, $password)
     {
@@ -145,4 +145,25 @@ class DatabaseConnection
             return $e;
         }
     }  
+    function makeStatementArray($query, $array = null)
+    {
+        try
+        {
+            $stmt = $this->con->prepare($query);
+            
+            // If a single parameter is passed, wrap it in an array
+            if ($array !== null) {
+                $stmt->execute([$array]); // Ensure the argument is an array
+            } else {
+                $stmt->execute();
+            }
+    
+            return $stmt;
+        } catch(Exception $e)
+        {
+            return $e;
+        }
+    }
+    
+
 }
