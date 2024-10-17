@@ -10,7 +10,7 @@ body {
 
 
 /* Form styling */
-form {
+#termin-div {
     max-width: 500px;
     margin: 50px auto;
     background-color: #1e1e1e;
@@ -50,7 +50,12 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #0056b3;
 }
+/* Datepicker weekdays styling */
+.ui-datepicker th {
+    color: white; /* Weekday text color */
+}
 
+/* General Datepicker styling */
 #datepicker {
     background-color: #333;
     color: #fff;
@@ -67,13 +72,13 @@ input[type="submit"]:hover {
 }
 
 /* Make sure the calendar days have a readable color */
- .ui-datepicker-calendar td a {
+.ui-datepicker-calendar td a {
     background-color: #444;
     color: #f0f0f0;
 } 
 
 .ui-datepicker-calendar td a:hover {
-    background-color: #555;
+    background-color: white;
 }
 
 /* Datepicker header */
@@ -91,10 +96,9 @@ input[type="submit"]:hover {
 
 /* Make the next and previous buttons visible */
 .ui-datepicker-prev, .ui-datepicker-next {
-    background-color: #777777; /* Button background color */
+    background-color: white; /* Button background color */
     border-radius: 5px;
 }
-
 
 /* Arrows for next and prev buttons */
 .ui-datepicker-prev span, .ui-datepicker-next span {
@@ -103,3 +107,23 @@ input[type="submit"]:hover {
 }
 
 
+
+
+/* Combobox styling */
+#combobox select {
+    background-color: #333;
+    color: #f0f0f0;
+    margin-top: 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+}
+
+
+/* Name and email fields spacing */
+#nameAndEmail input {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}

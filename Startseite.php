@@ -19,7 +19,7 @@
 <body>
 
     <button onclick="location.href='./Termin.php'" id="termin-buchen-button" , class="pulse">VIP Termin buchen</button>
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <!-- <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <video class="img-fluid" autoplay loop muted>
@@ -42,7 +42,7 @@
                 </video>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 

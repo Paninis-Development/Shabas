@@ -1,48 +1,6 @@
 <?php
 require_once('./connection.php');
 
-// function getSite($site)
-// {
-//     if(isset($_GET['site'])){
-//         include_once('scripts/'.$_GET['site'].'.php');
-//     } else{
-//         include_once('scripts/'.$site.'.php');
-//     }
-// }
-
-// function checkUserData()
-// {
-//     if (isset($_POST['login'])) {
-//         $email = $_POST['email'];
-//         $password = $_POST['password'];
-
-//         $db = new DatabaseConnection();
-//         if ($db->checkUser($email, $password)) {
-//             if (!($db->isAccepted($email, $password))) {
-//                 echo '<p style="color:red;font-size:12px"><b>Benutzer wurde noch nicht durch einen Admin bestätigt!</b></p>';
-//             } else {
-//                 global $ben_id;
-
-//                 $query = "select ben_id from benutzer where mail=?";
-//                 $array = array($email);
-//                 $stmt = $db->makeStatement($query, $array);
-//                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
-//                 $id = $result['ben_id'];
-
-//                 $ben_id = $id;
-//                 if () {
-//                     header("Location: /mealmaster_web/Admin/scripts/admin.php");
-//                 } else {
-//                     header("Location: /mealmaster_web/Student/scripts/student.php"); //schüler seite
-//                 }
-//                 $_SESSION['ben_id'] = $ben_id;
-//                 exit;
-//             }
-//         } else {
-//             echo '<p style="color:red;font-size:12px"><b>Bitte geben Sie gültige Daten ein!</b></p>';
-//         }
-//     }
-// }
 
 
 function checkUser($email, $password)
@@ -119,7 +77,6 @@ function getClosingTime($date)
 
 function getOpeningClosingTime($date)
 {
-
     $db = new DatabaseConnection();
     $query = "SELECT open_time, close_time FROM openinghours WHERE opening_date = ?;";
     $array = array($date);
@@ -127,36 +84,21 @@ function getOpeningClosingTime($date)
 
     $openCloseTimes = [];
     if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $openCloseTimes['openTime'] = $row['OpenTime'];
-        $openCloseTimes['closeTime'] = $row['CloseTime'];
+        // Use the correct column names from the database
+        $openCloseTimes['openTime'] = $row['open_time'];
+        $openCloseTimes['closeTime'] = $row['close_time'];
     }
 
     return $openCloseTimes;
 }
 
-// function generateTimeSlots($openTime, $closeTime, $interval = 45)
-// {
-//     $timeSlots = [];
-//     $current = strtotime($openTime);
-//     $end = strtotime($closeTime);
 
-//     while ($current < $end) {
-//         $startTime = date('H:i', $current);
-//         $current = strtotime("+$interval minutes", $current);
-//         if ($current <= $end) {
-//             $endTime = date('H:i', $current);
-//             $timeSlots[] = "$startTime - $endTime";
-//         }
-//     }
-
-//     return $timeSlots;
-// }
 
 
 function generateTimeSlotsWithAvailability($openTime, $closeTime, $date)
 {
     $slots = [];
-    $interval = 45 * 60; // 45 minutes in seconds
+    $interval = 40 * 60; // 45 minutes in seconds
     $startTime = strtotime($openTime);
     $endTime = strtotime($closeTime);
 
@@ -165,11 +107,11 @@ function generateTimeSlotsWithAvailability($openTime, $closeTime, $date)
         $slotEnd = date("H:i", $startTime + $interval);
 
         // Check if the time slot is available
-        if (isSlotAvailable($date, $slotStart, $slotEnd)) {
+        if(isSlotAvailable($date, $slotStart, $slotEnd)) {
             $slots[] = "<option value='$slotStart-$slotEnd'>$slotStart - $slotEnd</option>";
         } else {
             // Slot is taken, disable the option
-            $slots[] = "<option value='$slotStart-$slotEnd' disabled>$slotStart - $slotEnd (Taken)</option>";
+            $slots[] = "<option value='$slotStart-$slotEnd' disabled>$slotStart - $slotEnd (Vergeben)</option>";
         }
 
         // Move to the next time slot
@@ -185,25 +127,34 @@ function isSlotAvailable($date, $startTime, $endTime)
 {
     $db = new DatabaseConnection();
 
-    // Query to check if any appointment overlaps with the selected time slot on the specified date
-    $query = "SELECT COUNT(*) as count 
-    FROM appointments 
-    WHERE appointment_date = ? 
-    AND (
-        (start_time < ? AND end_time > ?)  -- Appointment wraps around the slot
-        OR (start_time >= ? AND start_time < ?) -- Slot starts during an appointment
-        OR (end_time > ? AND end_time <= ?) -- Slot ends during an appointment
-    )";
+    // Wrap the database interaction in a try-catch block
+    try {
+        // Query to check if any appointment overlaps with the selected time slot on the specified date
+        $query = "SELECT COUNT(*) as count 
+        FROM appointment 
+        WHERE appointment_date = ? 
+        AND (
+            (start_time < ? AND end_time > ?)  
+            OR (start_time >= ? AND start_time < ?) 
+            OR (end_time > ? AND end_time <= ?) 
+        )";
 
-    // The time range you want to check
-    $params = array($date, $endTime, $startTime);
+        // Pass the correct number of parameters for each placeholder
+        $params = array($date, $endTime, $startTime, $startTime, $endTime, $startTime, $endTime);
 
-    $stmt = $db->makeStatement($query, $params);
+        // Execute the query
+        $result = $db->executeisSlotAvailable($query, $params);
 
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Fetch the result
 
-    // If count > 0, the slot is taken
-    return $result['count'] == 0;
+        // If count > 0, the slot is taken
+        return $result['count'] == 0;
+        
+    } catch (PDOException $e) {
+        // Log or handle the error as necessary
+        echo "Error checking slot availability: " . $e->getMessage();
+        return false; // Return false in case of an error
+    }
 }
 
 function saveAppointment($date, $startTime, $endTime, $name, $email, $phone)
@@ -225,7 +176,7 @@ function getAppointmentDetails($date)
 {
     $db = new DatabaseConnection();
 
-    $query = "SELECT appointment_date , start_time , end_time , customer_email , customer_phone FROM appointment WHERE appointment_date = ?";
+    $query = "SELECT customer_name, start_time, end_time, customer_email, customer_phone, appointment_date FROM appointment WHERE appointment_date = ?";
 
     if ($date !== null){
         $stmt = $db->makeStatementArray($query, $date);
@@ -235,39 +186,37 @@ function getAppointmentDetails($date)
     }
 
 
-    // $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// $stmt = $this->con->prepare("SELECT appointment_date , start_time , end_time , customer_email , customer_phone FROM appointment WHERE appointment_date = $date");
 
-// $stmt->execute();
 
-// // holen aller gerichte
-// $appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// if ($appointments != null) {
-//     return $appointments;
-// } else {
-//     return false;
-// }
-
-function saveOpeningHours($date, $openingTime, $closingTime) {
-    global $pdo;
+function saveOpeningHours($opendate, $openingTime, $closingTime) {
+    
+    $db = new DatabaseConnection();
 
     try {
         // Insert the opening hours into the openinghours table
-        $query = "INSERT INTO openinghours (opening_date, open_time, close_time) VALUES (:date, :opening_time, :closing_time)";
-        $stmt = $pdo->prepare($query);
+        $query = "INSERT INTO openinghours (opening_date, open_time, close_time) VALUES ($opendate, $openingTime, $closingTime)";
+    
 
-        // Bind parameters
-        $stmt->bindParam(':date', $date);
-        $stmt->bindParam(':opening_time', $openingTime);
-        $stmt->bindParam(':closing_time', $closingTime);
-
-        // Execute the query
-        return $stmt->execute();
+        $stmt = $db->makeStatementArray($query);
+        return $stmt;
     } catch (PDOException $e) {
         // Log or handle errors
         return false;
     }
+}
+
+
+function deleteAppointment($appointmentId) {
+
+    $db = new DatabaseConnection();
+
+    $query = "DELETE FROM appointments WHERE appointment_id = ?";
+
+    
+        $stmt = $db->makeStatementArray($query, $appointmentId);
+        return $stmt;
+
+
 }

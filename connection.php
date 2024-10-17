@@ -26,22 +26,6 @@ class DatabaseConnection
     }
 
 
-    // function getAppointmentDetails($date)
-    // {
-    //     $stmt = $this->con->prepare("SELECT appointment_date , start_time , end_time , customer_email , customer_phone FROM appointment WHERE appointment_date = $date");
-
-    //     $stmt->execute();
-
-    //     // holen aller gerichte
-    //     $appointments = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    //     if ($appointments != null) {
-    //         return $appointments;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
     function checkUser($email, $password)
     {
         $hashedPassword = $this->hash_password($password);
@@ -164,6 +148,18 @@ class DatabaseConnection
             return $e;
         }
     }
-    
+    function executeisSlotAvailable($query, $array = null)
+    {
+        try
+        {
+            $stmt = $this->con->prepare($query);
+            $stmt->execute($array);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } catch(Exception $e)
+        {
+            return $e;
+        }
+    }
 
 }

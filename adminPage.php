@@ -7,40 +7,6 @@ $allowedDates = getOpeningDays();
 
 // Check if a date was submitted and sanitize the input
 $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Check if this form submission is for saving opening hours
-    if (isset($_POST['opening_time']) && isset($_POST['closing_time']) && $selectedDate) {
-        // Sanitize form inputs
-        $openingTime = htmlspecialchars($_POST['opening_time']);
-        $closingTime = htmlspecialchars($_POST['closing_time']);
-
-        // Save the opening hours to the database
-        if (saveOpeningHours($selectedDate, $openingTime, $closingTime)) {
-            echo "Opening hours saved successfully!";
-        } else {
-            echo "Error saving opening hours!";
-        }
-    } else {
-        // Sanitize form inputs for the appointment form
-        $date = htmlspecialchars($_POST['date']);
-        $slot = htmlspecialchars($_POST['timeSlot']);
-        $name = htmlspecialchars($_POST['customer_name']);
-        $email = htmlspecialchars($_POST['customer_email']);
-        $phone = htmlspecialchars($_POST['customer_phone']);
-
-        // Extract start and end times from the selected slot
-        list($startTime, $endTime) = explode('-', $slot);
-
-        // Save the appointment
-        if (saveAppointment($date, $startTime, $endTime, $name, $email, $phone)) {
-            echo "Appointment saved successfully!";
-        } else {
-            echo "Error saving appointment!";
-        }
-    }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -69,12 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         #unavailableDates {
             display: none;
         }
+
         #opening_time {
-            
             background-color: grey;
-        }´
+        }
+
         #closing_time {
-            
             background-color: grey;
         }
     </style>
@@ -85,62 +51,84 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </header>
 
 <body>
-
-    <form action="" method="GET">
-        <!-- The datepicker input field -->
-        <input type="text" id="adminDatepicker" name="date" placeholder="Select a date" class="placeholder" value="<?php echo $selectedDate; ?>" required>
-
+    <div id="admin-div">
+        <!-- Form 1: GET Form for selecting date -->
+        <form id="dateForm" method="GET">
+            <!-- The datepicker input field -->
+            <input type="text" id="adminDatepicker" name="date" placeholder="Select a date" class="placeholder" value="<?php echo $selectedDate; ?>" required>
+        </form>
 
         <!-- Appointment Details Table -->
         <table class="table table-dark table-striped" id="appointmentTable">
             <thead>
                 <tr>
-                    <th>Appointment Date</th>
+                    <th>Customer Name</th>
                     <th>Start Time</th>
                     <th>End Time</th>
-                    <th>Customer Email</th>
-                    <th>Customer Phone</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                if ($selectedDate) {
-                    // Fetch appointment details for the selected date
-                    $appointmentDetails = getAppointmentDetails($selectedDate);
-                    if ($appointmentDetails) {
-                        // Loop through each row of the results and print them in the table
-                        foreach ($appointmentDetails->fetchAll(PDO::FETCH_ASSOC) as $appointment) {
-                            echo "<tr>
-                        <td>{$appointment['appointment_date']}</td>
-                        <td>{$appointment['start_time']}</td>
-                        <td>{$appointment['end_time']}</td>
-                        <td>{$appointment['customer_email']}</td>
-                        <td>{$appointment['customer_phone']}</td>
+                try {
+                    if ($selectedDate) {
+                        // Fetch appointment details for the selected date
+                        $appointmentDetails = getAppointmentDetails($selectedDate);
 
-                    </tr>";
+                        if ($appointmentDetails) {
+                            $appointments = $appointmentDetails->fetchAll(PDO::FETCH_ASSOC);
+
+                            if (!empty($appointments)) {
+                                foreach ($appointments as $appointment) {
+                                    // Check if 'appointment_id' exists, and use it for unique row IDs
+                                    $appointmentId = isset($appointment['appointment_id']) ? $appointment['appointment_id'] : uniqid();
+
+                                    echo "<tr class='main-row' data-toggle='collapse' data-target='#row{$appointmentId}' aria-expanded='false' aria-controls='row{$appointmentId}'>
+                                    <td>{$appointment['customer_name']}</td>
+                                    <td>{$appointment['start_time']}</td>
+                                    <td>{$appointment['end_time']}</td>
+                                </tr>
+                                <tr id='row{$appointmentId}' class='collapse'>
+                                    <td colspan='3'>
+                                        <strong>Email:</strong> {$appointment['customer_email']}<br>
+                                        <strong>Phone:</strong> {$appointment['customer_phone']}<br>
+                                        <strong>Appointment Date:</strong> {$appointment['appointment_date']}<br><br>
+                                        <button class='btn btn-danger' onclick='deleteAppointment({$appointmentId})'>Delete</button>
+                                    </td>
+                                </tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='3'>No appointments found for the selected date.</td></tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='3'>No appointments found for the selected date.</td></tr>";
                         }
-                    } else {
-                        echo "<tr><td colspan='6'>No appointments found for the selected date.</td></tr>";
                     }
+                } catch (PDOException $e) {
+                    echo "<tr><td colspan='3'>Error fetching appointments: " . $e->getMessage() . "</td></tr>";
                 }
                 ?>
             </tbody>
+        </table>
 
-            <div id="unavailableDates">
-                <form action="" method="POST">
-                    <input type="time" id="opening_time" name="opening_time" required>
-                    <label for="opening_time">Opening Time:</label>
-                    <br><br>
+        <!-- Form 2: POST Form for saving opening hours -->
+        <div id="unavailableDates">
+            <form id="hoursForm" action="" method="POST">
+                <input type="hidden" name="action" value="save_hours">
 
-                    <input type="time" id="closing_time" name="closing_time" required>
-                    <label for="closing_time">Closing Time:</label>
-                    <br><br>
+                <input type="time" id="opening_time" name="opening_time" required>
+                <label for="opening_time">Opening Time:</label>
+                <br><br>
 
-                    <input id="openUpButton" type="submit" value="Am <?php echo $selectedDate ?> öffnen?">
+                <input type="time" id="closing_time" name="closing_time" required>
+                <label for="closing_time">Closing Time:</label>
+                <br><br>
 
-                </form>
-            </div>
-    </form>
+                <input type="text" value=<?php $selectedDate ?>>
+
+                <input id="openUpButton" type="submit" value="Am <?php echo $selectedDate ?> öffnen?">
+            </form>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -166,23 +154,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 beforeShowDay: enableSpecificDates,
                 dateFormat: 'yy-mm-dd',
                 onSelect: function(dateText, inst) {
-                    // Auto-submit the form when a date is selected
-                    $('form').submit();
+                    // Submit the GET form with selected date via JavaScript
+                    $('#dateForm').submit();
                 }
             });
 
-            // If a date is already selected, show the table
+            // If a date is already selected, show the appropriate form
             if (selectedDate) {
                 if (allowedDates.includes(selectedDate)) {
-
-                    $('#appointmentTable').show();
+                    $('#appointmentTable').show(); // Show appointment table
                 } else {
-                    $('#unavailableDates').show();
+                    $('#unavailableDates').show(); // Show POST form to set hours
                 }
-
-
             }
+
+            // Function to handle row expansion/collapse
+            function initializeRowToggle() {
+                // Remove existing event handlers to avoid duplicates
+                $('.main-row').off('click');
+
+                // Attach click event for each row to toggle the collapse
+                $('.main-row').on('click', function() {
+                    const target = $(this).data('target');
+                    $(target).toggleClass('collapse');
+                });
+            }
+
+            // Call the function to ensure row toggle works after page load
+            initializeRowToggle();
         });
+
+
+
+        function deleteAppointment(appointmentId) {
+            if (confirm("Are you sure you want to delete this appointment?")) {
+                // AJAX call to trigger the delete function
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "deleteAppointment.php?id=" + appointmentId, true); // Adjust the URL and parameters as needed
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        alert("Appointment deleted successfully!");
+                        // Optionally, you can reload the page or remove the row from the table
+                        location.reload(); // Refresh the page to reflect changes
+                    }
+                };
+                xhr.send();
+            }
+        }
     </script>
 
 </body>
