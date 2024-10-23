@@ -5,16 +5,15 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
     <head>
+    <link rel="icon" type="image/x-icon" href="assets/images/shababs-logo.ico">
+
     <script src="assets/js/color-modes.js">
-    <link rel="icon" href="/mealmaster_web/images/Firmenlogo.png" type="image/x-icon"></link>
     </script>
     </head>
     <body>
-       
             <?php
-            include('./Startseite.php');
+            include('./Startseite2.php');
             ?>
-
         <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

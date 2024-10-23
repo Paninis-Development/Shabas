@@ -1,10 +1,18 @@
+<?php 
+include_once('./function.php');
+
+if(isLoggedIn()) {
+    $loggedIn = true;
+} else {
+    $loggedIn = false;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>header</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -32,10 +40,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+                    <?php if ($loggedIn): ?>
                         <a class="nav-link" href="adminPage.php">Admin Panel</a>
                     <?php else: ?>
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="<?php $loggedin ?>">Admin Panel</a>
+                        <a class="nav-link disabled" href="#" tabindex="-1">Admin Panel</a>
                     <?php endif; ?>
                 </li>
             </ul>

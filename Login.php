@@ -3,7 +3,7 @@ session_start();
 require_once('./function.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $email = $_POST['email'] ?? '';
+  $email = $_POST['email'] ?? ''; 
   $password = $_POST['password'] ?? '';
 
   $isValid = checkUser($email, $password);
@@ -27,11 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Logging Page</title>
-
+  <title>Login</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link href="mealmaster_web/auth/style/LogIn.css" rel="stylesheet">
-  <link rel="icon" href="/mealmaster_web/images/Firmenlogo.png" type="image/x-icon">
+  <link rel="icon" type="image/x-icon" href="assets/images/shababs-logo.ico">
+
 </head>
 
 <body>

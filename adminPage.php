@@ -15,9 +15,10 @@ $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="assets/images/shababs-logo.ico">
     <link href="assets/css/Admin.css" rel="stylesheet">
     <style>
         /* Styling for unavailable dates with red text */
@@ -115,6 +116,7 @@ $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
             <form id="hoursForm" action="" method="POST">
                 <input type="hidden" name="action" value="save_hours">
 
+                <div id="timepickers">
                 <input type="time" id="opening_time" name="opening_time" required>
                 <label for="opening_time">Opening Time:</label>
                 <br><br>
@@ -122,10 +124,10 @@ $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
                 <input type="time" id="closing_time" name="closing_time" required>
                 <label for="closing_time">Closing Time:</label>
                 <br><br>
-
-                <input type="text" value=<?php $selectedDate ?>>
+                </div>
 
                 <input id="openUpButton" type="submit" value="Am <?php echo $selectedDate ?> öffnen?">
+                <input id="closeButton" type="submit" value="Am <?php echo $selectedDate ?> schließen?">
             </form>
         </div>
     </div>
@@ -153,6 +155,7 @@ $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
             $("#adminDatepicker").datepicker({
                 beforeShowDay: enableSpecificDates,
                 dateFormat: 'yy-mm-dd',
+                minDate: 0,
                 onSelect: function(dateText, inst) {
                     // Submit the GET form with selected date via JavaScript
                     $('#dateForm').submit();

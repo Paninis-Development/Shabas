@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+body {
+    
+}
+
+table {
+    width: 100%;
+}
+
+th,
+td {
+    padding: 15px;
+    text-align: left;
+}
+
+.table {
+    width: 50%;
+    margin: auto;
+    border: 1px solid black;
+    text-align: center;
+
+}
+tr{
+    text-align: left;
+}
+
+
+/* Pulse animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgb(8, 0, 81);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 20px rgba(252, 69, 102, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(252, 69, 102, 0);
+    }
+}
+
+/* Styling for the button */
+#termin-buchen-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Adding the pulse animation to the button */
+#termin-buchen-button.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Optional: Change the button color on hover */
+/* #termin-buchen-button:hover {
+    animation:  1s infinite;
+} */
+
+
+h2 {
+    padding-top: 40px;
+    text-align: center;
+}
+
+#Impressum-Section {
+    padding-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#Öffnungszeiten-Section {
+    padding-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin: auto;
+    max-width: 1000px;
+    
+}
+
+#carouselExampleSlidesOnly {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    max-width: 70%;
+}

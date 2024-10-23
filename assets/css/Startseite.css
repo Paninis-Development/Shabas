@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+body {
+    
+}
 
 table {
     width: 100%;
@@ -39,7 +42,7 @@ tr{
 }
 
 /* Styling for the button */
-#termin-buchen-button {
+/* #termin-buchen-button {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -55,9 +58,60 @@ tr{
 }
 
 /* Adding the pulse animation to the button */
-#termin-buchen-button.pulse {
+/* #termin-buchen-button.pulse {
     animation: pulse 2s infinite;
+}  */
+
+#termin-buchen-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
 }
+
+button {
+    background-color: white;
+    border: 2px solid #ccc;
+    color: black;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  button {
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+  }
+
+  button {
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
+  }
+
+ .cta-btn {
+    background-color: white;
+    border: 2px solid #ccc;
+    color: black;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .cta-btn {
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .cta-btn {
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.2);
+    transform: translateY(1px);
+  }
 
 /* Optional: Change the button color on hover */
 /* #termin-buchen-button:hover {
@@ -93,3 +147,135 @@ h2 {
     margin-top: 40px;
     max-width: 70%;
 }
+.cover {
+    background-image: url('../images/handyQuer.jpg');
+
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .cover-content {
+    text-align: center;
+    color: white;
+  }
+  
+  .cover-content h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+
+  .pricing {
+    padding: 2rem;
+    background-color: #fff;
+    text-align: center;
+  }
+  
+  .pricing h2 {
+    margin-bottom: 2rem;
+  }
+  
+  .pricing-plans {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .plan {
+    background-color: #212529;
+    padding: 2rem;
+    color: white;
+    border-radius: 10px;
+    width: 30%;
+    margin-bottom: 2rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .plan h3 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+  
+  .plan p {
+    font-size: 1.2rem;
+  }
+
+  /* Basis-Styling */
+#pricing {
+    padding: 50px;
+    background-color: #f8f9fa;
+    text-align: center;
+  }
+  
+  .pricing-plans {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; /* Ermöglicht das Umfließen der Elemente */
+    gap: 20px; /* Abstand zwischen den Plänen */
+  }
+  
+  .plan:hover {
+    transform: translateY(-10px); /* Kleiner Hover-Effekt */
+  }
+  
+  .plan h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .plan p {
+    font-size: 18px;
+  }
+  
+
+  .pulse:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 992px) {
+    .plan {
+      width: 45%; /* Bei mittleren Bildschirmen (Tablets) nehmen die Pläne 45% ein */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .plan {
+      width: 100%; /* Bei kleinen Bildschirmen (Handys) nehmen die Pläne die volle Breite ein */
+    }
+  }
+  
+  .plan button:hover {
+    background-color: #555;
+  }
+  
+  /* Gallery Section */
+  .gallery {
+    padding: 2rem;
+    background-color: #212529;
+    text-align: center;
+  }
+  
+  .gallery h2 {
+    margin-bottom: 2rem;
+  }
+  
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .gallery-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  

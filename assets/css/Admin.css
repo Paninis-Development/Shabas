@@ -36,8 +36,19 @@ input::placeholder {
     color: #999;
 }
 
-input[type="submit"] {
+#openUpButton {
     background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
+}
+
+#closeButton {
+    background-color: red;
     color: #fff;
     border: none;
     padding: 10px;
@@ -51,7 +62,9 @@ input[type="submit"]:hover {
     background-color: #0056b3;
 }
 
+
 #adminDatepicker {
+    cursor: auto;
     background-color: #333;
     color: #fff;
     border-radius: 5px;
@@ -67,10 +80,10 @@ input[type="submit"]:hover {
 }
 
 /* Make sure the calendar days have a readable color */
- .ui-datepicker-calendar td a {
+.ui-datepicker-calendar td a {
     background-color: #444;
     color: #f0f0f0;
-} 
+}
 
 .ui-datepicker-calendar td a:hover {
     background-color: #555;
@@ -90,16 +103,21 @@ input[type="submit"]:hover {
 }
 
 /* Make the next and previous buttons visible */
-.ui-datepicker-prev, .ui-datepicker-next {
-    background-color: #777777; /* Button background color */
+.ui-datepicker-prev,
+.ui-datepicker-next {
+    background-color: #777777;
+    /* Button background color */
     border-radius: 5px;
 }
 
 
 /* Arrows for next and prev buttons */
-.ui-datepicker-prev span, .ui-datepicker-next span {
-    color: #777777; /* Arrow color */
-    font-size: 1.2rem; /* Size of the arrow */
+.ui-datepicker-prev span,
+.ui-datepicker-next span {
+    color: #777777;
+    /* Arrow color */
+    font-size: 1.2rem;
+    /* Size of the arrow */
 }
 
 
@@ -113,11 +131,13 @@ input[type="submit"]:hover {
     /* Red text */
 }
 
-    /* Styling for available dates with blue background */
-    .available-date a {
-        background-color: #d1ecf1 !important; /* Light blue background */
-        color: #0c5460 !important; /* Blue text */
-    }
+/* Styling for available dates with blue background */
+.available-date a {
+    background-color: #d1ecf1 !important;
+    /* Light blue background */
+    color: #0c5460 !important;
+    /* Blue text */
+}
 
 #appointmentTable {
     display: none;
@@ -126,11 +146,19 @@ input[type="submit"]:hover {
 #unavailableDates {
     display: none;
 }
-#opening_time {
+
+ #opening_time {
     
     background-color: grey;
 }´
 #closing_time {
-    
     background-color: grey;
+} 
+
+input[type="time"] {
+    color: white;
+    border: white;
+    margin-top: 25px;
+    height: 50px;
+    width: 40%;
 }

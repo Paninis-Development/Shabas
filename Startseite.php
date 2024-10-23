@@ -10,43 +10,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Startseite</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="assets/css/Startseite.css" rel="stylesheet">
+    <link href="assets/css/Startseite2.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/images/shababs-logo.ico">
+
 </head>
 <header>
-    <?php include('./Header.php'); ?>
+    <?php include'./Header.php'; ?>
 </header>
 
 <body>
 
-    <button onclick="location.href='./Termin.php'" id="termin-buchen-button" , class="pulse">VIP Termin buchen</button>
-    <!-- <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <video class="img-fluid" autoplay loop muted>
-                    <source src="assets/videos/WhatsApp Video 2024-10-11 at 13.47.08.mp4" type="video/mp4" />
-                </video>
-            </div>
-            <div class="carousel-item">
-                <video class="img-fluid" autoplay loop muted>
-                    <source src="assets/videos/WhatsApp Video 2024-10-11 at 13.47.13.mp4" type="video/mp4" />
-                </video>
-            </div>
-            <div class="carousel-item">
-                <video class="img-fluid" autoplay loop muted>
-                    <source src="assets/videos/WhatsApp Video 2024-10-11 at 13.47.12.mp4" type="video/mp4" />
-                </video>
-            </div>
-            <div class="carousel-item">
-                <video class="img-fluid" autoplay loop muted>
-                    <source src="assets/videos/WhatsApp Video 2024-10-11 at 13.47.01 (1).mp4" type="video/mp4" />
-                </video>
-            </div>
-        </div>
-    </div> -->
+<div id="coverFilter">
+    <section class="cover">
+    <div class="cover-content">
+      <h2>Frischer Schnitt. Frisches Gefühl.</h2>
+      <a href="#pricing" class="cta-btn">Jetzt Termin Buchen</a>
+      <!-- <button href="#pricing" class="cta-btn">Jetzt Termin Buchen</button> -->
+    </div>
+  </section>
+  </div>
+  <!-- Pricing Plans -->
+  <section id="pricing" class="pricing">
+    <h2>Unsere Preise</h2>
+    <div class="pricing-plans">
+      <div class="plan">
+        <h3>Basic</h3>
+        <p>Haarschnitt: 20€</p>
+        <p>Bartpflege: 10€</p>
+        <button onclick="location.href='./Termin.php'"  data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5">Termin buchen</button>
+      </div>
+      <div class="plan">
+        <h3>Premium</h3>
+        <p>Haarschnitt: 30€</p>
+        <p>Bartpflege: 15€</p>
+        <button onclick="location.href='./Termin.php'"  data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" >Termin buchen</button>
+      </div>
+      <!-- <div class="plan">
+        <h3>Luxus</h3>
+        <p>Haarschnitt: 40€</p>
+        <p>Bartpflege: 20€</p>
+        <button onclick="location.href='./Termin.php'" id="termin-buchen-button" , class="pulse">Termin buchen</button>
+      </div> -->
+    </div>
+  </section>
 
-
-
-    <details id="Öffnungszeiten-Section">
+  <!-- Gallery -->
+  <section class="gallery">
+    <h2>Unsere Arbeiten</h2>
+    <div class="gallery-grid">
+      <img src="assets/images/exampleFoto1.jpg" alt="Schnitt 1">
+      <img src="assets/images/exampleFoto2.jpg" alt="Schnitt 2">
+      <img src="assets/images/exampleFoto3.jpg" alt="Schnitt 3">
+      
+    </div>
+  </section>    
         <h2>Normale Öffnungszeiten</h2>
         <br>
         <summary><strong>Öffnungszeiten</strong></summary>
@@ -85,16 +102,18 @@
                 <td>geschlossen</td>
             </tr>
         </table>
-    </details>
+
     <details id="Impressum-Section">
         <br>
         <summary><strong>Impressum</strong></summary>
-        <p>Name: Ihr Name</p>
-        <p>Adresse: Ihre Adresse</p>
-        <p>Telefonnummer: Ihre Telefonnummer</p>
-        <p>Email: Ihre Email</p>
+        <p>Name: Shababs Barbershop</p>
+        <p>Adresse: </p>
+        <p>Telefonnummer: </p>
+        <p>Email: shababs.barbershop@gmail.com</p>
     </details>
 
 </body>
-
+<footer>
+    <?php include'./footer.php'; ?>
+</footer>
 </html>

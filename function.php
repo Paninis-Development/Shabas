@@ -3,6 +3,32 @@ require_once('./connection.php');
 
 
 
+// function checkUser($email, $password)
+// {
+//     $db = new DatabaseConnection();
+//     $query = 'SELECT Password FROM admin WHERE Username = ?';
+//     $array = array($email);
+//     $stmt = $db->makeStatement($query, $array);
+//     $result = $stmt->fetch(PDO::FETCH_ASSOC);
+//     // hash pw for new pw
+//     // echo password_hash($password, PASSWORD_DEFAULT);
+//     // Check if the user exists
+//     if ($result) {
+//         // Fetch the hashed password from the database
+//         $hashedPassword = $result['Password'];
+
+//         // Verify the password
+//         if (password_verify($password, $hashedPassword)) {
+//             global $loggedIn ;
+//             $loggedIn = true;
+//             return true;
+//         }
+//     }
+//     $loggedIn = false;
+//     // Return false if the user doesn't exist or the password is incorrect
+//     return false;
+// }
+
 function checkUser($email, $password)
 {
     $db = new DatabaseConnection();
@@ -10,8 +36,7 @@ function checkUser($email, $password)
     $array = array($email);
     $stmt = $db->makeStatement($query, $array);
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    // hash pw for new pw
-    // echo password_hash($password, PASSWORD_DEFAULT);
+
     // Check if the user exists
     if ($result) {
         // Fetch the hashed password from the database
@@ -19,14 +44,30 @@ function checkUser($email, $password)
 
         // Verify the password
         if (password_verify($password, $hashedPassword)) {
-            global $loggedIn;
+            // Start session and set loggedIn status
+            session_start();
+            $_SESSION['loggedIn'] = true;
             return true;
         }
     }
-    $loggedIn = false;
-    // Return false if the user doesn't exist or the password is incorrect
+    
+    // If credentials are wrong, set loggedIn to false
+    session_start();
+    $_SESSION['loggedIn'] = false;
     return false;
 }
+
+
+function isLoggedIn()
+{
+    session_start();
+    // Check if 'loggedIn' is set and true
+    if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true) {
+        return true;
+    }
+    return false;
+}
+
 
 
 function getOpeningDays()
@@ -98,7 +139,7 @@ function getOpeningClosingTime($date)
 function generateTimeSlotsWithAvailability($openTime, $closeTime, $date)
 {
     $slots = [];
-    $interval = 40 * 60; // 45 minutes in seconds
+    $interval = 60 * 60; // 45 minutes in seconds
     $startTime = strtotime($openTime);
     $endTime = strtotime($closeTime);
 
@@ -162,7 +203,7 @@ function saveAppointment($date, $startTime, $endTime, $name, $email, $phone)
     $db = new DatabaseConnection();
 
     // Insert the appointment into the database
-    $query = "INSERT INTO appointments (appointment_date, start_time, end_time, customer_name, customer_email, customer_phone) 
+    $query = "INSERT INTO appointment (appointment_date, start_time, end_time, customer_name, customer_email, customer_phone) 
               VALUES (?, ?, ?, ?, ?, ?)";
 
     $params = array($date, $startTime, $endTime, $name, $email, $phone);
