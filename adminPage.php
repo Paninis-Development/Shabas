@@ -7,6 +7,13 @@ $allowedDates = getOpeningDays();
 
 // Check if a date was submitted and sanitize the input
 $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['opening_time']) && isset($_POST['closing_time'])) {
+    $opening_time = htmlspecialchars($_POST['opening_time']);
+    $closing_time = htmlspecialchars($_POST['closing_time']);
+
+    saveOpeningHours($selectedDate, $opening_time, $closing_time);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -110,6 +117,9 @@ $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
                 ?>
             </tbody>
         </table>
+        <form id="deleteDayForm" action="" method="POST"> 
+        <input id="closeButton" type="submit" value="Am <?php echo $selectedDate ?> schließen?">
+        </form>
 
         <!-- Form 2: POST Form for saving opening hours -->
         <div id="unavailableDates">
@@ -127,7 +137,7 @@ $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
                 </div>
 
                 <input id="openUpButton" type="submit" value="Am <?php echo $selectedDate ?> öffnen?">
-                <input id="closeButton" type="submit" value="Am <?php echo $selectedDate ?> schließen?">
+            
             </form>
         </div>
     </div>
@@ -166,6 +176,8 @@ $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
             if (selectedDate) {
                 if (allowedDates.includes(selectedDate)) {
                     $('#appointmentTable').show(); // Show appointment table
+                    $('#closeButton').show(); // Show close button
+
                 } else {
                     $('#unavailableDates').show(); // Show POST form to set hours
                 }

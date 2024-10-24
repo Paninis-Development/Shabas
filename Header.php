@@ -39,13 +39,13 @@ if(isLoggedIn()) {
                         Admin Login
                     </a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <?php if ($loggedIn): ?>
                         <a class="nav-link" href="adminPage.php">Admin Panel</a>
                     <?php else: ?>
                         <a class="nav-link disabled" href="#" tabindex="-1">Admin Panel</a>
                     <?php endif; ?>
-                </li>
+                </li> -->
             </ul>
         </div>
     </nav>

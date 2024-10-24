@@ -134,8 +134,6 @@ function getOpeningClosingTime($date)
 }
 
 
-
-
 function generateTimeSlotsWithAvailability($openTime, $closeTime, $date)
 {
     $slots = [];
@@ -237,7 +235,7 @@ function saveOpeningHours($opendate, $openingTime, $closingTime) {
 
     try {
         // Insert the opening hours into the openinghours table
-        $query = "INSERT INTO openinghours (opening_date, open_time, close_time) VALUES ($opendate, $openingTime, $closingTime)";
+        $query = "INSERT INTO openinghours (opening_date, open_time, close_time) VALUES ('$opendate', '$openingTime', '$closingTime')";
     
 
         $stmt = $db->makeStatementArray($query);
@@ -261,3 +259,41 @@ function deleteAppointment($appointmentId) {
 
 
 }
+
+// function sendSuccessMail($date, $startTime) {
+    
+//     use PHPMailer\PHPMailer\PHPMailer;
+//     use PHPMailer\PHPMailer\Exception;
+    
+//     require 'vendor/autoload.php';
+    
+//     $mail = new PHPMailer(true);
+    
+//     try {
+//         // Server settings
+//         $mail->SMTPDebug = 0;                       // Enable verbose debug output
+//         $mail->isSMTP();                            // Set mailer to use SMTP
+//         $mail->Host       = 'smtp.gmail.com';       // Specify main SMTP server
+//         $mail->SMTPAuth   = true;                   // Enable SMTP authentication
+//         $mail->Username   = 'your_email@gmail.com'; // SMTP username
+//         $mail->Password   = 'your_password';        // SMTP password
+//         $mail->SMTPSecure = 'tls';                  // Enable TLS encryption
+//         $mail->Port       = 587;                    // TCP port to connect to
+    
+//         // Recipients
+//         $mail->setFrom('your_email@gmail.com', 'Shababs Barbershop');
+//         $mail->addAddress($email, $name);           // Add a recipient
+    
+//         // Content
+//         $mail->isHTML(false);                       // Set email format to plain text
+//         $mail->Subject = 'Terminbestätigung bei Shababs Barbershop';
+//         $mail->Body    = "Liebe/r $name,\r\n\r\nvielen Dank für Ihre Terminbuchung bei Shababs Barbershop.\r\n\r\nIhr Termin ist am $date um $startTime.\r\n\r\nBitte erscheinen Sie 5-10 Minuten früher, um den Ablauf reibungslos zu gestalten.\r\n\r\nWir freuen uns auf Ihren Besuch!\r\n\r\nHerzliche Grüße,\r\nIhr Shababs-Team";
+    
+//         // Send the email
+//         $mail->send();
+//         echo 'Message has been sent';
+//     } catch (Exception $e) {
+//         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+//     }
+    
+// }

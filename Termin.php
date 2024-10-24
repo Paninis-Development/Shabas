@@ -26,16 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Save the appointment
         if (saveAppointment($date, $startTime, $endTime, $name, $email, $phone)) {
 
-            if (!empty($email)) {
-                // The message
-                $message = "Liebe/r $name,\r\n\r\nvielen Dank für Ihre Terminbuchung bei Shababs Barbershop.\r\n\r\nIhr Termin ist am $date um $startTime.\r\n\r\nBitte erscheinen Sie 5-10 Minuten früher, um den Ablauf reibungslos zu gestalten.\r\n\r\nWir freuen uns auf Ihren Besuch!\r\n\r\nHerzliche Grüße,\r\nIhr Shababs-Team";
-
-                // In case any of our lines are larger than 70 characters, we should use wordwrap()
-                $message = wordwrap($message, 70, "\r\n");
-
-                // Send
-                mail($email, 'My Subject', $message);
-            }
+            // if (!empty($email)) {
+            //     sendSuccessMail($date, $startTime);
+            // }
         } else {
             echo "Error saving appointment!";
         }
@@ -138,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     return [true, "", "Available"];
                 }
                 return [false, "", "Unavailable"];
-            } 
+            }
 
             // Initialize the datepicker
             $("#datepicker").datepicker({
@@ -159,8 +152,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         });
     </script>
 </body>
-<footer>
-<?php include'./footer.php'; ?>
-</footer>
 
 </html>

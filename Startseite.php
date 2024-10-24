@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Startseite</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="assets/css/Startseite2.css" rel="stylesheet">
+    <link href="assets/css/Startseite.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="assets/images/shababs-logo.ico">
 
 </head>
@@ -23,7 +23,7 @@
 <div id="coverFilter">
     <section class="cover">
     <div class="cover-content">
-      <h2>Frischer Schnitt. Frisches Gefühl.</h2>
+      <h2>Freshes Schnitt schneidet freshe Schnitte. Freshe Schnitte schneidet Freshes Schnitt</h2>
       <a href="#pricing" class="cta-btn">Jetzt Termin Buchen</a>
       <!-- <button href="#pricing" class="cta-btn">Jetzt Termin Buchen</button> -->
     </div>
