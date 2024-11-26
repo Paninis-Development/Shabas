@@ -146,8 +146,11 @@ input[type="submit"]:hover {
 #unavailableDates {
     display: none;
 }
+#closeButton{
+    display: none;
+}
 
- #opening_time {
+#opening_time {
     
     background-color: grey;
 }´

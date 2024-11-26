@@ -1,11 +1,11 @@
 <?php 
 include_once('./function.php');
 
-if(isLoggedIn()) {
-    $loggedIn = true;
-} else {
-    $loggedIn = false;
-}
+// if(isLoggedIn()) {
+   $loggedIn = true;
+// } else {
+//     $loggedIn = false;
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">

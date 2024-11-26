@@ -12,7 +12,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['opening_time']) && iss
     $closing_time = htmlspecialchars($_POST['closing_time']);
 
     saveOpeningHours($selectedDate, $opening_time, $closing_time);
+} 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['closeButton'])) {
+    // Der Code hier wird nur ausgeführt, wenn das Formular über den Button mit dem Namen "closeButton" abgesendet wurde
+    // Führe hier die Schließlogik aus
+    closeDay($selectedDate);
+    
 }
+
 
 ?>
 
@@ -70,9 +77,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['opening_time']) && iss
         <table class="table table-dark table-striped" id="appointmentTable">
             <thead>
                 <tr>
-                    <th>Customer Name</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
+                    <th>Name</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Barber</th>
                 </tr>
             </thead>
             <tbody>
@@ -94,13 +102,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['opening_time']) && iss
                                     <td>{$appointment['customer_name']}</td>
                                     <td>{$appointment['start_time']}</td>
                                     <td>{$appointment['end_time']}</td>
+                                    <td>{$appointment['barber_name']}</td>
                                 </tr>
                                 <tr id='row{$appointmentId}' class='collapse'>
                                     <td colspan='3'>
                                         <strong>Email:</strong> {$appointment['customer_email']}<br>
                                         <strong>Phone:</strong> {$appointment['customer_phone']}<br>
                                         <strong>Appointment Date:</strong> {$appointment['appointment_date']}<br><br>
-                                        <button class='btn btn-danger' onclick='deleteAppointment({$appointmentId})'>Delete</button>
+                                        <button class='btn btn-danger' onclick='deleteAppointment('<?php echo $appointmentId; ?>')>Delete</button>
+
                                     </td>
                                 </tr>";
                                 }
@@ -117,9 +127,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['opening_time']) && iss
                 ?>
             </tbody>
         </table>
-        <form id="deleteDayForm" action="" method="POST"> 
-        <input id="closeButton" type="submit" value="Am <?php echo $selectedDate ?> schließen?">
-        </form>
+<!-- Im HTML-Formular -->
+<form id="deleteDayForm" action="" method="POST"> 
+    <input id="closeButton" type="submit" name="closeButton" value="Am <?php echo $selectedDate ?> schließen?">
+</form>
+
 
         <!-- Form 2: POST Form for saving opening hours -->
         <div id="unavailableDates">
@@ -127,17 +139,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['opening_time']) && iss
                 <input type="hidden" name="action" value="save_hours">
 
                 <div id="timepickers">
-                <input type="time" id="opening_time" name="opening_time" required>
-                <label for="opening_time">Opening Time:</label>
-                <br><br>
+                    <input type="time" id="opening_time" name="opening_time" required>
+                    <label for="opening_time">Opening Time:</label>
+                    <br><br>
 
-                <input type="time" id="closing_time" name="closing_time" required>
-                <label for="closing_time">Closing Time:</label>
-                <br><br>
+                    <input type="time" id="closing_time" name="closing_time" required>
+                    <label for="closing_time">Closing Time:</label>
+                    <br><br>
                 </div>
 
                 <input id="openUpButton" type="submit" value="Am <?php echo $selectedDate ?> öffnen?">
-            
+
             </form>
         </div>
     </div>
@@ -205,17 +217,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['opening_time']) && iss
             if (confirm("Are you sure you want to delete this appointment?")) {
                 // AJAX call to trigger the delete function
                 var xhr = new XMLHttpRequest();
-                xhr.open("GET", "deleteAppointment.php?id=" + appointmentId, true); // Adjust the URL and parameters as needed
+                xhr.open("GET", "deleteAppointment.php?id=" + encodeURIComponent(appointmentId), true);
                 xhr.onreadystatechange = function() {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
                         alert("Appointment deleted successfully!");
-                        // Optionally, you can reload the page or remove the row from the table
                         location.reload(); // Refresh the page to reflect changes
+                    } else if (xhr.readyState === 4) {
+                        console.log("Failed to delete appointment:", xhr.responseText);
                     }
                 };
                 xhr.send();
             }
         }
+
+        function resetForm() {
+        document.getElementById("dateForm").reset();
+    }
+        
     </script>
 
 </body>

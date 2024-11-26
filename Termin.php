@@ -4,7 +4,7 @@ include_once('./function.php');
 
 // Get the available opening days
 $allowedDates = getOpeningDays();
-
+$barbers = getBarber();
 // Check if a date was submitted and sanitize the input
 $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
 
@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = htmlspecialchars($_POST['customer_name']);
     $email = htmlspecialchars($_POST['customer_email']);
     $phone = htmlspecialchars($_POST['customer_phone']);
+    $barber = htmlspecialchars($_POST['barber_select']);
 
     // Extract start and end times from the selected slot
     list($startTime, $endTime) = explode('-', $slot);
@@ -24,8 +25,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
         // Save the appointment
-        if (saveAppointment($date, $startTime, $endTime, $name, $email, $phone)) {
+        if (saveAppointment($date, $startTime, $endTime, $name, $email, $phone, $barber)) {
 
+            // showToast();
+            // echo "  <div class='toast show'>
+            //     <div class='toast-header'>
+            //       <strong class='me-auto'>Toast Header</strong>
+            //       <button type='button' class='btn-close' data-bs-dismiss='toast'></button>
+            //     </div>
+            //     <div class='toast-body'>
+            //       <p>Termin gespeichert</p>
+            //     </div>
+            //   </div>";
             // if (!empty($email)) {
             //     sendSuccessMail($date, $startTime);
             // }
@@ -35,6 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,10 +83,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <!-- Appointment form (POST) - Only visible when date is selected -->
         <form action="" method="POST" id="appointmentForm">
-            <input type="hidden" name="date" value="<?php echo $selectedDate; ?>">
 
+            <input type="hidden" name="date" value="<?php echo $selectedDate; ?>">
             <!-- Time slot combobox -->
             <div id="combobox">
+                <select id="options" name="barber_select" required>
+                    <?php foreach ($barbers as $barber) : ?>
+                        <option name="barber_name">
+                            <?php echo htmlspecialchars(string: $barber['barber_name']) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
                 <select id="options" name="timeSlot" required>
                     <?php
                     if ($selectedDate) {
@@ -96,6 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     }
                     ?>
                 </select>
+
             </div>
 
             <!-- Name and email fields -->
@@ -150,7 +171,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $('#nameAndEmail').show();
             }
         });
+
+
+
+
+
+        function showToast() {
+            // Get the snackbar DIV
+            var x = document.getElementById("snackbar");
+
+            // Add the "show" class to DIV
+            x.className = "show";
+
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function() {
+                x.className = x.className.replace("show", "");
+            }, 3000);
+        }
     </script>
+
+
+    <div id="snackbar">Termin erfolgreich gespeichert</div>
 </body>
 
 </html>

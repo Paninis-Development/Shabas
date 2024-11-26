@@ -50,7 +50,8 @@ function checkUser($email, $password)
             return true;
         }
     }
-    
+
+
     // If credentials are wrong, set loggedIn to false
     session_start();
     $_SESSION['loggedIn'] = false;
@@ -146,7 +147,7 @@ function generateTimeSlotsWithAvailability($openTime, $closeTime, $date)
         $slotEnd = date("H:i", $startTime + $interval);
 
         // Check if the time slot is available
-        if(isSlotAvailable($date, $slotStart, $slotEnd)) {
+        if (isSlotAvailable($date, $slotStart, $slotEnd)) {
             $slots[] = "<option value='$slotStart-$slotEnd'>$slotStart - $slotEnd</option>";
         } else {
             // Slot is taken, disable the option
@@ -188,7 +189,6 @@ function isSlotAvailable($date, $startTime, $endTime)
 
         // If count > 0, the slot is taken
         return $result['count'] == 0;
-        
     } catch (PDOException $e) {
         // Log or handle the error as necessary
         echo "Error checking slot availability: " . $e->getMessage();
@@ -196,15 +196,15 @@ function isSlotAvailable($date, $startTime, $endTime)
     }
 }
 
-function saveAppointment($date, $startTime, $endTime, $name, $email, $phone)
+function saveAppointment($date, $startTime, $endTime, $name, $email, $phone, $barber)
 {
     $db = new DatabaseConnection();
 
     // Insert the appointment into the database
-    $query = "INSERT INTO appointment (appointment_date, start_time, end_time, customer_name, customer_email, customer_phone) 
-              VALUES (?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO appointment (appointment_date, start_time, end_time, customer_name, customer_email, customer_phone, barber_name) 
+              VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-    $params = array($date, $startTime, $endTime, $name, $email, $phone);
+    $params = array($date, $startTime, $endTime, $name, $email, $phone, $barber);
 
     $stmt = $db->makeStatement($query, $params);
 
@@ -215,28 +215,40 @@ function getAppointmentDetails($date)
 {
     $db = new DatabaseConnection();
 
-    $query = "SELECT customer_name, start_time, end_time, customer_email, customer_phone, appointment_date FROM appointment WHERE appointment_date = ?";
+    $query = "SELECT customer_name, start_time, end_time, customer_email, customer_phone, appointment_date, barber_name FROM appointment WHERE appointment_date = ?";
 
-    if ($date !== null){
+    if ($date !== null) {
         $stmt = $db->makeStatementArray($query, $date);
         return $stmt;
     } else {
-        return null;            
+        return null;
     }
+}
 
+function getBarber()
+{
+    $db = new DatabaseConnection();
 
+    $query = "SELECT barber_name FROM barber";
+
+    $stmt = $db->makeStatement($query);
+
+    return $stmt;
 }
 
 
 
-function saveOpeningHours($opendate, $openingTime, $closingTime) {
-    
+
+
+function saveOpeningHours($opendate, $openingTime, $closingTime)
+{
+
     $db = new DatabaseConnection();
 
     try {
         // Insert the opening hours into the openinghours table
         $query = "INSERT INTO openinghours (opening_date, open_time, close_time) VALUES ('$opendate', '$openingTime', '$closingTime')";
-    
+
 
         $stmt = $db->makeStatementArray($query);
         return $stmt;
@@ -247,18 +259,36 @@ function saveOpeningHours($opendate, $openingTime, $closingTime) {
 }
 
 
-function deleteAppointment($appointmentId) {
+function deleteAppointment($appointmentId)
+{
 
     $db = new DatabaseConnection();
 
     $query = "DELETE FROM appointments WHERE appointment_id = ?";
 
-    
-        $stmt = $db->makeStatementArray($query, $appointmentId);
-        return $stmt;
 
-
+    $stmt = $db->makeStatementArray($query, $appointmentId);
+    return $stmt;
 }
+function closeDay($date)
+{
+    $db = new DatabaseConnection();
+
+    // Deaktiviere temporär den Safe Update Mode
+    $db->makeStatement("SET SQL_SAFE_UPDATES = 0");
+
+    // Führe die DELETE-Abfrage aus
+    $query = "DELETE FROM openinghours WHERE opening_date = ?";
+    $stmt = $db->makeStatementArray($query, $date);
+
+    // (Optional) Aktiviere den Safe Update Mode wieder, wenn benötigt
+    $db->makeStatement("SET SQL_SAFE_UPDATES = 1");
+
+    return $stmt;
+}
+
+
+
 
 // function sendSuccessMail($date, $startTime) {
     

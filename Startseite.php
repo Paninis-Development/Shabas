@@ -23,7 +23,7 @@
 <div id="coverFilter">
     <section class="cover">
     <div class="cover-content">
-      <h2>Freshes Schnitt schneidet freshe Schnitte. Freshe Schnitte schneidet Freshes Schnitt</h2>
+      <h2>Shababs Barbershop</h2>
       <a href="#pricing" class="cta-btn">Jetzt Termin Buchen</a>
       <!-- <button href="#pricing" class="cta-btn">Jetzt Termin Buchen</button> -->
     </div>
