@@ -1,7 +1,6 @@
 <?php
 include_once('./connection.php');
 include_once('./function.php');
-
 // Get the available opening days
 $allowedDates = getOpeningDays();
 $barbers = getBarber();
@@ -45,6 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $barberName = isset($_POST['barber_select']) ? $_POST['barber_select'] : null;
+
+    // Now you can use $barberName as needed
+    echo "Selected Barber: " . htmlspecialchars($barberName);
+}
 ?>
 
 
@@ -84,59 +89,65 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- Appointment form (POST) - Only visible when date is selected -->
         <form action="" method="POST" id="appointmentForm">
 
-            <input type="hidden" name="date" value="<?php echo $selectedDate; ?>">
-            <!-- Time slot combobox -->
-            <div id="combobox">
-                <select id="options" name="barber_select" required>
-                    <?php foreach ($barbers as $barber) : ?>
-                        <option name="barber_name">
-                            <?php echo htmlspecialchars(string: $barber['barber_name']) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                <select id="options" name="timeSlot" required>
-                    <?php
-                    if ($selectedDate) {
-                        if (strtotime($selectedDate)) {
-                            $times = getOpeningClosingTime($selectedDate);
+<input type="hidden" name="date" value="<?php echo $selectedDate; ?>">
+<!-- Time slot combobox -->
+<div id="combobox">
+    <select id="options" name="barber_select" required onchange="this.form.submit();">
+        <option value="">default</option>
+        <?php foreach ($barbers as $barber) : ?>
+            <option value="<?php echo htmlspecialchars($barber['barber_name']); ?>">
+                <?php echo htmlspecialchars($barber['barber_name']); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <select id="options" name="timeSlot" required>
+        <?php
+        if ($selectedDate) {
+            if (strtotime($selectedDate)) {
+                $times = getOpeningClosingTime($selectedDate);
 
-                            if (!empty($times)) {
-                                $timeSlots = generateTimeSlotsWithAvailability($times['openTime'], $times['closeTime'], $selectedDate);
-                                foreach ($timeSlots as $slot) {
-                                    echo $slot;
-                                }
-                            } else {
-                                echo "<option value='no-time'>No opening hours available</option>";
-                            }
-                        } else {
-                            echo "<option value='invalid-date'>Invalid date format</option>";
-                        }
-                    } else {
-                        echo "<option value=''>Please select a date</option>";
+                if (!empty($times)) {
+                    // Get the selected barber name from the form submission
+                    $barberName = isset($_POST['barber_select']) ? $_POST['barber_select'] : null;
+
+                    // Generate time slots using the selected barber name
+                    $timeSlots = generateTimeSlotsWithAvailability($times['openTime'], $times['closeTime'], $selectedDate, $barberName);
+
+                    foreach ($timeSlots as $slot) {
+                        echo $slot;
                     }
-                    ?>
-                </select>
+                } else {
+                    echo "<option value='no-time'>No opening hours available</option>";
+                }
+            } else {
+                echo "<option value='invalid-date'>Invalid date format</option>";
+            }
+        } else {
+            echo "<option value=''>Please select a date</option>";
+        }
+        ?>
+    </select>
+</div>
 
-            </div>
+<!-- Name and email fields -->
+<div id="nameAndEmail">
+    <div class="form-group">
+        <label for="customerNameForm">Name *</label>
+        <input type="text" class="form-control" id="customerNameForm" name="customer_name" placeholder="Name *" required>
+    </div>
+    <div class="form-group">
+        <label for="customerMailForm">Email Address</label>
+        <input type="email" class="form-control" id="customerMailForm" name="customer_email" placeholder="Email *" required>
+    </div>
+    <div class="form-group">
+        <label for="customerPhoneNrForm">Phone Number</label>
+        <input type="text" class="form-control" id="customerPhoneNrForm" name="customer_phone" placeholder="Phone Number">
+    </div>
+</div>
 
-            <!-- Name and email fields -->
-            <div id="nameAndEmail">
-                <div class="form-group">
-                    <label for="customerNameForm">Name *</label>
-                    <input type="text" class="form-control" id="customerNameForm" name="customer_name" placeholder="Name *" required>
-                </div>
-                <div class="form-group">
-                    <label for="customerMailForm">Email Address</label>
-                    <input type="email" class="form-control" id="customerMailForm" name="customer_email" placeholder="Email *" required>
-                </div>
-                <div class="form-group">
-                    <label for="customerPhoneNrForm">Phone Number</label>
-                    <input type="text" class="form-control" id="customerPhoneNrForm" name="customer_phone" placeholder="Phone Number">
-                </div>
-            </div>
+<input type="submit" value="Submit Appointment">
+</form>
 
-            <input type="submit" value="Submit Appointment">
-        </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>

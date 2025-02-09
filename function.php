@@ -135,7 +135,7 @@ function getOpeningClosingTime($date)
 }
 
 
-function generateTimeSlotsWithAvailability($openTime, $closeTime, $date)
+function generateTimeSlotsWithAvailability($openTime, $closeTime, $date, $barberName)
 {
     $slots = [];
     $interval = 60 * 60; // 45 minutes in seconds
@@ -147,7 +147,7 @@ function generateTimeSlotsWithAvailability($openTime, $closeTime, $date)
         $slotEnd = date("H:i", $startTime + $interval);
 
         // Check if the time slot is available
-        if (isSlotAvailable($date, $slotStart, $slotEnd)) {
+        if (isSlotAvailable($date, $slotStart, $slotEnd, $barberName)) {
             $slots[] = "<option value='$slotStart-$slotEnd'>$slotStart - $slotEnd</option>";
         } else {
             // Slot is taken, disable the option
@@ -163,24 +163,26 @@ function generateTimeSlotsWithAvailability($openTime, $closeTime, $date)
 
 
 
-function isSlotAvailable($date, $startTime, $endTime)
+function isSlotAvailable($date, $startTime, $endTime, $barberName)
 {
     $db = new DatabaseConnection();
 
     // Wrap the database interaction in a try-catch block
     try {
         // Query to check if any appointment overlaps with the selected time slot on the specified date
-        $query = "SELECT COUNT(*) as count 
-        FROM appointment 
-        WHERE appointment_date = ? 
-        AND (
-            (start_time < ? AND end_time > ?)  
-            OR (start_time >= ? AND start_time < ?) 
-            OR (end_time > ? AND end_time <= ?) 
-        )";
+        $query = "SELECT COUNT(*) AS count
+FROM appointment
+INNER JOIN barber ON appointment.barberID = barber.BarberID
+WHERE appointment_date = ? 
+  AND barber.barber_name = ? 
+  AND (
+      (start_time < ? AND end_time > ?)
+      OR (start_time >= ? AND start_time < ?)
+      OR (end_time > ? AND end_time <= ?)
+  );";
 
         // Pass the correct number of parameters for each placeholder
-        $params = array($date, $endTime, $startTime, $startTime, $endTime, $startTime, $endTime);
+        $params = array($date, $barberName, $endTime, $startTime, $startTime, $endTime, $startTime, $endTime);
 
         // Execute the query
         $result = $db->executeisSlotAvailable($query, $params);
@@ -231,7 +233,7 @@ function getBarber()
 
     $query = "SELECT barber_name FROM barber";
 
-    $stmt = $db->makeStatement($query);
+    $stmt = $db->makeStatement($query, null);
 
     return $stmt;
 }
