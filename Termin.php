@@ -93,14 +93,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!-- Time slot combobox -->
 <div id="combobox">
     <select id="options" name="barber_select" required onchange="this.form.submit();">
-        <option value="">default</option>
+        <!-- <option value="">default</option> -->
         <?php foreach ($barbers as $barber) : ?>
             <option value="<?php echo htmlspecialchars($barber['barber_name']); ?>">
                 <?php echo htmlspecialchars($barber['barber_name']); ?>
             </option>
         <?php endforeach; ?>
     </select>
+
     <select id="options" name="timeSlot" required>
+    <!-- <option value="">Bitte Uhrzeit Auswählen</option> -->
         <?php
         if ($selectedDate) {
             if (strtotime($selectedDate)) {
