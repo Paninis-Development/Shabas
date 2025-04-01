@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 require_once('./function.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     }
                   </style>
                   <h2 class="fw-bold mb-2 text-uppercase">Shababs Chef</h2>
-                  <p class="text-white-50 mb-5">Gib deine Anmeldedaten ein G!!</p>
+                  <p class="text-white-50 mb-5">Admin Login</p>
 
                   <?php if (!empty($message)): ?>
                     <div class="alert alert-info"><?= $message ?></div>

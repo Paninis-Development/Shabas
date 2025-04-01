@@ -1,33 +1,12 @@
 <?php
 require_once('./connection.php');
 
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+require 'PHPMailer/Exception.php';
 
-
-// function checkUser($email, $password)
-// {
-//     $db = new DatabaseConnection();
-//     $query = 'SELECT Password FROM admin WHERE Username = ?';
-//     $array = array($email);
-//     $stmt = $db->makeStatement($query, $array);
-//     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-//     // hash pw for new pw
-//     // echo password_hash($password, PASSWORD_DEFAULT);
-//     // Check if the user exists
-//     if ($result) {
-//         // Fetch the hashed password from the database
-//         $hashedPassword = $result['Password'];
-
-//         // Verify the password
-//         if (password_verify($password, $hashedPassword)) {
-//             global $loggedIn ;
-//             $loggedIn = true;
-//             return true;
-//         }
-//     }
-//     $loggedIn = false;
-//     // Return false if the user doesn't exist or the password is incorrect
-//     return false;
-// }
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 function checkUser($email, $password)
 {
@@ -141,7 +120,7 @@ function generateTimeSlotsWithAvailability($openTime, $closeTime, $date, $barber
     $interval = 60 * 60; // 45 minutes in seconds
     $startTime = strtotime($openTime);
     $endTime = strtotime($closeTime);
-
+    $slots[] = "<option value='' selected disabled>Bitte Uhrzeit auswählen *</option>";
     while ($startTime < $endTime) {
         $slotStart = date("H:i", $startTime);
         $slotEnd = date("H:i", $startTime + $interval);
@@ -193,20 +172,20 @@ WHERE appointment_date = ?
         return $result['count'] == 0;
     } catch (PDOException $e) {
         // Log or handle the error as necessary
-        echo "Error checking slot availability: " . $e->getMessage();
+        logMessage("Error checking slot availability: " . $e->getMessage() . "", "ERROR");
         return false; // Return false in case of an error
     }
 }
 
-function saveAppointment($date, $startTime, $endTime, $name, $email, $phone, $barber)
+function saveAppointment($date, $startTime, $endTime, $name, $email, $phone, $barberID)
 {
     $db = new DatabaseConnection();
 
     // Insert the appointment into the database
-    $query = "INSERT INTO appointment (appointment_date, start_time, end_time, customer_name, customer_email, customer_phone, barber_name) 
+    $query = "INSERT INTO appointment (appointment_date, start_time, end_time, customer_name, customer_email, customer_phone, barberID) 
               VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-    $params = array($date, $startTime, $endTime, $name, $email, $phone, $barber);
+    $params = array($date, $startTime, $endTime, $name, $email, $phone, $barberID);
 
     $stmt = $db->makeStatement($query, $params);
 
@@ -217,7 +196,20 @@ function getAppointmentDetails($date)
 {
     $db = new DatabaseConnection();
 
-    $query = "SELECT customer_name, start_time, end_time, customer_email, customer_phone, appointment_date, barber_name FROM appointment WHERE appointment_date = ?";
+    $query = "SELECT 
+    a.AppointmentID, 
+    a.customer_name, 
+    a.start_time, 
+    a.end_time, 
+    a.customer_email, 
+    a.customer_phone, 
+    a.appointment_date, 
+    a.barberID,
+    b.barber_name
+FROM appointment a
+JOIN barber b ON a.barberID = b.BarberID
+WHERE a.appointment_date = ?;
+";
 
     if ($date !== null) {
         $stmt = $db->makeStatementArray($query, $date);
@@ -225,6 +217,20 @@ function getAppointmentDetails($date)
     } else {
         return null;
     }
+}
+function getBarberIdByBarberName($barberName)
+{
+    $db = new DatabaseConnection();
+
+    $query = "SELECT BarberID FROM barber WHERE barber_name = ?";
+    
+    // Übergib den Parameter als Array
+    $stmt = $db->makeStatement($query, [$barberName]);
+
+    // Hole das Ergebnis
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+    return $result ? $result['BarberID'] : null;
 }
 
 function getBarber()
@@ -238,6 +244,45 @@ function getBarber()
     return $stmt;
 }
 
+function getBarberDetails()
+{
+    $db = new DatabaseConnection();
+
+    $query = "SELECT BarberID, barber_name, barber_mail FROM barber";
+
+    $stmt = $db->makeStatement($query, null);
+
+    return $stmt;
+}
+
+function addBarber($name, $email)
+{
+
+    $db = new DatabaseConnection();
+
+    try {
+        // Insert the opening hours into the openinghours table
+        $query = "INSERT INTO barber (barber_name, barber_mail) VALUES ('$name', '$email')";
+
+
+        $stmt = $db->makeStatementArray($query);
+        return $stmt;
+    } catch (PDOException $e) {
+        // Log or handle errors
+        return false;
+    }
+}
+
+function deleteBarber($barberId)
+{
+    $db = new DatabaseConnection();
+
+    $query = "DELETE FROM barber WHERE BarberID = ?";
+
+    $stmt = $db->makeStatement($query, [$barberId]);
+
+    return $stmt;
+}
 
 
 
@@ -266,10 +311,10 @@ function deleteAppointment($appointmentId)
 
     $db = new DatabaseConnection();
 
-    $query = "DELETE FROM appointments WHERE appointment_id = ?";
+    $query = "DELETE FROM appointment WHERE AppointmentID = ?";
 
 
-    $stmt = $db->makeStatementArray($query, $appointmentId);
+    $stmt = $db->makeStatement($query, [$appointmentId]);
     return $stmt;
 }
 function closeDay($date)
@@ -289,43 +334,100 @@ function closeDay($date)
     return $stmt;
 }
 
+function logMessage($message, $type = "INFO") {
+    date_default_timezone_set('Europe/Berlin');
+    $logFile = "log/log.txt"; // Speicherort des Log-Files
 
+    // ANSI Farbcodes für die Konsole (werden im Editor evtl. nicht farbig angezeigt)
+    $colors = [
+        "ERROR" => "\033[31m",   // Rot
+        "WARNING" => "\033[33m", // Gelb
+        "INFO" => "\033[32m",    // Grün
+        "RESET" => "\033[0m"     // Reset auf Standardfarbe
+    ];
 
+    // Log-Nachricht formatieren mit Zeitstempel
+    $timestamp = date("Y-m-d H:i:s", time());
+    $logEntry = "{$colors[$type]}[$timestamp] [$type] $message{$colors['RESET']}\n";
 
-// function sendSuccessMail($date, $startTime) {
-    
-//     use PHPMailer\PHPMailer\PHPMailer;
-//     use PHPMailer\PHPMailer\Exception;
-    
-//     require 'vendor/autoload.php';
-    
-//     $mail = new PHPMailer(true);
-    
-//     try {
-//         // Server settings
-//         $mail->SMTPDebug = 0;                       // Enable verbose debug output
-//         $mail->isSMTP();                            // Set mailer to use SMTP
-//         $mail->Host       = 'smtp.gmail.com';       // Specify main SMTP server
-//         $mail->SMTPAuth   = true;                   // Enable SMTP authentication
-//         $mail->Username   = 'your_email@gmail.com'; // SMTP username
-//         $mail->Password   = 'your_password';        // SMTP password
-//         $mail->SMTPSecure = 'tls';                  // Enable TLS encryption
-//         $mail->Port       = 587;                    // TCP port to connect to
-    
-//         // Recipients
-//         $mail->setFrom('your_email@gmail.com', 'Shababs Barbershop');
-//         $mail->addAddress($email, $name);           // Add a recipient
-    
-//         // Content
-//         $mail->isHTML(false);                       // Set email format to plain text
-//         $mail->Subject = 'Terminbestätigung bei Shababs Barbershop';
-//         $mail->Body    = "Liebe/r $name,\r\n\r\nvielen Dank für Ihre Terminbuchung bei Shababs Barbershop.\r\n\r\nIhr Termin ist am $date um $startTime.\r\n\r\nBitte erscheinen Sie 5-10 Minuten früher, um den Ablauf reibungslos zu gestalten.\r\n\r\nWir freuen uns auf Ihren Besuch!\r\n\r\nHerzliche Grüße,\r\nIhr Shababs-Team";
-    
-//         // Send the email
-//         $mail->send();
-//         echo 'Message has been sent';
-//     } catch (Exception $e) {
-//         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-//     }
-    
-// }
+    // Nachricht in Datei speichern
+    file_put_contents($logFile, strip_tags($logEntry), FILE_APPEND);
+}
+
+function sendConfirmationEmail($to, $name, $date, $startTime, $endTime, $barber) {
+    $mail = new PHPMailer(true);
+
+    try {
+        // SMTP Server Settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'shababs.barbershop.linz@gmail.com';    // Change this
+        $mail->Password = 'ieqfehsrtthzdwjt';            // Change this
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = 465;
+        
+
+        // Email Setup
+        $mail->setFrom('shababs.barbershop.linz@gmail.com', 'Shababs Barbershop'); // Change this
+        $mail->addAddress($to, $name); // Recipient
+
+        // Email Content
+        $mail->isHTML(true);
+        $mail->Subject = "Terminbestaetigung - Shababs Barbershop";
+        $mail->Body = "
+            <p>Hallo <strong>$name</strong>,</p>
+            <p>Ihr Termin wurde erfolgreich gebucht:</p>
+            <ul>
+                <li><strong>Datum:</strong> $date</li>
+                <li><strong>Uhrzeit:</strong> $startTime - $endTime</li>
+                <li><strong>Barber:</strong> $barber</li>
+            </ul>
+            <p>Vielen Dank fuer Ihre Buchung!</p>
+            <p>Mit freundlichen Gruessen,<br>Shababs Barbershop</p>
+        ";
+        
+        $mail->send();
+        logMessage("Confirmation email sent to $to", "INFO");
+    } catch (Exception $e) {
+        logMessage("Error sending email: " . $mail->ErrorInfo, "ERROR");
+    }
+}
+
+function sendDeleteEmail($to,  $name, $date, $startTime) {
+    $mail = new PHPMailer(true);
+
+    try {
+        // SMTP Server Settings
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'shababs.barbershop.linz@gmail.com';    // Change this
+        $mail->Password = 'ieqfehsrtthzdwjt';            // Change this
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = 465;
+        
+
+        // Email Setup
+        $mail->setFrom('shababs.barbershop.linz@gmail.com', 'Shababs Barbershop'); // Change this
+        $mail->addAddress($to, $to); // Recipient
+
+        // Email Content
+        $mail->isHTML(true);
+        $mail->Subject = "Terminaenderung - Shababs Barbershop";
+        $mail->Body = "
+            <p>Hallo <strong>$name</strong>,</p>
+            <p>Ihr Termin am <strong>$date um $startTime</strong> wurde leider storniert.</p>
+            <p>Bitte vereinbaren Sie einen neuen Termin. Nutzen Sie dazu folgenden Link:</p>
+            <p><a href='https://www.orf.at' style='color: #007bff; text-decoration: none;'>Neuen Termin buchen</a></p>
+            <p>Vielen Dank fuer Ihr Verstaendnis!</p>
+            <p>Mit freundlichen Gruessen,<br>Shababs Barbershop</p>
+        ";
+        
+        
+        $mail->send();
+        logMessage("Delete email sent to $to", "INFO");
+    } catch (Exception $e) {
+        logMessage("Error sending email: " . $mail->ErrorInfo, "ERROR");
+    }
+}

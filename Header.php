@@ -36,7 +36,7 @@ include_once('./function.php');
                 </li>
                 <li class="nav-item  mr-auto">
                     <a class="nav-item" href="./Login.php">
-                        Admin Login
+                        Admin Page
                     </a>
                 </li>
                 <!-- <li class="nav-item">

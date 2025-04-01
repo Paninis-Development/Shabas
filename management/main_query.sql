@@ -30,6 +30,7 @@ insert into barber (barber_name, barber_mail) values
 ('mahmood', 'mahmood@gmail.com'),
 ('panini', 'panini@gmail.com'),
 ('litsch', 'litsch@gmail.com');
+
 delete from barber where BarberID = 2;
 
 -- Insert opening hours for several days
@@ -137,3 +138,13 @@ WHERE appointment_date = '2024-12-27'  -- Replace with an actual date
 SELECT barber_name FROM barber;
 select * from appointment;
 select * from barber;
+
+select * from appointment;
+
+SELECT customer_name, start_time, end_time, customer_email, customer_phone, appointment_date, barber_name FROM appointment WHERE appointment_date = '2024-12-27';
+
+SELECT BarberID FROM barber WHERE barber_name = "mahmood";
+
+
+INSERT INTO appointment (appointment_date, start_time, end_time, customer_name, customer_email, customer_phone, barberID) VALUES ("2025-05-27", "09:00", "10:00", "qkje", "kajdf", "oadfjh", 1);
+

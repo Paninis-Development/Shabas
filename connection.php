@@ -14,7 +14,7 @@ class DatabaseConnection
             $this->con = new PDO('mysql:host=' . $server . ';dbname=' . $schema . ';charset=utf8', $user, $pwd);
             $this->con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $e) {
-            echo 'Fehler bei der Verbindung zur Datenbank: ' . $e->getMessage();
+            logMessage("Error while connecting to database: " . $e->getMessage() . "", "ERROR");
         }
     }
     

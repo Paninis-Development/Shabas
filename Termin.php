@@ -1,9 +1,10 @@
 <?php
 include_once('./connection.php');
 include_once('./function.php');
-// Get the available opening days
-$allowedDates = getOpeningDays();
+// Get the available opening days and barbers
 $barbers = getBarber();
+$allowedDates = getOpeningDays();
+
 // Check if a date was submitted and sanitize the input
 $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
 
@@ -11,45 +12,54 @@ $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize form inputs
     $date = htmlspecialchars($_POST['date']);
-    $slot = htmlspecialchars($_POST['timeSlot']);
+    $slot = isset($_POST['timeSlot']) ? htmlspecialchars($_POST['timeSlot']) : '';
     $name = htmlspecialchars($_POST['customer_name']);
     $email = htmlspecialchars($_POST['customer_email']);
     $phone = htmlspecialchars($_POST['customer_phone']);
     $barber = htmlspecialchars($_POST['barber_select']);
 
     // Extract start and end times from the selected slot
-    list($startTime, $endTime) = explode('-', $slot);
+    if (strpos($slot, '-') !== false) {
+        list($startTime, $endTime) = explode('-', $slot);
+    } else {
+        $startTime = $endTime = ''; // Handle missing slot
+    }
 
     if (!empty($date) && !empty($name) && !empty($startTime) && !empty($endTime)) {
 
-
-        // Save the appointment
-        if (saveAppointment($date, $startTime, $endTime, $name, $email, $phone, $barber)) {
-
-            // showToast();
-            // echo "  <div class='toast show'>
-            //     <div class='toast-header'>
-            //       <strong class='me-auto'>Toast Header</strong>
-            //       <button type='button' class='btn-close' data-bs-dismiss='toast'></button>
-            //     </div>
-            //     <div class='toast-body'>
-            //       <p>Termin gespeichert</p>
-            //     </div>
-            //   </div>";
-            // if (!empty($email)) {
-            //     sendSuccessMail($date, $startTime);
-            // }
+        $barberID = getBarberIdByBarberName($barber);
+        $message = "";
+        $messageType = "";
+        // toast message
+        if ($barberID) {
+            if (saveAppointment($date, $startTime, $endTime, $name, $email, $phone, $barberID)) {
+                $message = "Termin erfolgreich gespeichert!";
+                $messageType = "success";
+                logMessage("Termin erfolgreich gespeichert. [date: '$date', startTime: '$startTime', endTime: '$endTime' , name: '$name', email: '$email', phone: '$phone', barberID: '$barberID']", "INFO");
+                sendConfirmationEmail($email, $name, $date, $startTime, $endTime, $barber);
+            } else {
+                $message = "Fehler beim Speichern des Termins.";
+                $messageType = "error";
+                logMessage("error while saving appointment", "ERROR");    
+            }
         } else {
-            echo "Error saving appointment!";
+            logMessage("barber not found in getBarberIdByName", "ERROR");          
         }
+
+        echo "<script>
+        window.onload = function() {
+            showToast('$message', '$messageType');
+        };
+      </script>";
     }
 }
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $barberName = isset($_POST['barber_select']) ? $_POST['barber_select'] : null;
 
-    // Now you can use $barberName as needed
-    echo "Selected Barber: " . htmlspecialchars($barberName);
-}
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     $barberName = isset($_POST['barber_select']) ? $_POST['barber_select'] : null;
+
+//     // Now you can use $barberName as needed
+//     echo "Selected Barber: " . htmlspecialchars($barberName);
+// }
 ?>
 
 
@@ -89,66 +99,70 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- Appointment form (POST) - Only visible when date is selected -->
         <form action="" method="POST" id="appointmentForm">
 
-<input type="hidden" name="date" value="<?php echo $selectedDate; ?>">
-<!-- Time slot combobox -->
-<div id="combobox">
-    <select id="options" name="barber_select" required onchange="this.form.submit();">
-        <!-- <option value="">default</option> -->
-        <?php foreach ($barbers as $barber) : ?>
-            <option value="<?php echo htmlspecialchars($barber['barber_name']); ?>">
-                <?php echo htmlspecialchars($barber['barber_name']); ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
+            <input type="hidden" name="date" value="<?php echo $selectedDate; ?>">
+            <!-- Time slot combobox -->
+            <div id="combobox">
+            <label for="barberSelect">Barber auswählen: *</label>
+                <select id="barberSelect" name="barber_select" required>
+                    <!-- <option value="">Select a Barber</option> -->
+                    <?php foreach ($barbers as $barber) : ?>
+                        <option value="<?php echo htmlspecialchars($barber['barber_name']); ?>">
+                            <?php echo htmlspecialchars($barber['barber_name']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
 
-    <select id="options" name="timeSlot" required>
-    <!-- <option value="">Bitte Uhrzeit Auswählen</option> -->
-        <?php
-        if ($selectedDate) {
-            if (strtotime($selectedDate)) {
-                $times = getOpeningClosingTime($selectedDate);
+                <label for="timeSlotSelect">Uhrzeit auswählen: *</label>
 
-                if (!empty($times)) {
-                    // Get the selected barber name from the form submission
-                    $barberName = isset($_POST['barber_select']) ? $_POST['barber_select'] : null;
+                <select id="timeSlotSelect" name="timeSlot" required>
+                    <!-- <option value="">Bitte Uhrzeit Auswählen</option> -->
+                    <?php
+                    if ($selectedDate) {
+                        if (strtotime($selectedDate)) {
+                            $times = getOpeningClosingTime($selectedDate);
 
-                    // Generate time slots using the selected barber name
-                    $timeSlots = generateTimeSlotsWithAvailability($times['openTime'], $times['closeTime'], $selectedDate, $barberName);
-
-                    foreach ($timeSlots as $slot) {
-                        echo $slot;
+                            if (!empty($times)) {
+                                // Get the selected barber name from the form submission
+                                $barberName = isset($_POST['barber_select']) ? $_POST['barber_select'] : null;
+                                $barberName ? null : $barberName = "mahmood";
+                                // Generate time slots using the selected barber name
+                                $timeSlots = generateTimeSlotsWithAvailability($times['openTime'], $times['closeTime'], $selectedDate, $barberName);
+                                foreach ($timeSlots as $slot) {
+                                    echo $slot;
+                                }
+                            } else {
+                                echo "<option value='no-time'>No opening hours available</option>";
+                                logMessage("No opening hours available", "ERROR");
+                            }
+                        } else {
+                            echo "<option value='invalid-date'>Invalid date format</option>";
+                            logMessage("Invalid date format", "ERROR");
+                        }
+                    } else {
+                        echo "<option value=''>Please select a date</option>";
                     }
-                } else {
-                    echo "<option value='no-time'>No opening hours available</option>";
-                }
-            } else {
-                echo "<option value='invalid-date'>Invalid date format</option>";
-            }
-        } else {
-            echo "<option value=''>Please select a date</option>";
-        }
-        ?>
-    </select>
-</div>
+                    ?>
+                </select>
+            </div>
 
-<!-- Name and email fields -->
-<div id="nameAndEmail">
-    <div class="form-group">
-        <label for="customerNameForm">Name *</label>
-        <input type="text" class="form-control" id="customerNameForm" name="customer_name" placeholder="Name *" required>
-    </div>
-    <div class="form-group">
-        <label for="customerMailForm">Email Address</label>
-        <input type="email" class="form-control" id="customerMailForm" name="customer_email" placeholder="Email *" required>
-    </div>
-    <div class="form-group">
-        <label for="customerPhoneNrForm">Phone Number</label>
-        <input type="text" class="form-control" id="customerPhoneNrForm" name="customer_phone" placeholder="Phone Number">
-    </div>
-</div>
+            <!-- Name and email fields -->
+            <div id="nameAndEmail">
+                <div class="form-group">
+                    <label for="customerNameForm">Name *</label>
+                    <input type="text" class="form-control" id="customerNameForm" name="customer_name" placeholder="Name *" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerMailForm">Email Address</label>
+                    <input type="email" class="form-control" id="customerMailForm" name="customer_email" placeholder="Email *" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerPhoneNrForm">Phone Number</label>
+                    <input type="text" class="form-control" id="customerPhoneNrForm" name="customer_phone" placeholder="Phone Number">
+                </div>
+            </div>
 
-<input type="submit" value="Submit Appointment">
-</form>
+            <input type="submit" value="Submit Appointment">
+        </form>
 
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -201,10 +215,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 x.className = x.className.replace("show", "");
             }, 3000);
         }
+
+        $(document).ready(function() {
+            $("#barberSelect").change(function() {
+                var selectedBarber = $(this).val();
+                var selectedDate = $("#datepicker").val();
+
+                if (selectedBarber && selectedDate) {
+                    $.ajax({
+                        url: "get_timeslots.php", // Create this PHP file
+                        type: "GET",
+                        data: {
+                            barber: selectedBarber,
+                            date: selectedDate
+                        },
+                        success: function(response) {
+                            $("#timeSlotSelect").html(response);
+                        },
+                        error: function() {
+                            alert("Error fetching time slots.");
+                        }
+                    });
+                }
+            });
+        });
+
+        function showToast(message, type) {
+            if (!message) return; // Falls keine Nachricht vorhanden ist
+
+            const toastContainer = document.getElementById("toast-container");
+            const toast = document.createElement("div");
+            toast.className = "toast " + type;
+            toast.innerHTML = message;
+
+            toastContainer.appendChild(toast);
+
+            setTimeout(() => toast.classList.add("show"), 100); // Einblenden
+
+            setTimeout(() => {
+                toast.classList.add("hide");
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
     </script>
 
 
-    <div id="snackbar">Termin erfolgreich gespeichert</div>
+    <div id="toast-container"></div>
+
 </body>
 
 </html>
