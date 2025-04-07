@@ -1,14 +1,14 @@
 <?php
 include_once('./connection.php');
 include_once('./function.php');
-// Get the available opening days and barbers
-// $barbers = getBarber();
 
+// Get the available opening days and barbers
 $allowedDates = getOpeningDays();
 
 // Check if a date was submitted and sanitize the input
 $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
 $barbers = getBarberAvailability($selectedDate);
+
 // Handle the POST request to save the appointment
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize form inputs
@@ -41,10 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 $message = "Fehler beim Speichern des Termins.";
                 $messageType = "error";
-                logMessage("error while saving appointment", "ERROR");    
+                logMessage("Fehler beim Speichern des Termins", "ERROR");    
             }
         } else {
-            logMessage("barber not found in getBarberIdByName", "ERROR");          
+            logMessage("Barber nicht gefunden in getBarberIdByName", "ERROR");          
         }
 
         echo "<script>
@@ -54,19 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </script>";
     }
 }
-
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     $barberName = isset($_POST['barber_select']) ? $_POST['barber_select'] : null;
-
-//     // Now you can use $barberName as needed
-//     echo "Selected Barber: " . htmlspecialchars($barberName);
-// }
 ?>
 
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
     <meta charset="UTF-8">
@@ -93,8 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- Date selection form (GET) -->
         <form action="" method="GET" id="dateForm">
             <!-- The datepicker input field -->
-            <input type="text" id="datepicker" name="date" placeholder="Select a date" class="placeholder" value="<?php echo $selectedDate; ?>" required>
-            <!-- <input type="submit" value="Check Availability"> -->
+            <input type="text" id="datepicker" name="date" placeholder="Wählen Sie ein Datum" class="placeholder" value="<?php echo $selectedDate; ?>" required>
         </form>
 
         <!-- Appointment form (POST) - Only visible when date is selected -->
@@ -103,9 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <input type="hidden" name="date" value="<?php echo $selectedDate; ?>">
             <!-- Time slot combobox -->
             <div id="combobox">
-            <label for="barberSelect">Barber auswählen: *</label>
+            <label for="barberSelect">Friseur auswählen: *</label>
                 <select id="barberSelect" name="barber_select" required>
-                    <!-- <option value="">Select a Barber</option> -->
                     <?php foreach ($barbers as $barber) : ?>
                         <option value="<?php echo htmlspecialchars($barber['barber_name']); ?>">
                             <?php echo htmlspecialchars($barber['barber_name']); ?>
@@ -116,7 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="timeSlotSelect">Uhrzeit auswählen: *</label>
 
                 <select id="timeSlotSelect" name="timeSlot" required>
-                    <!-- <option value="">Bitte Uhrzeit Auswählen</option> -->
                     <?php
                     if ($selectedDate) {
                         if (strtotime($selectedDate)) {
@@ -132,15 +120,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     echo $slot;
                                 }
                             } else {
-                                echo "<option value='no-time'>No opening hours available</option>";
-                                logMessage("No opening hours available", "ERROR");
+                                echo "<option value='no-time'>Keine Öffnungszeiten verfügbar</option>";
+                                logMessage("Keine Öffnungszeiten verfügbar", "ERROR");
                             }
                         } else {
-                            echo "<option value='invalid-date'>Invalid date format</option>";
-                            logMessage("Invalid date format", "ERROR");
+                            echo "<option value='invalid-date'>Ungültiges Datumsformat</option>";
+                            logMessage("Ungültiges Datumsformat", "ERROR");
                         }
                     } else {
-                        echo "<option value=''>Please select a date</option>";
+                        echo "<option value=''>Bitte wählen Sie ein Datum</option>";
                     }
                     ?>
                 </select>
@@ -153,16 +141,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" class="form-control" id="customerNameForm" name="customer_name" placeholder="Name *" required>
                 </div>
                 <div class="form-group">
-                    <label for="customerMailForm">Email Address</label>
-                    <input type="email" class="form-control" id="customerMailForm" name="customer_email" placeholder="Email *" required>
+                    <label for="customerMailForm">E-Mail-Adresse</label>
+                    <input type="email" class="form-control" id="customerMailForm" name="customer_email" placeholder="E-Mail *" required>
                 </div>
                 <div class="form-group">
-                    <label for="customerPhoneNrForm">Phone Number</label>
-                    <input type="text" class="form-control" id="customerPhoneNrForm" name="customer_phone" placeholder="Phone Number">
+                    <label for="customerPhoneNrForm">Telefonnummer</label>
+                    <input type="text" class="form-control" id="customerPhoneNrForm" name="customer_phone" placeholder="Telefonnummer">
                 </div>
             </div>
 
-            <input type="submit" value="Submit Appointment">
+            <input type="submit" value="Termin buchen">
         </form>
 
     </div>
@@ -177,9 +165,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             function enableSpecificDates(date) {
                 const formattedDate = $.datepicker.formatDate('yy-mm-dd', date);
                 if (allowedDates.includes(formattedDate)) {
-                    return [true, "", "Available"];
+                    return [true, "", "Verfügbar"];
                 }
-                return [false, "", "Unavailable"];
+                return [false, "", "Nicht verfügbar"];
             }
 
             // Initialize the datepicker
@@ -200,49 +188,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         });
 
-
-
-
-
-        function showToast() {
-            // Get the snackbar DIV
-            var x = document.getElementById("snackbar");
-
-            // Add the "show" class to DIV
-            x.className = "show";
-
-            // After 3 seconds, remove the show class from DIV
-            setTimeout(function() {
-                x.className = x.className.replace("show", "");
-            }, 3000);
-        }
-
-        $(document).ready(function() {
-            $("#barberSelect").change(function() {
-                var selectedBarber = $(this).val();
-                var selectedDate = $("#datepicker").val();
-
-                if (selectedBarber && selectedDate) {
-                    $.ajax({
-                        url: "get_timeslots.php", // Create this PHP file
-                        type: "GET",
-                        data: {
-                            barber: selectedBarber,
-                            date: selectedDate
-                        },
-                        success: function(response) {
-                            $("#timeSlotSelect").html(response);
-                        },
-                        error: function() {
-                            alert("Error fetching time slots.");
-                        }
-                    });
-                }
-            });
-        });
-
         function showToast(message, type) {
-            if (!message) return; // Falls keine Nachricht vorhanden ist
+            if (!message) return; // If no message
 
             const toastContainer = document.getElementById("toast-container");
             const toast = document.createElement("div");
@@ -251,7 +198,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             toastContainer.appendChild(toast);
 
-            setTimeout(() => toast.classList.add("show"), 100); // Einblenden
+            setTimeout(() => toast.classList.add("show"), 100); // Show the toast
 
             setTimeout(() => {
                 toast.classList.add("hide");
@@ -259,7 +206,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }, 3000);
         }
     </script>
-
 
     <div id="toast-container"></div>
 

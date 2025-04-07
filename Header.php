@@ -6,6 +6,7 @@ include_once('./function.php');
 // } else {
 //     $loggedIn = false;
 // }
+$imagePath = '/assets/images/shababs-logo.jpg'; 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +23,6 @@ include_once('./function.php');
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="./index.php">
-            <?php $imagePath = '/assets/images/shababs-logo.jpg'; ?>
             <img src="<?php echo $imagePath; ?>" alt="Logo" style="width:100px;height:100px;" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

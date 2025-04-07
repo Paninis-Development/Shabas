@@ -294,7 +294,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form id="holidayForm" method="POST">
             <label for="barberSelect">Barber auswählen: *</label>
             <select id="barberSelect" name="barber_select" required>
-            <option value="" disabled selected>Bitte einen Barber auswählen</option>
+                <option value="" disabled selected>Bitte einen Barber auswählen</option>
                 <?php foreach ($barbers as $barber) : ?>
                     <option value="<?php echo htmlspecialchars($barber['barber_name']); ?>">
                         <?php echo htmlspecialchars($barber['barber_name']); ?>
@@ -320,7 +320,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
 
-   
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -355,74 +355,74 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             });
 
-            $(function () {
-    let startDate = null;
-    let endDate = null;
+            $(function() {
+                let startDate = null;
+                let endDate = null;
 
-    $("#datepicker-popup").datepicker({
-        dateFormat: "dd.mm.yy",
-        numberOfMonths: 1,
-        beforeShowDay: function (date) {
-            let dateString = $.datepicker.formatDate("dd.mm.yy", date);
+                $("#datepicker-popup").datepicker({
+                    dateFormat: "dd.mm.yy",
+                    numberOfMonths: 1,
+                    beforeShowDay: function(date) {
+                        let dateString = $.datepicker.formatDate("dd.mm.yy", date);
 
-            if (startDate && dateString === startDate) {
-                return [true, "start", "Startdatum"];
-            }
-            if (endDate && dateString === endDate) {
-                return [true, "end", "Enddatum"];
-            }
-            if (
-                startDate &&
-                endDate &&
-                date >= $.datepicker.parseDate("dd.mm.yy", startDate) &&
-                date <= $.datepicker.parseDate("dd.mm.yy", endDate)
-            ) {
-                return [true, "range", "Ausgewählter Bereich"];
-            }
-            return [true, ""];
-        },
-        onSelect: function (dateText) {
-            // Wenn beide gesetzt sind, neu starten
-            if (startDate && endDate) {
-                startDate = dateText;
-                endDate = null;
-            } else if (!startDate) {
-                startDate = dateText;
-            } else {
-                let startDateObj = $.datepicker.parseDate("dd.mm.yy", startDate);
-                let endDateObj = $.datepicker.parseDate("dd.mm.yy", dateText);
+                        if (startDate && dateString === startDate) {
+                            return [true, "start", "Startdatum"];
+                        }
+                        if (endDate && dateString === endDate) {
+                            return [true, "end", "Enddatum"];
+                        }
+                        if (
+                            startDate &&
+                            endDate &&
+                            date >= $.datepicker.parseDate("dd.mm.yy", startDate) &&
+                            date <= $.datepicker.parseDate("dd.mm.yy", endDate)
+                        ) {
+                            return [true, "range", "Ausgewählter Bereich"];
+                        }
+                        return [true, ""];
+                    },
+                    onSelect: function(dateText) {
+                        // Wenn beide gesetzt sind, neu starten
+                        if (startDate && endDate) {
+                            startDate = dateText;
+                            endDate = null;
+                        } else if (!startDate) {
+                            startDate = dateText;
+                        } else {
+                            let startDateObj = $.datepicker.parseDate("dd.mm.yy", startDate);
+                            let endDateObj = $.datepicker.parseDate("dd.mm.yy", dateText);
 
-                if (endDateObj < startDateObj) {
-                    startDate = dateText;
+                            if (endDateObj < startDateObj) {
+                                startDate = dateText;
+                                endDate = null;
+                            } else {
+                                endDate = dateText;
+                            }
+                        }
+
+                        $("#datepicker").val(startDate + (endDate ? " - " + endDate : ""));
+                        $("#datepicker-popup").datepicker("refresh");
+                    }
+                }).hide();
+
+                $("#datepicker").click(function(event) {
+                    event.stopPropagation();
+                    $("#datepicker-popup").toggle();
+                });
+
+                $(document).on("mousedown", function(event) {
+                    if (!$(event.target).closest("#datepicker-container, .ui-datepicker-header").length) {
+                        $("#datepicker-popup").hide();
+                    }
+                });
+
+                $("#resetDate").click(function() {
+                    startDate = null;
                     endDate = null;
-                } else {
-                    endDate = dateText;
-                }
-            }
-
-            $("#datepicker").val(startDate + (endDate ? " - " + endDate : ""));
-            $("#datepicker-popup").datepicker("refresh");
-        }
-    }).hide();
-
-    $("#datepicker").click(function (event) {
-        event.stopPropagation();
-        $("#datepicker-popup").toggle();
-    });
-
-    $(document).on("mousedown", function (event) {
-        if (!$(event.target).closest("#datepicker-container, .ui-datepicker-header").length) {
-            $("#datepicker-popup").hide();
-        }
-    });
-
-    $("#resetDate").click(function () {
-        startDate = null;
-        endDate = null;
-        $("#datepicker").val("");
-        $("#datepicker-popup").datepicker("refresh");
-    });
-});
+                    $("#datepicker").val("");
+                    $("#datepicker-popup").datepicker("refresh");
+                });
+            });
 
             // If a date is already selected, show the appropriate form
             if (selectedDate) {
@@ -454,39 +454,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         function resetForm() {
             document.getElementById("dateForm").reset();
         }
-
-
-        // document.getElementById("addRowBtn").addEventListener("click", function() {
-        //     let tableBody = document.getElementById("tableBody");
-
-        //     // Neue Zeile erstellen
-        //     let newRow = document.createElement("tr");
-        //     newRow.innerHTML = `
-        //         <td><input type="text" class="form-control" placeholder="Name"></td>
-        //         <td><input type="email" class="form-control" placeholder="Email"></td>
-        //         <td><button class="btn btn-danger deleteRowBtn">Löschen</button></td>
-        //     `;
-
-        //     // Zeile zur Tabelle hinzufügen
-        //     tableBody.appendChild(newRow);
-
-        //     // Event Listener für Löschen-Button hinzufügen
-        //     newRow.querySelector(".deleteRowBtn").addEventListener("click", function() {
-        //         newRow.remove();
-        //     });
-        // });
-
-        // $(document).ready(function() {
-        //     $("#opening_time, #closing_time").timepicker({
-        //         timeFormat: 'HH:mm',
-        //         interval: 30,
-        //         minTime: '06:00',
-        //         maxTime: '23:30',
-        //         dynamic: false,
-        //         dropdown: true,
-        //         scrollbar: true
-        //     });
-        // });
 
         document.addEventListener("DOMContentLoaded", function() {
             let script = document.createElement("script");

@@ -11,18 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($isValid) {
     $_SESSION['loggedin'] = true; // Set session variable for login status
     $_SESSION['user_email'] = $email; // Optional: store user email or other info
-    $message = "Login successful!";
+    $message = "Erfolgreich eingeloggt!";
     header('Location: adminPage.php'); // Redirect to the homepage or admin panel
     exit;
   } else {
-    $message = "Invalid email or password.";
+    $message = "Ungültige E-Mail oder Passwort.";
   }
 }
 ?>
 
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
   <meta charset="UTF-8">
@@ -30,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <title>Login</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link rel="icon" type="image/x-icon" href="assets/images/shababs-logo.ico">
-
 </head>
 
 <body>
@@ -62,15 +60,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                   <div data-mdb-input-init class="form-outline form-white mb-4">
                     <input type="email" name="email" id="typeEmailX" class="form-control form-control-lg" required />
-                    <label class="form-label" for="typeEmailX">Email</label>
+                    <label class="form-label" for="typeEmailX">E-Mail</label>
                   </div>
 
                   <div data-mdb-input-init class="form-outline form-white mb-4">
                     <input type="password" name="password" id="typePasswordX" class="form-control form-control-lg" required />
-                    <label class="form-label" for="typePasswordX">Password</label>
+                    <label class="form-label" for="typePasswordX">Passwort</label>
                   </div>
 
-                  <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+                  <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Einloggen</button>
 
                   <div class="d-flex justify-content-center text-center mt-4 pt-1">
                     <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
