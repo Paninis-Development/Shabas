@@ -2,12 +2,13 @@
 include_once('./connection.php');
 include_once('./function.php');
 // Get the available opening days and barbers
-$barbers = getBarber();
+// $barbers = getBarber();
+
 $allowedDates = getOpeningDays();
 
 // Check if a date was submitted and sanitize the input
 $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
-
+$barbers = getBarberAvailability($selectedDate);
 // Handle the POST request to save the appointment
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sanitize form inputs

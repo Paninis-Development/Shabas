@@ -26,6 +26,7 @@ function checkUser($email, $password)
             // Start session and set loggedIn status
             session_start();
             $_SESSION['loggedIn'] = true;
+            exeAutoInsertOpeningHours();
             return true;
         }
     }
@@ -48,7 +49,11 @@ function isLoggedIn()
     return false;
 }
 
+function exeAutoInsertOpeningHours() {
+    $db = new DatabaseConnection();
 
+    $db->autoInsertOpeningHours();
+}
 
 function getOpeningDays()
 {
@@ -150,15 +155,15 @@ function isSlotAvailable($date, $startTime, $endTime, $barberName)
     try {
         // Query to check if any appointment overlaps with the selected time slot on the specified date
         $query = "SELECT COUNT(*) AS count
-FROM appointment
-INNER JOIN barber ON appointment.barberID = barber.BarberID
-WHERE appointment_date = ? 
-  AND barber.barber_name = ? 
-  AND (
-      (start_time < ? AND end_time > ?)
-      OR (start_time >= ? AND start_time < ?)
-      OR (end_time > ? AND end_time <= ?)
-  );";
+        FROM appointment
+        INNER JOIN barber ON appointment.barberID = barber.BarberID
+        WHERE appointment_date = ? 
+        AND barber.barber_name = ? 
+        AND (
+        (start_time < ? AND end_time > ?)
+        OR (start_time >= ? AND start_time < ?)
+        OR (end_time > ? AND end_time <= ?)
+        );";
 
         // Pass the correct number of parameters for each placeholder
         $params = array($date, $barberName, $endTime, $startTime, $startTime, $endTime, $startTime, $endTime);
@@ -196,20 +201,23 @@ function getAppointmentDetails($date)
 {
     $db = new DatabaseConnection();
 
-    $query = "SELECT 
-    a.AppointmentID, 
-    a.customer_name, 
-    a.start_time, 
-    a.end_time, 
-    a.customer_email, 
-    a.customer_phone, 
-    a.appointment_date, 
-    a.barberID,
-    b.barber_name
-FROM appointment a
-JOIN barber b ON a.barberID = b.BarberID
-WHERE a.appointment_date = ?;
+    $query = "
+    SELECT 
+        a.AppointmentID, 
+        a.customer_name, 
+        a.start_time, 
+        a.end_time, 
+        a.customer_email, 
+        a.customer_phone, 
+        a.appointment_date, 
+        a.barberID,
+        b.barber_name
+    FROM appointment a
+    JOIN barber b ON a.barberID = b.BarberID
+    WHERE a.appointment_date = ?
+    ORDER BY a.appointment_date, a.start_time;
 ";
+
 
     if ($date !== null) {
         $stmt = $db->makeStatementArray($query, $date);
@@ -223,14 +231,37 @@ function getBarberIdByBarberName($barberName)
     $db = new DatabaseConnection();
 
     $query = "SELECT BarberID FROM barber WHERE barber_name = ?";
-    
+
     // Übergib den Parameter als Array
     $stmt = $db->makeStatement($query, [$barberName]);
 
     // Hole das Ergebnis
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
     return $result ? $result['BarberID'] : null;
+}
+
+function addHoliday($barberID, $startDate, $endDate, $reason) {
+    $db = new DatabaseConnection();
+    $query = "INSERT INTO `shababs_web`.`barber_availability` (`BarberID`, `start_date`, `end_date`, `reason`) VALUES (?, ?, ?, ?);";
+    $params = array($barberID, $startDate, $endDate, $reason);
+    $stmt = $db->makeStatement($query, $params);
+    return $stmt;
+}
+
+function getBarberAvailability($date)
+{
+    $db = new DatabaseConnection();
+    $query = "SELECT b.BarberID, b.barber_name
+FROM barber b
+WHERE b.BarberID NOT IN (
+    SELECT ba.BarberID 
+    FROM barber_availability ba
+    WHERE ? BETWEEN ba.start_date AND ba.end_date
+);
+";
+    $stmt = $db->makeStatement($query, [$date]);
+    return $stmt;
 }
 
 function getBarber()
@@ -284,9 +315,6 @@ function deleteBarber($barberId)
     return $stmt;
 }
 
-
-
-
 function saveOpeningHours($opendate, $openingTime, $closingTime)
 {
 
@@ -334,7 +362,8 @@ function closeDay($date)
     return $stmt;
 }
 
-function logMessage($message, $type = "INFO") {
+function logMessage($message, $type = "INFO")
+{
     date_default_timezone_set('Europe/Berlin');
     $logFile = "log/log.txt"; // Speicherort des Log-Files
 
@@ -354,7 +383,8 @@ function logMessage($message, $type = "INFO") {
     file_put_contents($logFile, strip_tags($logEntry), FILE_APPEND);
 }
 
-function sendConfirmationEmail($to, $name, $date, $startTime, $endTime, $barber) {
+function sendConfirmationEmail($to, $name, $date, $startTime, $endTime, $barber)
+{
     $mail = new PHPMailer(true);
 
     try {
@@ -366,7 +396,7 @@ function sendConfirmationEmail($to, $name, $date, $startTime, $endTime, $barber)
         $mail->Password = 'ieqfehsrtthzdwjt';            // Change this
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
-        
+
 
         // Email Setup
         $mail->setFrom('shababs.barbershop.linz@gmail.com', 'Shababs Barbershop'); // Change this
@@ -386,7 +416,7 @@ function sendConfirmationEmail($to, $name, $date, $startTime, $endTime, $barber)
             <p>Vielen Dank fuer Ihre Buchung!</p>
             <p>Mit freundlichen Gruessen,<br>Shababs Barbershop</p>
         ";
-        
+
         $mail->send();
         logMessage("Confirmation email sent to $to", "INFO");
     } catch (Exception $e) {
@@ -394,7 +424,8 @@ function sendConfirmationEmail($to, $name, $date, $startTime, $endTime, $barber)
     }
 }
 
-function sendDeleteEmail($to,  $name, $date, $startTime) {
+function sendDeleteEmail($to,  $name, $date, $startTime)
+{
     $mail = new PHPMailer(true);
 
     try {
@@ -406,7 +437,7 @@ function sendDeleteEmail($to,  $name, $date, $startTime) {
         $mail->Password = 'ieqfehsrtthzdwjt';            // Change this
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
-        
+
 
         // Email Setup
         $mail->setFrom('shababs.barbershop.linz@gmail.com', 'Shababs Barbershop'); // Change this
@@ -423,8 +454,8 @@ function sendDeleteEmail($to,  $name, $date, $startTime) {
             <p>Vielen Dank fuer Ihr Verstaendnis!</p>
             <p>Mit freundlichen Gruessen,<br>Shababs Barbershop</p>
         ";
-        
-        
+
+
         $mail->send();
         logMessage("Delete email sent to $to", "INFO");
     } catch (Exception $e) {

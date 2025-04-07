@@ -161,5 +161,37 @@ class DatabaseConnection
             return $e;
         }
     }
+    function autoInsertOpeningHours() {
+        $today = new DateTime();
+    
+        for ($i = 0; $i < 14; $i++) {
+            $dateObj = (clone $today)->modify("+$i days");
+            $date = $dateObj->format('Y-m-d');
+    
+            // 0 = Sonntag
+            if ($dateObj->format('w') == 0) {
+                continue;
+            }
+    
+            // Check ob der Tag schon existiert
+            $stmt = $this->con->prepare("SELECT COUNT(*) FROM openinghours WHERE opening_date = ?");
+            $stmt->execute([$date]);
+            $exists = $stmt->fetchColumn();
+    
+            if (!$exists) {
+                $open_time = '09:00:00';
+                $close_time = '19:00:00';
+    
+                $insert = $this->con->prepare("INSERT INTO openinghours (opening_date, open_time, close_time) VALUES (?, ?, ?)");
+                $insert->execute([$date, $open_time, $close_time]);
+    
+                logMessage("Öffnungszeiten eingetragen für '$date'");
+            } else {
+                logMessage("'$date' ist bereits eingetragen");
+            }
+        }
+    }
+    
+    
 
 }

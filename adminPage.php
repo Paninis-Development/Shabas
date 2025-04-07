@@ -2,6 +2,7 @@
 include_once('./connection.php');
 include_once('./function.php');
 
+
 // Get the available opening days
 $allowedDates = getOpeningDays();
 $barberDetails = getBarberDetails();
@@ -55,6 +56,25 @@ if (isset($_POST['delete'])) {
         sendDeleteEmail($delete_email, $customerName, $selectedDate, $startTime);
     } else {
         logMessage("Fehler beim Löschen des Termins!", "ERROR");
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (!empty($_POST["barber_select"]) && !empty($_POST["date_range"])) {
+        $barberName = htmlspecialchars($_POST["barber_select"]);
+        $barberID = getBarberIdByBarberName($barberName);
+        $reason = htmlspecialchars($_POST["reason_select"]);
+        // Datum in Start- und Enddatum aufteilen
+        $dates = explode(" - ", $_POST["date_range"]);
+        if (count($dates) == 2) {
+            $startDate = DateTime::createFromFormat("d.m.Y", trim($dates[0]))->format("Y-m-d");
+            $endDate = DateTime::createFromFormat("d.m.Y", trim($dates[1]))->format("Y-m-d");
+
+            addHoliday($barberID, $startDate, $endDate, 'vacation');
+            logMessage("'$barberName' von '$startDate' bis '$endDate' '$reason' eingetragen");
+        } else {
+            echo "Ungültiges Datumsformat!";
+        }
     }
 }
 
@@ -146,26 +166,26 @@ if (isset($_POST['delete'])) {
                                         $appointmentId = isset($appointment['AppointmentID']) ? $appointment['AppointmentID'] : uniqid();
 
                                         echo "<tr class='main-row' data-toggle='collapse' data-target='#row{$appointmentId}' aria-expanded='false' aria-controls='row{$appointmentId}'>
-        <td>{$appointment['customer_name']}</td>
-        <td>{$appointment['start_time']}</td>
-        <td>{$appointment['end_time']}</td>
-        <td>{$appointment['barber_name']}</td>
-    </tr>
-    <tr id='row{$appointmentId}' class='collapse'>
-        <td colspan='4'>
-            <strong>Email:</strong> {$appointment['customer_email']}<br>
-            <strong>Phone:</strong> {$appointment['customer_phone']}<br>
-            <strong>Appointment Date:</strong> {$appointment['appointment_date']}<br><br>
+                                        <td>{$appointment['customer_name']}</td>
+                                        <td>{$appointment['start_time']}</td>
+                                        <td>{$appointment['end_time']}</td>
+                                        <td>{$appointment['barber_name']}</td>
+                                        </tr>
+                                        <tr id='row{$appointmentId}' class='collapse'>
+                                        <td colspan='4'>
+                                        <strong>Email:</strong> {$appointment['customer_email']}<br>
+                                        <strong>Phone:</strong> {$appointment['customer_phone']}<br>
+                                        <strong>Appointment Date:</strong> {$appointment['appointment_date']}<br><br>
             
-            <form method='post'>
-                <input type='hidden' name='delete_id' value='{$appointmentId}'>
-                <input type='hidden' name='delete_email' value='{$appointment['customer_email']}'>
-                <input type='hidden' name='start_time' value='{$appointment['start_time']}'>
-                <input type='hidden' name='customer_name' value='{$appointment['customer_name']}'>
-                <button type='submit' name='delete' class='btn btn-danger'>Delete</button>
-            </form>
-        </td>
-    </tr>";
+                                        <form method='post'>
+                                        <input type='hidden' name='delete_id' value='{$appointmentId}'>
+                                        <input type='hidden' name='delete_email' value='{$appointment['customer_email']}'>
+                                        <input type='hidden' name='start_time' value='{$appointment['start_time']}'>
+                                        <input type='hidden' name='customer_name' value='{$appointment['customer_name']}'>
+                                        <button type='submit' name='delete' class='btn btn-danger'>Delete</button>
+                                    </form>
+                                </td>
+                            </tr>";
                                     }
                                 } else {
                                     echo "<tr><td colspan='3'>No appointments found for the selected date.</td></tr>";
@@ -269,13 +289,44 @@ if (isset($_POST['delete'])) {
             </div>
         </div>
     </div>
+    <div class="container" id="urlaubVerwaltung">
+        <h2>Urlaub/Krankenstand Verwaltung</h2>
+        <form id="holidayForm" method="POST">
+            <label for="barberSelect">Barber auswählen: *</label>
+            <select id="barberSelect" name="barber_select" required>
+            <option value="" disabled selected>Bitte einen Barber auswählen</option>
+                <?php foreach ($barbers as $barber) : ?>
+                    <option value="<?php echo htmlspecialchars($barber['barber_name']); ?>">
+                        <?php echo htmlspecialchars($barber['barber_name']); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <label for="reasonSelect">Grund auswählen: *</label>
+            <select id="reasonSelect" name="reason_select" required>
+                <!-- <option value="">Select a Barber</option> -->
+                <option value="sick">Krankenstand</option>
+                <option value="vacation">Urlaub</option>
+            </select>
+
+            <label>Wähle eine Zeitspanne:</label>
+            <div id="datepicker-container">
+                <input type="text" id="datepicker" name="date_range" placeholder="Datum wählen..." readonly required>
+                <div id="datepicker-popup"></div> <!-- Hier wird der Datepicker eingefügt -->
+            </div>
+            <button type="button" id="resetDate">Datum zurücksetzen</button>
+
+            <button type="submit">Senden</button>
+        </form>
+    </div>
 
 
-
-
+   
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+
     <script>
         $(document).ready(function() {
             const allowedDates = <?php echo json_encode($allowedDates); ?>;
@@ -303,6 +354,75 @@ if (isset($_POST['delete'])) {
                     $('#dateForm').submit();
                 }
             });
+
+            $(function () {
+    let startDate = null;
+    let endDate = null;
+
+    $("#datepicker-popup").datepicker({
+        dateFormat: "dd.mm.yy",
+        numberOfMonths: 1,
+        beforeShowDay: function (date) {
+            let dateString = $.datepicker.formatDate("dd.mm.yy", date);
+
+            if (startDate && dateString === startDate) {
+                return [true, "start", "Startdatum"];
+            }
+            if (endDate && dateString === endDate) {
+                return [true, "end", "Enddatum"];
+            }
+            if (
+                startDate &&
+                endDate &&
+                date >= $.datepicker.parseDate("dd.mm.yy", startDate) &&
+                date <= $.datepicker.parseDate("dd.mm.yy", endDate)
+            ) {
+                return [true, "range", "Ausgewählter Bereich"];
+            }
+            return [true, ""];
+        },
+        onSelect: function (dateText) {
+            // Wenn beide gesetzt sind, neu starten
+            if (startDate && endDate) {
+                startDate = dateText;
+                endDate = null;
+            } else if (!startDate) {
+                startDate = dateText;
+            } else {
+                let startDateObj = $.datepicker.parseDate("dd.mm.yy", startDate);
+                let endDateObj = $.datepicker.parseDate("dd.mm.yy", dateText);
+
+                if (endDateObj < startDateObj) {
+                    startDate = dateText;
+                    endDate = null;
+                } else {
+                    endDate = dateText;
+                }
+            }
+
+            $("#datepicker").val(startDate + (endDate ? " - " + endDate : ""));
+            $("#datepicker-popup").datepicker("refresh");
+        }
+    }).hide();
+
+    $("#datepicker").click(function (event) {
+        event.stopPropagation();
+        $("#datepicker-popup").toggle();
+    });
+
+    $(document).on("mousedown", function (event) {
+        if (!$(event.target).closest("#datepicker-container, .ui-datepicker-header").length) {
+            $("#datepicker-popup").hide();
+        }
+    });
+
+    $("#resetDate").click(function () {
+        startDate = null;
+        endDate = null;
+        $("#datepicker").val("");
+        $("#datepicker-popup").datepicker("refresh");
+    });
+});
 
             // If a date is already selected, show the appropriate form
             if (selectedDate) {

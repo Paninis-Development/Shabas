@@ -148,3 +148,102 @@ SELECT BarberID FROM barber WHERE barber_name = "mahmood";
 
 INSERT INTO appointment (appointment_date, start_time, end_time, customer_name, customer_email, customer_phone, barberID) VALUES ("2025-05-27", "09:00", "10:00", "qkje", "kajdf", "oadfjh", 1);
 
+
+-- testing a urlaub/krankenstand solution
+
+CREATE TABLE IF NOT EXISTS `shababs_web`.`barber_availability` (
+  `AvailabilityID` INT(11) NOT NULL AUTO_INCREMENT,
+  `BarberID` INT(11) NOT NULL,
+  `start_date` DATE NOT NULL,
+  `end_date` DATE NOT NULL,
+  `reason` ENUM('vacation', 'sick') NOT NULL,
+  PRIMARY KEY (`AvailabilityID`),
+  FOREIGN KEY (`BarberID`) REFERENCES `shababs_web`.`barber`(`BarberID`) ON DELETE CASCADE
+) ENGINE = InnoDB;
+
+
+SELECT BarberID, barber_name 
+FROM shababs_web.barber 
+WHERE BarberID NOT IN (
+    SELECT BarberID FROM shababs_web.barber_availability
+    WHERE ? BETWEEN start_date AND end_date
+);
+
+INSERT INTO barber_availability (`BarberID`, `start_date`, `end_date`, `reason`) 
+VALUES (1, '2025-05-29', '2025-05-30', 'vacation');
+
+SELECT * FROM barber_availability
+WHERE '2024-04-10' NOT BETWEEN start_date AND end_date;
+
+
+select * from barber_availability;
+
+SET SQL_SAFE_UPDATES = 1;
+
+DELETE FROM appointment;
+
+-- Alle Termine löschen
+DELETE FROM appointment;
+
+-- Neue Termine mit einer Stunde Pause
+-- Beispiel für die Woche vom 07. April 2025 bis 13. April 2025
+
+-- Montag, 07. April 2025
+INSERT INTO appointment (customer_name, customer_email, customer_phone, appointment_date, barberID, start_time, end_time) VALUES
+('Max Mustermann', 'max@example.com', '+491234567890', '2025-04-07', 1, '09:00:00', '10:00:00'),
+('Max Mustermann2', 'max@example.com', '+491234567890', '2025-04-07', 2, '09:00:00', '10:00:00'),
+('Lisa Müller', 'lisa@example.com', '+491234567891', '2025-04-07', 1, '11:00:00', '12:00:00'),
+('John Doe', 'john@example.com', '+491234567892', '2025-04-07', 2, '13:00:00', '14:00:00'),
+('Anna Schmidt', 'anna@example.com', '+491234567893', '2025-04-07', 2, '15:00:00', '16:00:00'),
+('Peter Meier', 'peter@example.com', '+491234567894', '2025-04-07', 3, '17:00:00', '18:00:00');
+
+-- Dienstag, 08. April 2025
+INSERT INTO appointment (customer_name, customer_email, customer_phone, appointment_date, barberID, start_time, end_time) VALUES
+('Sophie Klein', 'sophie@example.com', '+491234567895', '2025-04-08', 1, '09:00:00', '10:00:00'),
+('Michael Braun', 'michael@example.com', '+491234567896', '2025-04-08', 1, '11:00:00', '12:00:00'),
+('Sarah Weber', 'sarah@example.com', '+491234567897', '2025-04-08', 2, '13:00:00', '14:00:00'),
+('Tim Fischer', 'tim@example.com', '+491234567898', '2025-04-08', 2, '15:00:00', '16:00:00'),
+('Klara Vogel', 'klara@example.com', '+491234567899', '2025-04-08', 3, '17:00:00', '18:00:00');
+
+-- Mittwoch, 09. April 2025
+INSERT INTO appointment (customer_name, customer_email, customer_phone, appointment_date, barberID, start_time, end_time) VALUES
+('Tom Schneider', 'tom@example.com', '+491234567900', '2025-04-09', 1, '09:00:00', '10:00:00'),
+('Jasmin Hoffmann', 'jasmin@example.com', '+491234567901', '2025-04-09', 1, '11:00:00', '12:00:00'),
+('David Lang', 'david@example.com', '+491234567902', '2025-04-09', 2, '13:00:00', '14:00:00'),
+('Eva König', 'eva@example.com', '+491234567903', '2025-04-09', 2, '15:00:00', '16:00:00'),
+('Markus Müller', 'markus@example.com', '+491234567904', '2025-04-09', 3, '17:00:00', '18:00:00');
+
+-- Donnerstag, 10. April 2025
+INSERT INTO appointment (customer_name, customer_email, customer_phone, appointment_date, barberID, start_time, end_time) VALUES
+('Katrin Schuster', 'katrin@example.com', '+491234567905', '2025-04-10', 1, '09:00:00', '10:00:00'),
+('Niklas Weber', 'niklas@example.com', '+491234567906', '2025-04-10', 1, '11:00:00', '12:00:00'),
+('Monika Fischer', 'monika@example.com', '+491234567907', '2025-04-10', 2, '13:00:00', '14:00:00'),
+('Tobias Richter', 'tobias@example.com', '+491234567908', '2025-04-10', 2, '15:00:00', '16:00:00'),
+('Beatrix Jäger', 'beatrix@example.com', '+491234567909', '2025-04-10', 3, '17:00:00', '18:00:00');
+
+-- Freitag, 11. April 2025
+INSERT INTO appointment (customer_name, customer_email, customer_phone, appointment_date, barberID, start_time, end_time) VALUES
+('Lena Schulz', 'lena@example.com', '+491234567910', '2025-04-11', 1, '09:00:00', '10:00:00'),
+('Oliver Braun', 'oliver@example.com', '+491234567911', '2025-04-11', 1, '11:00:00', '12:00:00'),
+('Mia Fischer', 'mia@example.com', '+491234567912', '2025-04-11', 2, '13:00:00', '14:00:00'),
+('Felix Schneider', 'felix@example.com', '+491234567913', '2025-04-11', 2, '15:00:00', '16:00:00'),
+('Julia König', 'julia@example.com', '+491234567914', '2025-04-11', 3, '17:00:00', '18:00:00');
+
+-- Samstag, 12. April 2025
+INSERT INTO appointment (customer_name, customer_email, customer_phone, appointment_date, barberID, start_time, end_time) VALUES
+('Paul Weber', 'paul@example.com', '+491234567915', '2025-04-12', 1, '09:00:00', '10:00:00'),
+('Nina Jäger', 'nina@example.com', '+491234567916', '2025-04-12', 1, '11:00:00', '12:00:00'),
+('Johanna Braun', 'johanna@example.com', '+491234567917', '2025-04-12', 2, '13:00:00', '14:00:00'),
+('Matthias Fischer', 'matthias@example.com', '+491234567918', '2025-04-12', 2, '15:00:00', '16:00:00'),
+('Victoria König', 'victoria@example.com', '+491234567919', '2025-04-12', 3, '17:00:00', '18:00:00');
+
+-- Sonntag, 13. April 2025
+INSERT INTO appointment (customer_name, customer_email, customer_phone, appointment_date, barberID, start_time, end_time) VALUES
+('Karla Schulz', 'karla@example.com', '+491234567920', '2025-04-13', 1, '09:00:00', '10:00:00'),
+('Stefan Hoffmann', 'stefan@example.com', '+491234567921', '2025-04-13', 1, '11:00:00', '12:00:00'),
+('Elke Fischer', 'elke@example.com', '+491234567922', '2025-04-13', 2, '13:00:00', '14:00:00'),
+('Hans Richter', 'hans@example.com', '+491234567923', '2025-04-13', 2, '15:00:00', '16:00:00'),
+('Jörg Weber', 'joerg@example.com', '+491234567924', '2025-04-13', 3, '17:00:00', '18:00:00');
+
+
+
