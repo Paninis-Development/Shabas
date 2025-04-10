@@ -36,7 +36,7 @@ function checkUser($email, $password)
     session_start();
     $_SESSION['loggedIn'] = false;
     return false;
-}
+};
 
 
 function isLoggedIn()
@@ -47,13 +47,13 @@ function isLoggedIn()
         return true;
     }
     return false;
-}
+};
 
 function exeAutoInsertOpeningHours() {
     $db = new DatabaseConnection();
 
     $db->autoInsertOpeningHours();
-}
+};
 
 function getOpeningDays()
 {
@@ -70,7 +70,7 @@ function getOpeningDays()
     }
 
     return $dates;
-}
+};
 function getOpeningTime($date)
 {
     $db = new DatabaseConnection();
@@ -84,7 +84,7 @@ function getOpeningTime($date)
     }
 
     return $openingtime;
-}
+};
 function getClosingTime($date)
 {
     $db = new DatabaseConnection();
@@ -98,7 +98,7 @@ function getClosingTime($date)
     }
 
     return $closingtime;
-}
+};
 
 
 function getOpeningClosingTime($date)
@@ -116,13 +116,13 @@ function getOpeningClosingTime($date)
     }
 
     return $openCloseTimes;
-}
+};
 
 
 function generateTimeSlotsWithAvailability($openTime, $closeTime, $date, $barberName)
 {
     $slots = [];
-    $interval = 60 * 60; // 45 minutes in seconds
+    $interval = 60 * 60; // 60 minutes in seconds
     $startTime = strtotime($openTime);
     $endTime = strtotime($closeTime);
     $slots[] = "<option value='' selected disabled>Bitte Uhrzeit auswählen *</option>";
@@ -143,7 +143,7 @@ function generateTimeSlotsWithAvailability($openTime, $closeTime, $date, $barber
     }
 
     return $slots;
-}
+};
 
 
 
@@ -180,7 +180,7 @@ function isSlotAvailable($date, $startTime, $endTime, $barberName)
         logMessage("Error checking slot availability: " . $e->getMessage() . "", "ERROR");
         return false; // Return false in case of an error
     }
-}
+};
 
 function saveAppointment($date, $startTime, $endTime, $name, $email, $phone, $barberID)
 {
@@ -195,7 +195,7 @@ function saveAppointment($date, $startTime, $endTime, $name, $email, $phone, $ba
     $stmt = $db->makeStatement($query, $params);
 
     return $stmt;
-}
+};
 
 function getAppointmentDetails($date)
 {
@@ -225,7 +225,7 @@ function getAppointmentDetails($date)
     } else {
         return null;
     }
-}
+};
 function getBarberIdByBarberName($barberName)
 {
     $db = new DatabaseConnection();
@@ -239,15 +239,43 @@ function getBarberIdByBarberName($barberName)
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     return $result ? $result['BarberID'] : null;
-}
+};
 
-function addHoliday($barberID, $startDate, $endDate, $reason) {
+function addAbsence($barberID, $startDate, $endDate, $reason) {
     $db = new DatabaseConnection();
     $query = "INSERT INTO `shababs_web`.`barber_availability` (`BarberID`, `start_date`, `end_date`, `reason`) VALUES (?, ?, ?, ?);";
     $params = array($barberID, $startDate, $endDate, $reason);
     $stmt = $db->makeStatement($query, $params);
     return $stmt;
-}
+};
+
+function getAbsences() {
+    $db = new DatabaseConnection();
+    $query = "SELECT 
+        ba.AvailabilityID,
+        b.barber_name,
+        ba.start_date,
+        ba.end_date,
+        ba.reason
+    FROM barber_availability ba
+    JOIN barber b ON ba.BarberID = b.BarberID
+    ORDER BY ba.start_date DESC";
+    $stmt = $db->makeStatement($query);
+    $stmt = $db->makeStatement("SELECT * FROM barber_availability");
+$absences = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $absences;
+};
+
+function deleteAbsence($availabilityId) {
+   
+    $db = new DatabaseConnection();
+    $query = "DELETE FROM barber_availability WHERE AvailabilityID = ?";
+    $stmt = $db->makeStatement($query, [$availabilityId]);
+    return $stmt;
+   
+};
+
 
 function getBarberAvailability($date)
 {
@@ -262,7 +290,7 @@ WHERE b.BarberID NOT IN (
 ";
     $stmt = $db->makeStatement($query, [$date]);
     return $stmt;
-}
+};
 
 function getBarber()
 {
@@ -273,7 +301,7 @@ function getBarber()
     $stmt = $db->makeStatement($query, null);
 
     return $stmt;
-}
+};
 
 function getBarberDetails()
 {
@@ -284,7 +312,7 @@ function getBarberDetails()
     $stmt = $db->makeStatement($query, null);
 
     return $stmt;
-}
+};
 
 function addBarber($name, $email)
 {
@@ -302,18 +330,34 @@ function addBarber($name, $email)
         // Log or handle errors
         return false;
     }
-}
+};
 
 function deleteBarber($barberId)
 {
     $db = new DatabaseConnection();
 
     $query = "DELETE FROM barber WHERE BarberID = ?";
+    $result = $db->makeStatement($query, [$barberId]);
 
-    $stmt = $db->makeStatement($query, [$barberId]);
-
-    return $stmt;
+    if ($result instanceof \PDOStatement) {
+        // Erfolg
+        if ($result->rowCount() > 0) {
+            logMessage("Barber mit ID $barberId erfolgreich gelöscht.");
+        } else {
+            logMessage("Kein Barber mit ID $barberId gefunden oder bereits gelöscht.");
+        }
+    } elseif ($result instanceof \Throwable) {
+        // Fehlerfall
+        if (strval($result->getCode()) === '23000') {
+            logMessage("Barber mit ID $barberId konnte nicht gelöscht werden: Termin(e) vorhanden.");
+        } else {
+            logMessage("Fehler beim Löschen von Barber mit ID $barberId: " . $result->getMessage());
+        }
+    }
+    
+    return $result;
 }
+
 
 function saveOpeningHours($opendate, $openingTime, $closingTime)
 {
@@ -331,7 +375,7 @@ function saveOpeningHours($opendate, $openingTime, $closingTime)
         // Log or handle errors
         return false;
     }
-}
+};
 
 
 function deleteAppointment($appointmentId)
@@ -344,7 +388,7 @@ function deleteAppointment($appointmentId)
 
     $stmt = $db->makeStatement($query, [$appointmentId]);
     return $stmt;
-}
+};
 function closeDay($date)
 {
     $db = new DatabaseConnection();
@@ -360,7 +404,7 @@ function closeDay($date)
     $db->makeStatement("SET SQL_SAFE_UPDATES = 1");
 
     return $stmt;
-}
+};
 
 function logMessage($message, $type = "INFO")
 {
@@ -381,7 +425,7 @@ function logMessage($message, $type = "INFO")
 
     // Nachricht in Datei speichern
     file_put_contents($logFile, strip_tags($logEntry), FILE_APPEND);
-}
+};
 
 function sendConfirmationEmail($to, $name, $date, $startTime, $endTime, $barber)
 {
@@ -422,7 +466,7 @@ function sendConfirmationEmail($to, $name, $date, $startTime, $endTime, $barber)
     } catch (Exception $e) {
         logMessage("Error sending email: " . $mail->ErrorInfo, "ERROR");
     }
-}
+};
 
 function sendDeleteEmail($to,  $name, $date, $startTime)
 {
@@ -461,4 +505,5 @@ function sendDeleteEmail($to,  $name, $date, $startTime)
     } catch (Exception $e) {
         logMessage("Error sending email: " . $mail->ErrorInfo, "ERROR");
     }
-}
+};
+

@@ -31,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $barberID = getBarberIdByBarberName($barber);
         $message = "";
         $messageType = "";
-        // toast message
         if ($barberID) {
             if (saveAppointment($date, $startTime, $endTime, $name, $email, $phone, $barberID)) {
                 $message = "Termin erfolgreich gespeichert!";
@@ -41,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 $message = "Fehler beim Speichern des Termins.";
                 $messageType = "error";
-                logMessage("Fehler beim Speichern des Termins", "ERROR");    
+                logMessage($message, "ERROR");    
             }
         } else {
             logMessage("Barber nicht gefunden in getBarberIdByName", "ERROR");          
@@ -150,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
 
-            <input type="submit" value="Termin buchen">
+            <input type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" value="Termin buchen">
         </form>
 
     </div>

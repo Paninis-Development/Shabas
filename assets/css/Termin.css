@@ -36,9 +36,10 @@ input::placeholder {
 }
 
 input[type="submit"] {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+ background-color: grey;
+    color: black;
+    /* border: none; */
+    /* border-color: white; */
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
@@ -47,7 +48,9 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3;
+    /* background-color: #fb4061; */
+    background-color: grey;
+
 }
 /* Datepicker weekdays styling */
 .ui-datepicker th {

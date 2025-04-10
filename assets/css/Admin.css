@@ -36,16 +36,23 @@ input[type="time"] {
 }
 
 h2 {
-    font-family: "Poppins", sans-serif; /* Moderne, klare Schriftart */
+    font-family: "Poppins", sans-serif;
     font-size: 28px;
     font-weight: 600;
-    text-transform: uppercase; /* Großbuchstaben für modernes Design */
-    color: #fff; /* Weiße Schriftfarbe */
+    text-transform: uppercase;
+    color: #fff;
     letter-spacing: 1.5px;
     text-align: center;
     position: relative;
     padding-bottom: 10px;
 }
+
+h3 {
+    margin: 20px auto;
+    padding-top: 20px;
+
+}
+
 /* Form styling */
 #admin-div {
     max-width: 500px;
@@ -114,6 +121,7 @@ input[type="submit"]:hover {
 /* Datepicker styling */
 .ui-datepicker {
     background-color: #333;
+    color: white;
     border: 3px solid #555;
 }
 
@@ -158,7 +166,10 @@ input[type="submit"]:hover {
     /* Size of the arrow */
 }
 
-
+.past-date {
+    opacity: 0.4;
+    font-style: italic;
+}
 
 
 
@@ -184,17 +195,19 @@ input[type="submit"]:hover {
 #unavailableDates {
     display: none;
 }
-#closeButton{
+
+#closeButton {
     display: none;
 }
 
 #opening_time {
-    
+
     background-color: grey;
 }
+
 #closing_time {
     background-color: grey;
-} 
+}
 
 input[type="time"] {
     color: white;
@@ -305,4 +318,62 @@ body {
 
 #holidayForm button:hover {
     background-color: #0056b3;
+}
+
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.toast {
+    background-color: #333;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 250px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateX(100%);
+}
+
+.toast.success {
+    background-color: #4CAF50;
+}
+
+.toast.error {
+    background-color: #f44336;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.absence-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.absence-list th,
+.absence-list td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.absence-list th {
+    background-color: #f2f2f2;
 }

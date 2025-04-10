@@ -105,3 +105,306 @@
 [32m[2025-04-07 11:19:24] [INFO] '2025-04-17' ist bereits eingetragen[0m
 [32m[2025-04-07 11:19:24] [INFO] '2025-04-18' ist bereits eingetragen[0m
 [32m[2025-04-07 11:19:24] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 08:49:24] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 08:49:24] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 08:49:24] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 08:49:24] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 08:49:24] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 08:49:24] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 08:49:24] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 08:49:24] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 08:49:24] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 08:49:24] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 08:49:24] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 08:49:24] [INFO] Öffnungszeiten eingetragen für '2025-04-21'[0m
+[32m[2025-04-08 09:58:12] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 09:58:12] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 09:58:12] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 09:58:12] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 09:58:12] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 09:58:12] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 09:58:12] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 09:58:12] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 09:58:12] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 09:58:12] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 09:58:12] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 09:58:12] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:41] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:41] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:41] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:41] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:41] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:41] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:41] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:41] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:41] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:41] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:41] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:41] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:50] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:50] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:50] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:50] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:50] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:50] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:50] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:50] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:50] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:50] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:50] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 10:49:50] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-08 10:50:19] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 10:50:19] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 10:50:19] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 10:50:19] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 10:50:19] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 10:50:19] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 10:50:19] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 10:50:19] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 10:50:19] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 10:50:19] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 10:50:19] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 10:50:19] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-08 10:51:43] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 10:51:43] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 10:51:43] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 10:51:43] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 10:51:43] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 10:51:43] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 10:51:43] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 10:51:43] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 10:51:43] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 10:51:43] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 10:51:43] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 10:51:43] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-08 11:03:08] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 11:03:08] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 11:03:08] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 11:03:08] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 11:03:08] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 11:03:08] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 11:03:08] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 11:03:08] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 11:03:08] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 11:03:08] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 11:03:08] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 11:03:08] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-08 13:06:48] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 13:06:48] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 13:06:48] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 13:06:48] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 13:06:48] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 13:06:48] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 13:06:48] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 13:06:48] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 13:06:48] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 13:06:48] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 13:06:48] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 13:06:48] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-08 13:10:57] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 13:10:57] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 13:10:57] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 13:10:57] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 13:10:57] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 13:10:57] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 13:10:57] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 13:10:57] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 13:10:57] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 13:10:57] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 13:10:57] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 13:10:57] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-08 13:18:30] [INFO] Successfully closed on '2025-04-22'[0m
+[32m[2025-04-08 13:19:40] [INFO] Termin erfolgreich gespeichert. [date: '2025-04-16', startTime: '11:00', endTime: '12:00' , name: 'oijsfja', email: 'sadf@gag.com', phone: '23', barberID: '3'][0m
+[32m[2025-04-08 13:19:43] [INFO] Confirmation email sent to sadf@gag.com[0m
+[32m[2025-04-08 13:19:43] [INFO] Termin erfolgreich gespeichert. [date: '2025-04-16', startTime: '11:00', endTime: '12:00' , name: 'oijsfja', email: 'sadf@gag.com', phone: '23', barberID: '3'][0m
+[32m[2025-04-08 13:19:45] [INFO] Confirmation email sent to sadf@gag.com[0m
+[32m[2025-04-08 13:19:50] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 13:19:50] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 13:19:50] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 13:19:50] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 13:19:50] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 13:19:50] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 13:19:50] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 13:19:50] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 13:19:50] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 13:19:50] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 13:19:50] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 13:19:50] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-08 13:19:54] [INFO] Successfully opened up on '2025-04-22'[0m
+[32m[2025-04-08 13:20:10] [INFO] Successfully opened up on '2025-04-22'[0m
+[32m[2025-04-08 13:22:33] [INFO] Successfully opened up on '2025-04-23'[0m
+[32m[2025-04-08 13:24:03] [INFO] Successfully opened up on '2025-04-24'[0m
+[32m[2025-04-08 13:24:17] [INFO] Successfully closed on '2025-04-24'[0m
+[32m[2025-04-08 13:24:21] [INFO] Successfully closed on '2025-04-23'[0m
+[32m[2025-04-08 13:24:24] [INFO] Successfully closed on '2025-04-22'[0m
+[32m[2025-04-08 13:27:25] [INFO] Successfully opened up on '2025-04-22'[0m
+[32m[2025-04-08 13:27:48] [INFO] Successfully opened up on '2025-04-23'[0m
+[32m[2025-04-08 13:28:08] [INFO] Successfully opened up on '2025-04-24'[0m
+[32m[2025-04-08 13:28:26] [INFO] Successfully opened up on '2025-04-25'[0m
+[32m[2025-04-08 13:29:18] [INFO] Successfully opened up on '2025-04-26'[0m
+[32m[2025-04-08 13:30:00] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 13:30:00] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 13:30:00] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 13:30:00] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 13:30:00] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 13:30:00] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 13:30:00] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 13:30:00] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 13:30:00] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 13:30:00] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 13:30:00] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 13:30:00] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-08 13:30:14] [INFO] Successfully opened up on '2025-04-20'[0m
+[32m[2025-04-08 13:30:46] [INFO] Successfully opened up on '2025-04-30'[0m
+[32m[2025-04-08 13:31:10] [INFO] Successfully closed on '2025-04-30'[0m
+[32m[2025-04-08 13:31:13] [INFO] Successfully closed on '2025-04-26'[0m
+[32m[2025-04-08 13:31:17] [INFO] Successfully closed on '2025-04-25'[0m
+[32m[2025-04-08 13:31:19] [INFO] Successfully closed on '2025-04-24'[0m
+[32m[2025-04-08 13:31:22] [INFO] Successfully closed on '2025-04-23'[0m
+[32m[2025-04-08 13:31:26] [INFO] Successfully closed on '2025-04-22'[0m
+[32m[2025-04-08 17:43:00] [INFO] Termin erfolgreich gespeichert. [date: '2025-04-09', startTime: '15:00', endTime: '16:00' , name: 'odfjöljkg', email: 'fanefo4378@exclussi.com', phone: '978324972', barberID: '1'][0m
+[32m[2025-04-08 17:43:03] [INFO] Confirmation email sent to fanefo4378@exclussi.com[0m
+[32m[2025-04-08 17:44:19] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 17:44:19] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 17:44:19] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 17:44:19] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 17:44:19] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 17:44:19] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 17:44:19] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 17:44:19] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 17:44:19] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 17:44:19] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 17:44:19] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 17:44:19] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-08 17:44:48] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-08 17:44:50] [INFO] Delete email sent to fanefo4378@exclussi.com[0m
+[32m[2025-04-08 17:46:26] [INFO] 'mahmood' von '2025-04-15' bis '2025-04-16' 'sick' eingetragen[0m
+[32m[2025-04-08 17:46:41] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 17:46:41] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 17:46:41] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 17:46:41] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 17:46:41] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 17:46:41] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 17:46:41] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 17:46:41] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 17:46:41] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 17:46:41] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 17:46:41] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 17:46:41] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-08 17:47:47] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 17:47:47] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 17:47:47] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 17:47:47] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 17:47:47] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 17:47:47] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 17:47:47] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 17:47:47] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 17:47:47] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 17:47:47] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 17:47:47] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 17:47:47] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-08 18:21:46] [INFO] '2025-04-08' ist bereits eingetragen[0m
+[32m[2025-04-08 18:21:46] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-08 18:21:46] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-08 18:21:46] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-08 18:21:46] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-08 18:21:46] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-08 18:21:46] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-08 18:21:46] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-08 18:21:46] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-08 18:21:46] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-08 18:21:46] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-08 18:21:46] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-09 08:44:06] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-09 08:44:06] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-09 08:44:06] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-09 08:44:06] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-09 08:44:06] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-09 08:44:06] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-09 08:44:06] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-09 08:44:06] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-09 08:44:06] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-09 08:44:06] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-09 08:44:06] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-09 08:44:06] [INFO] Öffnungszeiten eingetragen für '2025-04-22'[0m
+[32m[2025-04-09 08:48:14] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-09 08:48:14] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-09 08:48:14] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-09 08:48:14] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-09 08:48:14] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-09 08:48:14] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-09 08:48:14] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-09 08:48:14] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-09 08:48:14] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-09 08:48:14] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-09 08:48:14] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-09 08:48:14] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-09 11:19:07] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-09 11:19:07] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-09 11:19:07] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-09 11:19:07] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-09 11:19:07] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-09 11:19:07] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-09 11:19:07] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-09 11:19:07] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-09 11:19:07] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-09 11:19:07] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-09 11:19:07] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-09 11:19:07] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-09 13:14:22] [INFO] '2025-04-09' ist bereits eingetragen[0m
+[32m[2025-04-09 13:14:22] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-09 13:14:22] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-09 13:14:22] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-09 13:14:22] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-09 13:14:22] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-09 13:14:22] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-09 13:14:22] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-09 13:14:22] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-09 13:14:22] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-09 13:14:22] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-09 13:14:22] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-09 13:17:46] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-09 13:17:48] [INFO] Delete email sent to eva@example.com[0m
+[32m[2025-04-09 13:18:36] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-09 13:18:38] [INFO] Delete email sent to markus@example.com[0m
+[32m[2025-04-09 13:18:38] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-09 13:18:40] [INFO] Delete email sent to markus@example.com[0m
+[32m[2025-04-09 13:25:02] [INFO] Eintrag 5 erfolgreich gelöscht.[0m
+[32m[2025-04-09 13:25:11] [INFO] Eintrag 3 erfolgreich gelöscht.[0m
+[32m[2025-04-09 13:25:14] [INFO] Eintrag 4 erfolgreich gelöscht.[0m
+[32m[2025-04-09 13:25:17] [INFO] Eintrag 6 erfolgreich gelöscht.[0m
+[32m[2025-04-09 13:25:20] [INFO] Eintrag 9 erfolgreich gelöscht.[0m
+[32m[2025-04-09 13:25:25] [INFO] Eintrag 8 erfolgreich gelöscht.[0m
+[32m[2025-04-09 13:25:28] [INFO] Eintrag 7 erfolgreich gelöscht.[0m
+[32m[2025-04-09 13:25:31] [INFO] Eintrag 1 erfolgreich gelöscht.[0m
+[32m[2025-04-09 13:25:35] [INFO] Eintrag 2 erfolgreich gelöscht.[0m
+[32m[2025-04-09 13:38:17] [INFO] Barber mit ID 1 konnte nicht gelöscht werden: Termin(e) vorhanden.[0m
+[32m[2025-04-10 08:53:28] [INFO] 'panini' von '2025-04-13' bis '2025-04-15' 'vacation' eingetragen[0m
+[32m[2025-04-10 08:53:41] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-10 08:53:41] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-10 08:53:41] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-10 08:53:41] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-10 08:53:41] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-10 08:53:41] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-10 08:53:41] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-10 08:53:41] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-10 08:53:41] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-10 08:53:41] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-10 08:53:41] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-10 08:53:41] [INFO] Öffnungszeiten eingetragen für '2025-04-23'[0m
+[32m[2025-04-10 08:54:59] [INFO] Eintrag 10 erfolgreich gelöscht.[0m
+[32m[2025-04-10 08:55:09] [INFO] Barber mit ID 3 konnte nicht gelöscht werden: Termin(e) vorhanden.[0m
+[32m[2025-04-10 10:57:52] [INFO] Termin erfolgreich gespeichert. [date: '2025-04-11', startTime: '15:00', endTime: '16:00' , name: 'kugiu', email: 'df@s.com', phone: '324', barberID: '2'][0m
+[32m[2025-04-10 10:57:54] [INFO] Confirmation email sent to df@s.com[0m
+[32m[2025-04-10 10:58:00] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-10 10:58:00] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-10 10:58:00] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-10 10:58:00] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-10 10:58:00] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-10 10:58:00] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-10 10:58:00] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-10 10:58:00] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-10 10:58:00] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-10 10:58:00] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-10 10:58:00] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-10 10:58:00] [INFO] '2025-04-23' ist bereits eingetragen[0m

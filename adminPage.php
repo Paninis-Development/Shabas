@@ -7,6 +7,7 @@ include_once('./function.php');
 $allowedDates = getOpeningDays();
 $barberDetails = getBarberDetails();
 $barbers = getBarber();
+$absences = getAbsences();
 
 // Check if a date was submitted and sanitize the input
 $selectedDate = isset($_GET['date']) ? htmlspecialchars($_GET['date']) : '';
@@ -15,6 +16,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['opening_time']) && iss
     $closing_time = htmlspecialchars($_POST['closing_time']);
 
     saveOpeningHours($selectedDate, $opening_time, $closing_time);
+
+    logMessage("Successfully opened up on '$selectedDate'");
+    $message = "Am erfolgreich geöffnet";
+    $messageType = "success";
+    echo "
+    <script>
+    window.onload = function() {
+        showToast('$message', '$messageType');
+        setTimeout(function() {
+            window.location.href = '" . $_SERVER['REQUEST_URI'] . "';
+        }, 2000); // wait 2 seconds before redirect
+    };
+    </script>";
+
+
+    header("Location: " . $_SERVER['REQUEST_URI']);
+    exit();
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['closeButton'])) {
     $appointmentDetails = getAppointmentDetails($selectedDate);
@@ -27,6 +45,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['closeButton'])) {
     }
 
     closeDay($selectedDate);
+
+    logMessage("Successfully closed on '$selectedDate'");
+    $message = "Am '$selectedDate' erfolgreich geschlossen";
+    $messageType = "success";
+    echo "<script>
+    window.onload = function() {
+        showToast('$message', '$messageType');
+    };
+  </script>";
+    header("Location: " . $_SERVER['REQUEST_URI']);
+    exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_barber'])) {
@@ -70,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $startDate = DateTime::createFromFormat("d.m.Y", trim($dates[0]))->format("Y-m-d");
             $endDate = DateTime::createFromFormat("d.m.Y", trim($dates[1]))->format("Y-m-d");
 
-            addHoliday($barberID, $startDate, $endDate, 'vacation');
+            addAbsence($barberID, $startDate, $endDate, 'vacation');
             logMessage("'$barberName' von '$startDate' bis '$endDate' '$reason' eingetragen");
         } else {
             echo "Ungültiges Datumsformat!";
@@ -78,6 +107,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_id'])) {
+    $availabilityId = htmlspecialchars($_POST['delete_availability_id']);
+
+    // Aufruf der Methode
+    if ($yourBarberManager = deleteAbsence($availabilityId)) {
+        // Optional Erfolgsmeldung oder Log
+        logMessage("Eintrag $availabilityId erfolgreich gelöscht.");
+    } else {
+        logMessage("Fehler beim Löschen von $availabilityId.");
+    }
+
+    // Redirect zur Vermeidung von doppeltem POST
+    header("Location: " . $_SERVER['REQUEST_URI']);
+    exit;
+}
 
 
 ?>
@@ -173,9 +217,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         </tr>
                                         <tr id='row{$appointmentId}' class='collapse'>
                                         <td colspan='4'>
-                                        <strong>Email:</strong> {$appointment['customer_email']}<br>
-                                        <strong>Phone:</strong> {$appointment['customer_phone']}<br>
-                                        <strong>Appointment Date:</strong> {$appointment['appointment_date']}<br><br>
+                                        <strong>E-Mail:</strong> {$appointment['customer_email']}<br>
+                                        <strong>Telefonnummer:</strong> {$appointment['customer_phone']}<br>
+                                        <strong>Termin Datum:</strong> {$appointment['appointment_date']}<br><br>
             
                                         <form method='post'>
                                         <input type='hidden' name='delete_id' value='{$appointmentId}'>
@@ -202,7 +246,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </tbody>
             </table>
             <!-- Im HTML-Formular -->
-            <form id="deleteDayForm" action="" method="POST">
+            <form id="deleteDayForm" onsubmit="return confirm('Wirklich schließen?');" action="" method="POST">
                 <input id="closeButton" type="submit" name="closeButton" value="Am <?php echo $selectedDate ?> schließen?">
             </form>
 
@@ -222,10 +266,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="time" id="closing_time" placeholder="Bitte Zeit auswählen:" name="closing_time" required>
                         <br><br>
                     </div>
-
-
                     <input id="openUpButton" type="submit" value="Am <?php echo $selectedDate ?> öffnen?">
-
                 </form>
             </div>
         </div>
@@ -242,7 +283,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Email</th>
+                    <th>E-Mail</th>
                     <th>Name</th>
                     <th>Aktionen</th>
                 </tr>
@@ -254,7 +295,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <td><?php echo htmlspecialchars($barber['barber_mail']); ?></td>
                         <td><?php echo htmlspecialchars($barber['barber_name']); ?></td>
                         <td>
-                            <form method="POST" style="display:inline;">
+                            <form method="POST" onsubmit="return confirm('Wirklich löschen? \n Barber kann nur gelöscht werden wenn er keine Termine hat');" style="display:inline;">
                                 <input type="hidden" name="BarberID" value="<?php echo $barber['BarberID']; ?>">
                                 <button type="submit" name="delete_barber" class="btn btn-danger">Löschen</button>
                             </form>
@@ -291,7 +332,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     <div class="container" id="urlaubVerwaltung">
         <h2>Urlaub/Krankenstand Verwaltung</h2>
-        <form id="holidayForm" method="POST">
+        <form id="holidayForm"  method="POST">
             <label for="barberSelect">Barber auswählen: *</label>
             <select id="barberSelect" name="barber_select" required>
                 <option value="" disabled selected>Bitte einen Barber auswählen</option>
@@ -317,15 +358,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <button type="submit">Senden</button>
         </form>
+        <div class="absence-list">
+            <h3>Aktuelle Abwesenheiten</h3>
+            <?php if (!empty($absences)) : ?>
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>Barber</th>
+                            <th>Grund</th>
+                            <th>Von</th>
+                            <th>Bis</th>
+                            <th>Aktion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($absences as $absence) : ?>
+                            <tr>
+                                <td><?= htmlspecialchars($absence['barber_name']) ?></td>
+                                <td><?= $absence['reason'] === 'sick' ? 'Krankenstand' : 'Urlaub' ?></td>
+                                <td><?= date("d.m.Y", strtotime($absence['start_date'])) ?></td>
+                                <td><?= date("d.m.Y", strtotime($absence['end_date'])) ?></td>
+                                <td>
+                                    <form method="POST" onsubmit="return confirm('Wirklich löschen?');" style="display:inline;">
+                                        <input type="hidden" name="delete_availability_id" value="<?= $absence['AvailabilityID'] ?>">
+                                        <button type="submit" class="delete-button">🗑️ Löschen</button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else : ?>
+                <p>Keine Abwesenheiten eingetragen.</p>
+            <?php endif; ?>
+        </div>
+
     </div>
-
-
-
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
 
     <script>
         $(document).ready(function() {
@@ -333,22 +406,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             const selectedDate = "<?php echo $selectedDate; ?>"; // Get the selected date from PHP
 
             // Function to enable only specific dates
+            // Function to enable and style specific dates
             function enableSpecificDates(date) {
                 const formattedDate = $.datepicker.formatDate('yy-mm-dd', date);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0); // nur das Datum vergleichen
 
-                // If the date is allowed, return normal styling
-                if (allowedDates.includes(formattedDate)) {
-                    return [true, "available-date", "Available"];
+                const isAllowed = allowedDates.includes(formattedDate);
+                const isPast = date < today;
+
+                if (isAllowed) {
+                    return [true, isPast ? "available-date past-date" : "available-date", "Geöffnet"];
                 }
-                // If the date is not allowed, still enable it but give it a special class
-                return [true, "unavailable-date", "Unavailable"];
+
+                return [true, isPast ? "unavailable-date past-date" : "unavailable-date", "Geschlossen"];
             }
+
 
             // Initialize the datepicker
             $("#adminDatepicker").datepicker({
                 beforeShowDay: enableSpecificDates,
                 dateFormat: 'yy-mm-dd',
-                minDate: 0,
+                // minDate: 0,
                 onSelect: function(dateText, inst) {
                     // Submit the GET form with selected date via JavaScript
                     $('#dateForm').submit();
@@ -478,7 +557,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             document.getElementById("dateForm").reset();
 
         });
+
+        function showToast(message, type) {
+            if (!message) return; // If no message
+
+            const toastContainer = document.getElementById("toast-container");
+            const toast = document.createElement("div");
+            toast.className = "toast " + type;
+            toast.innerHTML = message;
+
+            toastContainer.appendChild(toast);
+
+            setTimeout(() => toast.classList.add("show"), 100); // Show the toast
+
+            setTimeout(() => {
+                toast.classList.add("hide");
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
     </script>
+
+    <div id="toast-container"></div>
 
 </body>
 
