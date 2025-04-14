@@ -28,7 +28,7 @@
     <section class="cover">
     <div class="cover-content">
         <h2 id="graffiti-text">Shababs Barbershop</h2>
-      <a href="#pricing" class="cta-btn">Jetzt Termin Buchen</a>
+      <a href="#pricing" class="cta-btn">Jetzt Termin buchen</a>
     </div>
   </section>
 </div>
@@ -72,27 +72,27 @@
     </tr>
     <tr>
         <td>Montag</td>
-        <td>9:00 - 19:00</td>
+        <td>9:00 Uhr - 19:00 Uhr</td>
     </tr>
     <tr>
         <td>Dienstag</td>
-        <td>9:00 - 19:00</td>
+        <td>9:00 Uhr - 19:00 Uhr</td>
     </tr>
     <tr>
         <td>Mittwoch</td>
-        <td>9:00 - 19:00</td>
+        <td>9:00 Uhr - 19:00 Uhr</td>
     </tr>
     <tr>
         <td>Donnerstag</td>
-        <td>9:00 - 19:00</td>
+        <td>9:00 Uhr - 19:00 Uhr</td>
     </tr>
     <tr>
         <td>Freitag</td>
-        <td>9:00 - 19:00</td>
+        <td>9:00 Uhr - 19:00 Uhr</td>
     </tr>
     <tr>
         <td>Samstag</td>
-        <td>9:00 - 19:00</td>
+        <td>9:00 Uhr - 19:00 Uhr</td>
     </tr>
     <tr>
         <td>Sonntag</td>

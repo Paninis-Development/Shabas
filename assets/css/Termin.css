@@ -68,7 +68,10 @@ input[type="submit"]:hover {
     width: 100%;
     margin-bottom: 10px;
 }
-
+#datepicker::placeholder {
+    color: white;
+    opacity: 1;
+}
 /* Datepicker styling */
 .ui-datepicker {
     background-color: #333;

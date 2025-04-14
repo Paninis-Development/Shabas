@@ -241,6 +241,22 @@ function getBarberIdByBarberName($barberName)
     return $result ? $result['BarberID'] : null;
 };
 
+function getBarberNameByBarberId($barberID)
+{
+    $db = new DatabaseConnection();
+
+    $query = "SELECT barber_name FROM barber WHERE BarberID = ?";
+
+    // Übergib den Parameter als Array
+    $stmt = $db->makeStatement($query, [$barberID]);
+
+    // Hole das Ergebnis
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $result ? $result['barber_name'] : null;
+};
+
+
 function addAbsence($barberID, $startDate, $endDate, $reason) {
     $db = new DatabaseConnection();
     $query = "INSERT INTO `shababs_web`.`barber_availability` (`BarberID`, `start_date`, `end_date`, `reason`) VALUES (?, ?, ?, ?);";
@@ -440,6 +456,7 @@ function sendConfirmationEmail($to, $name, $date, $startTime, $endTime, $barber)
         $mail->Password = 'ieqfehsrtthzdwjt';            // Change this
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
+        $mail->CharSet = 'UTF-8';
 
 
         // Email Setup
@@ -448,7 +465,7 @@ function sendConfirmationEmail($to, $name, $date, $startTime, $endTime, $barber)
 
         // Email Content
         $mail->isHTML(true);
-        $mail->Subject = "Terminbestaetigung - Shababs Barbershop";
+        $mail->Subject = "Terminbestätigung - Shababs Barbershop";
         $mail->Body = "
             <p>Hallo <strong>$name</strong>,</p>
             <p>Ihr Termin wurde erfolgreich gebucht:</p>
@@ -457,8 +474,8 @@ function sendConfirmationEmail($to, $name, $date, $startTime, $endTime, $barber)
                 <li><strong>Uhrzeit:</strong> $startTime - $endTime</li>
                 <li><strong>Barber:</strong> $barber</li>
             </ul>
-            <p>Vielen Dank fuer Ihre Buchung!</p>
-            <p>Mit freundlichen Gruessen,<br>Shababs Barbershop</p>
+            <p>Vielen Dank für Ihre Buchung!</p>
+            <p>Mit freundlichen Grüßsen,<br>Shababs Barbershop</p>
         ";
 
         $mail->send();
@@ -482,6 +499,7 @@ function sendDeleteEmail($to,  $name, $date, $startTime)
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
 
+        $mail->CharSet = 'UTF-8';
 
         // Email Setup
         $mail->setFrom('shababs.barbershop.linz@gmail.com', 'Shababs Barbershop'); // Change this
@@ -489,14 +507,14 @@ function sendDeleteEmail($to,  $name, $date, $startTime)
 
         // Email Content
         $mail->isHTML(true);
-        $mail->Subject = "Terminaenderung - Shababs Barbershop";
+        $mail->Subject = "Terminä nderung - Shababs Barbershop";
         $mail->Body = "
             <p>Hallo <strong>$name</strong>,</p>
             <p>Ihr Termin am <strong>$date um $startTime</strong> wurde leider storniert.</p>
             <p>Bitte vereinbaren Sie einen neuen Termin. Nutzen Sie dazu folgenden Link:</p>
-            <p><a href='https://www.orf.at' style='color: #007bff; text-decoration: none;'>Neuen Termin buchen</a></p>
-            <p>Vielen Dank fuer Ihr Verstaendnis!</p>
-            <p>Mit freundlichen Gruessen,<br>Shababs Barbershop</p>
+            <p><a href='https://shababs-barbershop.com/Termin.php' style='color: #007bff; text-decoration: none;'>Neuen Termin buchen</a></p>
+            <p>Vielen Dank für Ihr Verständnis!</p>
+            <p>Mit freundlichen Grüßen,<br>Shababs Barbershop</p>
         ";
 
 

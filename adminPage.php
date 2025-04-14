@@ -47,16 +47,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['closeButton'])) {
     closeDay($selectedDate);
 
     logMessage("Successfully closed on '$selectedDate'");
-    $message = "Am '$selectedDate' erfolgreich geschlossen";
-    $messageType = "success";
-    echo "<script>
-    window.onload = function() {
-        showToast('$message', '$messageType');
-    };
-  </script>";
+    
+    // Nachricht zwischenspeichern z.B. in der Session
+    $_SESSION['toast_message'] = "Am '$selectedDate' erfolgreich geschlossen";
+    $_SESSION['toast_type'] = "success";
+
     header("Location: " . $_SERVER['REQUEST_URI']);
     exit();
 }
+
+// Später beim Laden der Seite:
+if (isset($_SESSION['toast_message'])) {
+    $message = $_SESSION['toast_message'];
+    $messageType = $_SESSION['toast_type'];
+    echo "<script>
+        window.onload = function() {
+            showToast('$message', '$messageType');
+        };
+    </script>";
+    unset($_SESSION['toast_message'], $_SESSION['toast_type']);
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_barber'])) {
     $barberId = $_POST['BarberID'];
@@ -181,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
             <!-- Form 1: GET Form for selecting date -->
             <form id="dateForm" method="GET">
                 <!-- The datepicker input field -->
-                <input type="text" id="adminDatepicker" name="date" placeholder="Select a date" class="placeholder" value="<?php echo $selectedDate; ?>" required>
+                <input type="text" id="adminDatepicker" name="date" placeholder="Wählen Sie ein Datum" class="placeholder" value="<?php echo $selectedDate; ?>" required>
             </form>
 
             <!-- Appointment Details Table -->
@@ -217,7 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
                                         </tr>
                                         <tr id='row{$appointmentId}' class='collapse'>
                                         <td colspan='4'>
-                                        <strong>E-Mail:</strong> {$appointment['customer_email']}<br>
+                                        <strong>E-Mail:</strong> <a href='mailto:{$appointment['customer_email']}'>{$appointment['customer_email']}</a><br>
                                         <strong>Telefonnummer:</strong> {$appointment['customer_phone']}<br>
                                         <strong>Termin Datum:</strong> {$appointment['appointment_date']}<br><br>
             
@@ -232,10 +243,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
                             </tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='3'>No appointments found for the selected date.</td></tr>";
+                                    echo "<tr><td colspan='3'>Keine Termine für den ausgewählten Tag gefunden.</td></tr>";
                                 }
                             } else {
-                                echo "<tr><td colspan='3'>No appointments found for the selected date.</td></tr>";
+                                echo "<tr><td colspan='3'>Keine Termine für den ausgewählten Tag gefunden.</td></tr>";
                             }
                         }
                     } catch (PDOException $e) {
@@ -246,7 +257,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
                 </tbody>
             </table>
             <!-- Im HTML-Formular -->
-            <form id="deleteDayForm" onsubmit="return confirm('Wirklich schließen?');" action="" method="POST">
+            <form id="deleteDayForm" onsubmit="return confirm('Wirklich schließen? \n Alle Termine an diesem Tag werden gelöscht!');" action="" method="POST">
                 <input id="closeButton" type="submit" name="closeButton" value="Am <?php echo $selectedDate ?> schließen?">
             </form>
 
@@ -257,11 +268,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
                     <input type="hidden" name="action" value="save_hours">
 
                     <div id="timepickers">
-                        <label for="opening_time">Opening Time:</label>
+                        <label for="opening_time">Öffnen um:</label>
                         <br><br>
                         <input type="time" id="opening_time" placeholder="Bitte Zeit auswählen:" name="opening_time" required>
                         <br><br>
-                        <label for="closing_time">Closing Time:</label>
+                        <label for="closing_time">Schließen um:</label>
                         <br><br>
                         <input type="time" id="closing_time" placeholder="Bitte Zeit auswählen:" name="closing_time" required>
                         <br><br>
@@ -374,7 +385,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
                     <tbody>
                         <?php foreach ($absences as $absence) : ?>
                             <tr>
-                                <td><?= htmlspecialchars($absence['barber_name']) ?></td>
+                                <?php 
+                                $barberID = htmlspecialchars($absence['BarberID']);
+                                $barberName = getBarberNameByBarberId($barberID)  ?>
+                                <td><?= $barberName ?></td>
                                 <td><?= $absence['reason'] === 'sick' ? 'Krankenstand' : 'Urlaub' ?></td>
                                 <td><?= date("d.m.Y", strtotime($absence['start_date'])) ?></td>
                                 <td><?= date("d.m.Y", strtotime($absence['end_date'])) ?></td>

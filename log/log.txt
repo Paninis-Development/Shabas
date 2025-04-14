@@ -408,3 +408,143 @@
 [32m[2025-04-10 10:58:00] [INFO] '2025-04-21' ist bereits eingetragen[0m
 [32m[2025-04-10 10:58:00] [INFO] '2025-04-22' ist bereits eingetragen[0m
 [32m[2025-04-10 10:58:00] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-10 15:24:59] [INFO] Termin erfolgreich gespeichert. [date: '2025-04-17', startTime: '12:00', endTime: '13:00' , name: 'Zehic ', email: 'coastal.xerinae.nvhd@letterhaven.net', phone: '22332423423', barberID: '1'][0m
+[32m[2025-04-10 15:25:02] [INFO] Confirmation email sent to coastal.xerinae.nvhd@letterhaven.net[0m
+[32m[2025-04-10 15:25:20] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-10 15:25:20] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-10 15:25:20] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-10 15:25:20] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-10 15:25:20] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-10 15:25:20] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-10 15:25:20] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-10 15:25:20] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-10 15:25:20] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-10 15:25:20] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-10 15:25:20] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-10 15:25:20] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-10 15:25:53] [INFO] 'panini' von '2025-04-10' bis '2025-04-12' 'vacation' eingetragen[0m
+[32m[2025-04-10 15:26:01] [INFO] '2025-04-10' ist bereits eingetragen[0m
+[32m[2025-04-10 15:26:01] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-10 15:26:01] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-10 15:26:01] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-10 15:26:01] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-10 15:26:01] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-10 15:26:01] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-10 15:26:01] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-10 15:26:01] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-10 15:26:01] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-10 15:26:01] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-10 15:26:01] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-10 15:36:29] [INFO] Barber mit ID 2 konnte nicht gelöscht werden: Termin(e) vorhanden.[0m
+[32m[2025-04-10 15:36:46] [INFO] Barber mit ID 15 erfolgreich gelöscht.[0m
+[32m[2025-04-11 10:56:14] [INFO] Termin erfolgreich gespeichert. [date: '2025-04-17', startTime: '10:00', endTime: '11:00' , name: 'sadf', email: 'hochhausersmi@gmail.com', phone: '234234', barberID: '1'][0m
+[32m[2025-04-11 10:56:17] [INFO] Confirmation email sent to hochhausersmi@gmail.com[0m
+[32m[2025-04-11 10:56:58] [INFO] Termin erfolgreich gespeichert. [date: '2025-04-17', startTime: '16:00', endTime: '17:00' , name: 'ewiqjf', email: 'sdfkla@asdf.com', phone: '2', barberID: '1'][0m
+[32m[2025-04-11 10:57:00] [INFO] Confirmation email sent to sdfkla@asdf.com[0m
+[32m[2025-04-11 10:57:18] [INFO] Termin erfolgreich gespeichert. [date: '2025-04-17', startTime: '15:00', endTime: '16:00' , name: 'a', email: 'a@a.com', phone: '23', barberID: '1'][0m
+[32m[2025-04-11 10:57:21] [INFO] Confirmation email sent to a@a.com[0m
+[32m[2025-04-11 10:58:44] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-11 10:58:44] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-11 10:58:44] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-11 10:58:44] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-11 10:58:44] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-11 10:58:44] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-11 10:58:44] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-11 10:58:44] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-11 10:58:44] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-11 10:58:44] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-11 10:58:44] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-11 10:58:44] [INFO] Öffnungszeiten eingetragen für '2025-04-24'[0m
+[32m[2025-04-11 10:59:36] [INFO] Barber mit ID 3 konnte nicht gelöscht werden: Termin(e) vorhanden.[0m
+[32m[2025-04-11 10:59:47] [INFO] 'panini' von '2025-04-21' bis '2025-04-23' 'sick' eingetragen[0m
+[32m[2025-04-11 10:59:55] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-11 10:59:55] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-11 10:59:55] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-11 10:59:55] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-11 10:59:55] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-11 10:59:55] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-11 10:59:55] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-11 10:59:55] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-11 10:59:55] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-11 10:59:55] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-11 10:59:55] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-11 10:59:55] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-11 11:06:01] [INFO] Termin erfolgreich gespeichert. [date: '2025-04-22', startTime: '10:00', endTime: '11:00' , name: 'adsa', email: 'coastal.xerinae.nvhd@letterhaven.net', phone: '2e32', barberID: '1'][0m
+[32m[2025-04-11 11:06:03] [INFO] Confirmation email sent to coastal.xerinae.nvhd@letterhaven.net[0m
+[32m[2025-04-11 11:06:27] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-11 11:06:27] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-11 11:06:27] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-11 11:06:27] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-11 11:06:27] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-11 11:06:27] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-11 11:06:27] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-11 11:06:27] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-11 11:06:27] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-11 11:06:27] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-11 11:06:27] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-11 11:06:27] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-11 11:06:35] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-11 11:06:37] [INFO] Delete email sent to coastal.xerinae.nvhd@letterhaven.net[0m
+[32m[2025-04-11 11:40:46] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-11 11:40:46] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-11 11:40:46] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-11 11:40:46] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-11 11:40:46] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-11 11:40:46] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-11 11:40:46] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-11 11:40:46] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-11 11:40:46] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-11 11:40:46] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-11 11:40:46] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-11 11:40:46] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-11 14:58:02] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-11 14:58:02] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-11 14:58:02] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-11 14:58:02] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-11 14:58:02] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-11 14:58:02] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-11 14:58:02] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-11 14:58:02] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-11 14:58:02] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-11 14:58:02] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-11 14:58:02] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-11 14:58:02] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-11 15:12:35] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-11 15:12:35] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-11 15:12:35] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-11 15:12:35] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-11 15:12:35] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-11 15:12:35] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-11 15:12:35] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-11 15:12:35] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-11 15:12:35] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-11 15:12:35] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-11 15:12:35] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-11 15:12:35] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-11 15:13:06] [INFO] Successfully opened up on '2025-04-26'[0m
+[32m[2025-04-11 15:19:39] [INFO] '2025-04-11' ist bereits eingetragen[0m
+[32m[2025-04-11 15:19:39] [INFO] '2025-04-12' ist bereits eingetragen[0m
+[32m[2025-04-11 15:19:39] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-11 15:19:39] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-11 15:19:39] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-11 15:19:39] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-11 15:19:39] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-11 15:19:39] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-11 15:19:39] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-11 15:19:39] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-11 15:19:39] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-11 15:19:39] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 08:48:02] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 08:48:02] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 08:48:02] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 08:48:02] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 08:48:02] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 08:48:02] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 08:48:02] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 08:48:02] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 08:48:02] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 08:48:02] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 08:48:02] [INFO] Öffnungszeiten eingetragen für '2025-04-25'[0m
+[32m[2025-04-14 08:48:02] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 09:13:52] [INFO] Successfully closed on '2025-04-26'[0m
+[32m[2025-04-14 09:14:07] [INFO] Successfully opened up on '2025-04-26'[0m

@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $messageType = "success";
                 logMessage("Termin erfolgreich gespeichert. [date: '$date', startTime: '$startTime', endTime: '$endTime' , name: '$name', email: '$email', phone: '$phone', barberID: '$barberID']", "INFO");
                 sendConfirmationEmail($email, $name, $date, $startTime, $endTime, $barber);
+                //relocate Startseite
             } else {
                 $message = "Fehler beim Speichern des Termins.";
                 $messageType = "error";

@@ -34,7 +34,7 @@ $imagePath = '/assets/images/shababs-logo.jpg';
                     <a class="nav-item" href="Termin.php">Termin buchen</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-item" href="Startseite.php#pricing">Unsere Services</a>
+                    <a class="nav-item" href="Startseite.php#Öffnungszeiten">Öffnungszeiten</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-item" href="Startseite.php#gallery">Gallerie</a>
@@ -43,7 +43,7 @@ $imagePath = '/assets/images/shababs-logo.jpg';
                     <a class="nav-item" href="Startseite.php#footer">Hilfe</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-item" href="aboutUs.php">About Us</a>
+                    <a class="nav-item" href="aboutUs.php">Über uns</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-item" href="Login.php">Admin Login</a>

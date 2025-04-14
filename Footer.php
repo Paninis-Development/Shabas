@@ -19,7 +19,7 @@
           <h4>Shababs</h4>
           <ul>
             <li><a href="#coverFilter">Termin buchen</a></li>
-            <li><a href="#pricing">Unsere Services</a></li>
+            <li><a href="#pricing">Unser Service</a></li>
             <li><a href="#gallery">Gallerie</a></li>
           </ul>
         </div>
