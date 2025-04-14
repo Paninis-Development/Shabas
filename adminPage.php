@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['closeButton'])) {
     closeDay($selectedDate);
 
     logMessage("Successfully closed on '$selectedDate'");
-    
+
     // Nachricht zwischenspeichern z.B. in der Session
     $_SESSION['toast_message'] = "Am '$selectedDate' erfolgreich geschlossen";
     $_SESSION['toast_type'] = "success";
@@ -99,26 +99,43 @@ if (isset($_POST['delete'])) {
     }
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (!empty($_POST["barber_select"]) && !empty($_POST["date_range"])) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST["barber_select"]) && !empty($_POST["date_range"])) {
         $barberName = htmlspecialchars($_POST["barber_select"]);
         $barberID = getBarberIdByBarberName($barberName);
         $reason = htmlspecialchars($_POST["reason_select"]);
-        // Datum in Start- und Enddatum aufteilen
-        $dates = explode(" - ", $_POST["date_range"]);
-        if (count($dates) == 2) {
-            $startDate = DateTime::createFromFormat("d.m.Y", trim($dates[0]))->format("Y-m-d");
-            $endDate = DateTime::createFromFormat("d.m.Y", trim($dates[1]))->format("Y-m-d");
+        $allDay = isset($_POST['all_day']) ? 1 : 0;
+        $startTime = $allDay ? null : $_POST['start_time'];
+        $endTime = $allDay ? null : $_POST['end_time'];
 
-            addAbsence($barberID, $startDate, $endDate, 'vacation');
+        // ⬇️ Bei ganztägig (Zeitraum), sonst einzelnes Datum
+        if ($allDay) {
+            $dates = explode(" - ", $_POST["date_range"]);
+            if (count($dates) == 2) {
+                $startDate = DateTime::createFromFormat("d.m.Y", trim($dates[0]))->format("Y-m-d");
+                $endDate = DateTime::createFromFormat("d.m.Y", trim($dates[1]))->format("Y-m-d");
+            } else {
+                echo "Ungültiges Datumsformat für Zeitspanne!";
+                return;
+            }
+        } else {
+            $startDate = DateTime::createFromFormat("d.m.Y", $_POST["date_range"])->format("Y-m-d");
+            $endDate = $startDate; // Nur ein Tag, deshalb gleich
+        }
+
+        // Eintragen
+        addAbsence($barberID, $startDate, $endDate, $reason, $allDay, $startTime, $endTime);
+        if ($allDay) {
             logMessage("'$barberName' von '$startDate' bis '$endDate' '$reason' eingetragen");
         } else {
-            echo "Ungültiges Datumsformat!";
+            logMessage("'$barberName' am '$startDate' von '$startTime' bis '$endTime' '$reason' eingetragen");
         }
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit;
     }
-}
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_id'])) {
+    
     $availabilityId = htmlspecialchars($_POST['delete_availability_id']);
 
     // Aufruf der Methode
@@ -343,7 +360,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
     </div>
     <div class="container" id="urlaubVerwaltung">
         <h2>Urlaub/Krankenstand Verwaltung</h2>
-        <form id="holidayForm"  method="POST">
+        <form id="holidayForm" method="POST">
             <label for="barberSelect">Barber auswählen: *</label>
             <select id="barberSelect" name="barber_select" required>
                 <option value="" disabled selected>Bitte einen Barber auswählen</option>
@@ -360,11 +377,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
                 <option value="vacation">Urlaub</option>
             </select>
 
-            <label>Wähle eine Zeitspanne:</label>
+            <label id="datepickerLabel">Wähle eine Zeitspanne:</label>
+
             <div id="datepicker-container">
                 <input type="text" id="datepicker" name="date_range" placeholder="Datum wählen..." readonly required>
                 <div id="datepicker-popup"></div> <!-- Hier wird der Datepicker eingefügt -->
             </div>
+
+            <label>
+                <input type="checkbox" id="allDayCheckbox" name="all_day" checked>
+                Ganztägig
+            </label>
+
+            <div id="timeFields" style="display: none;">
+                <label for="start_time">Startzeit:</label>
+                <input type="time" id="start_time" placeholder="Bitte Zeit auswählen:" name="start_time" required>
+
+
+                <label for="end_time">Endzeit:</label>
+                <input type="time" id="end_time" placeholder="Bitte Zeit auswählen:" name="end_time" required>
+
+            </div>
+
+
             <button type="button" id="resetDate">Datum zurücksetzen</button>
 
             <button type="submit">Senden</button>
@@ -372,30 +407,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
         <div class="absence-list">
             <h3>Aktuelle Abwesenheiten</h3>
             <?php if (!empty($absences)) : ?>
-                <table class="table table-dark table-striped">
+                <table class="absence-table">
                     <thead>
                         <tr>
                             <th>Barber</th>
                             <th>Grund</th>
-                            <th>Von</th>
-                            <th>Bis</th>
+                            <th>Von - Bis</th>
+                            <th>Zeit</th>
                             <th>Aktion</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($absences as $absence) : ?>
                             <tr>
-                                <?php 
+                                <?php
                                 $barberID = htmlspecialchars($absence['BarberID']);
-                                $barberName = getBarberNameByBarberId($barberID)  ?>
+                                $barberName = getBarberNameByBarberId($barberID);
+                                $isAllDay = $absence['all_day'] == 1;
+                                $formattedStart = $isAllDay ? '-' : date("H:i", strtotime($absence['start_time']));
+                                $formattedEnd = $isAllDay ? '-' : date("H:i", strtotime($absence['end_time']));
+                                ?>
                                 <td><?= $barberName ?></td>
                                 <td><?= $absence['reason'] === 'sick' ? 'Krankenstand' : 'Urlaub' ?></td>
-                                <td><?= date("d.m.Y", strtotime($absence['start_date'])) ?></td>
-                                <td><?= date("d.m.Y", strtotime($absence['end_date'])) ?></td>
+                                <td><?= date("d.m.Y", strtotime($absence['start_date'])) ?> - <br><?= date("d.m.Y", strtotime($absence['end_date'])) ?></td>
+                                <td><?= $isAllDay ? 'Ganztägig' : "$formattedStart - $formattedEnd" ?></td>
                                 <td>
                                     <form method="POST" onsubmit="return confirm('Wirklich löschen?');" style="display:inline;">
                                         <input type="hidden" name="delete_availability_id" value="<?= $absence['AvailabilityID'] ?>">
-                                        <button type="submit" class="delete-button">🗑️ Löschen</button>
+                                        <button type="submit" class="delete-button">🗑️</button>
                                     </form>
 
                                 </td>
@@ -403,6 +442,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+
             <?php else : ?>
                 <p>Keine Abwesenheiten eingetragen.</p>
             <?php endif; ?>
@@ -451,20 +491,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
             $(function() {
                 let startDate = null;
                 let endDate = null;
+                let isAllDay = $("#allDayCheckbox").is(":checked");
+
+                function updateDatepickerDisplay() {
+                    $("#datepicker-popup").datepicker("refresh");
+                }
+
+                function resetDateFields() {
+                    startDate = null;
+                    endDate = null;
+                    $("#datepicker").val("");
+                    updateDatepickerDisplay();
+                }
+
+                $("#allDayCheckbox").on("change", function() {
+                    isAllDay = $(this).is(":checked");
+
+                    // 🛠️ Label richtig setzen
+                    $("#datepickerLabel").text(isAllDay ? "Wähle eine Zeitspanne:" : "Wähle ein Datum:");
+
+                    // 🕒 Zeitfelder nur zeigen, wenn **nicht** ganztägig
+                    $("#timeFields").toggle(!isAllDay);
+
+                    // Reset Date
+                    resetDateFields();
+                });
+
 
                 $("#datepicker-popup").datepicker({
                     dateFormat: "dd.mm.yy",
                     numberOfMonths: 1,
                     beforeShowDay: function(date) {
-                        let dateString = $.datepicker.formatDate("dd.mm.yy", date);
+                        const dateString = $.datepicker.formatDate("dd.mm.yy", date);
 
                         if (startDate && dateString === startDate) {
                             return [true, "start", "Startdatum"];
                         }
-                        if (endDate && dateString === endDate) {
+                        if (!isAllDay && endDate && dateString === endDate) {
                             return [true, "end", "Enddatum"];
                         }
                         if (
+                            !isAllDay &&
                             startDate &&
                             endDate &&
                             date >= $.datepicker.parseDate("dd.mm.yy", startDate) &&
@@ -472,29 +539,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
                         ) {
                             return [true, "range", "Ausgewählter Bereich"];
                         }
+
                         return [true, ""];
                     },
                     onSelect: function(dateText) {
-                        // Wenn beide gesetzt sind, neu starten
-                        if (startDate && endDate) {
+                        if (!isAllDay) {
+                            // Nur ein Datum setzen
                             startDate = dateText;
                             endDate = null;
-                        } else if (!startDate) {
-                            startDate = dateText;
+                            $("#datepicker").val(startDate);
                         } else {
-                            let startDateObj = $.datepicker.parseDate("dd.mm.yy", startDate);
-                            let endDateObj = $.datepicker.parseDate("dd.mm.yy", dateText);
-
-                            if (endDateObj < startDateObj) {
+                            // Bereichsauswahl
+                            if (startDate && endDate) {
                                 startDate = dateText;
                                 endDate = null;
+                            } else if (!startDate) {
+                                startDate = dateText;
                             } else {
-                                endDate = dateText;
+                                let startDateObj = $.datepicker.parseDate("dd.mm.yy", startDate);
+                                let endDateObj = $.datepicker.parseDate("dd.mm.yy", dateText);
+
+                                if (endDateObj < startDateObj) {
+                                    startDate = dateText;
+                                    endDate = null;
+                                } else {
+                                    endDate = dateText;
+                                }
                             }
+
+                            $("#datepicker").val(startDate + (endDate ? " - " + endDate : ""));
                         }
 
-                        $("#datepicker").val(startDate + (endDate ? " - " + endDate : ""));
-                        $("#datepicker-popup").datepicker("refresh");
+                        updateDatepickerDisplay();
                     }
                 }).hide();
 
@@ -509,13 +585,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
                     }
                 });
 
+
                 $("#resetDate").click(function() {
-                    startDate = null;
-                    endDate = null;
-                    $("#datepicker").val("");
-                    $("#datepicker-popup").datepicker("refresh");
+                    resetDateFields();
                 });
             });
+
 
             // If a date is already selected, show the appropriate form
             if (selectedDate) {
@@ -572,6 +647,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
 
         });
 
+        document.addEventListener("DOMContentLoaded", function() {
+            let script = document.createElement("script");
+            script.src = "https://cdn.jsdelivr.net/npm/flatpickr";
+            script.onload = function() {
+                console.log("Flatpickr geladen!");
+                flatpickr("#start_time", {
+                    enableTime: true,
+                    noCalendar: true,
+                    dateFormat: "H:i",
+                    time_24hr: true
+                });
+
+                flatpickr("#end_time", {
+                    enableTime: true,
+                    noCalendar: true,
+                    dateFormat: "H:i",
+                    time_24hr: true
+                });
+            };
+            document.head.appendChild(script);
+            document.getElementById("dateForm").reset();
+
+        });
+
         function showToast(message, type) {
             if (!message) return; // If no message
 
@@ -589,6 +688,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
                 setTimeout(() => toast.remove(), 500);
             }, 3000);
         }
+
+        const allDayCheckbox = document.getElementById('allDayCheckbox');
+        const timeFields = document.getElementById('timeFields');
+
+        allDayCheckbox.addEventListener('change', () => {
+            timeFields.style.display = allDayCheckbox.checked ? 'none' : 'block';
+        });
     </script>
 
     <div id="toast-container"></div>

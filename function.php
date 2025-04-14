@@ -257,10 +257,12 @@ function getBarberNameByBarberId($barberID)
 };
 
 
-function addAbsence($barberID, $startDate, $endDate, $reason) {
+function addAbsence($barberID, $startDate, $endDate, $reason, $allDay, $startTime, $endTime) {
     $db = new DatabaseConnection();
-    $query = "INSERT INTO `shababs_web`.`barber_availability` (`BarberID`, `start_date`, `end_date`, `reason`) VALUES (?, ?, ?, ?);";
-    $params = array($barberID, $startDate, $endDate, $reason);
+    $query = "INSERT INTO `shababs_web`.`barber_availability` 
+        (`BarberID`, `start_date`, `end_date`, `reason`, `all_day`, `start_time`, `end_time`) 
+        VALUES (?, ?, ?, ?, ?, ?, ?);";
+    $params = array($barberID, $startDate, $endDate, $reason, $allDay, $startTime, $endTime);
     $stmt = $db->makeStatement($query, $params);
     return $stmt;
 };
@@ -272,6 +274,9 @@ function getAbsences() {
         b.barber_name,
         ba.start_date,
         ba.end_date,
+        ba.start_date,
+        ba.end_date,
+        ba.all_day,
         ba.reason
     FROM barber_availability ba
     JOIN barber b ON ba.BarberID = b.BarberID

@@ -386,3 +386,31 @@ body {
 .absence-list th {
     background-color: #f2f2f2;
 }
+
+    table.absence-table {
+        font-size: 0.9rem;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    table.absence-table th,
+    table.absence-table td {
+        padding: 6px 8px; /* Weniger Padding */
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    table.absence-table th {
+        background-color: #343a40;
+        color: white;
+    }
+
+    table.absence-table td {
+        background-color: #1e1e1e;
+        color: #f1f1f1;
+    }
+
+    .absence-table button.delete-button {
+        font-size: 0.9rem;
+        padding: 4px 6px;
+    }

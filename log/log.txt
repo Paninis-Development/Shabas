@@ -548,3 +548,81 @@
 [32m[2025-04-14 08:48:02] [INFO] '2025-04-26' ist bereits eingetragen[0m
 [32m[2025-04-14 09:13:52] [INFO] Successfully closed on '2025-04-26'[0m
 [32m[2025-04-14 09:14:07] [INFO] Successfully opened up on '2025-04-26'[0m
+[32m[2025-04-14 10:49:28] [INFO] 'panini' von '2025-04-07' bis '2025-04-09' 'sick' eingetragen[0m
+[32m[2025-04-14 10:49:42] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 10:49:42] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 10:49:42] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 10:49:42] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 10:49:42] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 10:49:42] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 10:49:42] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 10:49:42] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 10:49:42] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 10:49:42] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 10:49:42] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 10:49:42] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 10:50:51] [INFO] 'litsch' von '2025-04-08' bis '2025-04-10' 'sick' eingetragen[0m
+[32m[2025-04-14 10:54:54] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 10:54:54] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 10:54:54] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 10:54:54] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 10:54:54] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 10:54:54] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 10:54:54] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 10:54:54] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 10:54:54] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 10:54:54] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 10:54:54] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 10:54:54] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 10:55:43] [INFO] 'panini' von '2025-04-22' bis '2025-04-23' 'sick' eingetragen[0m
+[32m[2025-04-14 10:55:53] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 10:55:53] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 10:55:53] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 10:55:53] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 10:55:53] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 10:55:53] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 10:55:53] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 10:55:53] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 10:55:53] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 10:55:53] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 10:55:53] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 10:55:53] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 13:16:19] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 13:16:19] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 13:16:19] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 13:16:19] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 13:16:19] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 13:16:19] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 13:16:19] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 13:16:19] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 13:16:19] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 13:16:19] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 13:16:19] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 13:16:19] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 13:16:48] [INFO] 'panini' von '2025-04-23' bis '2025-04-23' 'vacation' eingetragen[0m
+[32m[2025-04-14 13:17:02] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 13:17:02] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 13:17:02] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 13:17:02] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 13:17:02] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 13:17:02] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 13:17:02] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 13:17:02] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 13:17:02] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 13:17:02] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 13:17:02] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 13:17:02] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 13:21:10] [INFO] 'litsch' am '2025-04-24' von '' bis '' 'vacation' eingetragen[0m
+[32m[2025-04-14 13:21:31] [INFO] 'panini' am '2025-04-28' von '09:00' bis '16:00' 'sick' eingetragen[0m
+[32m[2025-04-14 13:36:07] [INFO] Eintrag 2 erfolgreich gelöscht.[0m
+[32m[2025-04-14 13:36:24] [INFO] Eintrag 6 erfolgreich gelöscht.[0m
+[32m[2025-04-14 13:36:28] [INFO] Eintrag 5 erfolgreich gelöscht.[0m
+[32m[2025-04-14 13:37:09] [INFO] Eintrag 4 erfolgreich gelöscht.[0m
+[32m[2025-04-14 13:37:19] [INFO] 'panini' von '2025-04-15' bis '2025-04-16' 'sick' eingetragen[0m
+[32m[2025-04-14 13:38:28] [INFO] 'panini' von '2025-04-10' bis '2025-04-11' 'sick' eingetragen[0m
+[32m[2025-04-14 13:38:50] [INFO] 'litsch' am '2025-04-22' von '11:55' bis '12:05' 'sick' eingetragen[0m
+[32m[2025-04-14 13:39:00] [INFO] Eintrag 9 erfolgreich gelöscht.[0m
+[32m[2025-04-14 13:39:04] [INFO] Eintrag 8 erfolgreich gelöscht.[0m
+[32m[2025-04-14 13:39:07] [INFO] Eintrag 7 erfolgreich gelöscht.[0m
+[32m[2025-04-14 13:39:11] [INFO] Eintrag 3 erfolgreich gelöscht.[0m
+[32m[2025-04-14 13:39:15] [INFO] Eintrag 1 erfolgreich gelöscht.[0m
