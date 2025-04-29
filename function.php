@@ -471,17 +471,64 @@ function sendConfirmationEmail($to, $name, $date, $startTime, $endTime, $barber)
         // Email Content
         $mail->isHTML(true);
         $mail->Subject = "Terminbestätigung - Shababs Barbershop";
-        $mail->Body = "
-            <p>Hallo <strong>$name</strong>,</p>
-            <p>Ihr Termin wurde erfolgreich gebucht:</p>
-            <ul>
-                <li><strong>Datum:</strong> $date</li>
-                <li><strong>Uhrzeit:</strong> $startTime - $endTime</li>
-                <li><strong>Barber:</strong> $barber</li>
-            </ul>
-            <p>Vielen Dank für Ihre Buchung!</p>
-            <p>Mit freundlichen Grüßsen,<br>Shababs Barbershop</p>
-        ";
+        $mail->Body = '
+  <div style=\'font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.6; padding: 10px;\'>
+    <p>Hallo <strong>' . $name . '</strong>,</p>
+    
+    <p>vielen Dank für Ihre Buchung bei <strong>Shababs Barbershop</strong>!<br>
+    Ihr Termin wurde erfolgreich eingetragen:</p>
+    
+    <ul style=\'list-style: none; padding: 0;\'>
+      <li><strong>📅 Datum:</strong> ' . $date . '</li>
+      <li><strong>⏰ Uhrzeit:</strong> ' . $startTime . ' - ' . $endTime . '</li>
+      <li><strong>✂️ Barber:</strong> ' . $barber . '</li>
+    </ul>
+
+    <p>Wir freuen uns auf Ihren Besuch!</p>
+
+    <hr style=\'margin: 30px 0; border: none; border-top: 1px solid #ccc;\'>
+
+    <div style=\'font-size: 12px;\'>
+      <p style=\'margin-bottom: 5px;\'><strong>Mahmood Tro</strong><br>
+      Inhaber | Shababs Barbershop</p>
+
+      <p style=\'margin: 0;\'>
+        Marienstraße 4<br>
+        4020 Linz, Österreich<br>
+        <strong>Telefon:</strong> <a href=\'tel:+4367764275933\'>+43 677 64275933</a><br>
+        <strong>E-Mail:</strong> <a href=\'mailto:shababs.barbershop.linz@gmail.com\'>shababs.barbershop.linz@gmail.com</a>
+      </p>
+
+      <p style=\'margin: 20px 0 0 0;\'>
+        <strong>UID-Nummer:</strong> ATU81441637<br>
+        <strong>GLN:</strong> 9110033703418<br>
+        <strong>GISA-Zahl:</strong> 35957522<br>
+        <strong>Mitglied bei:</strong> Wirtschaftskammer Oberösterreich, Sparte Friseure<br>
+        <strong>Berufsrecht:</strong> <a href=\'https://www.ris.bka.gv.at\' target=\'_blank\'>www.ris.bka.gv.at</a><br>
+        <strong>Berufsbezeichnung:</strong> Friseur (verliehen in Österreich)
+      </p>
+
+      <p style=\'margin: 20px 0 0 0;\'>
+        <strong>Aufsichtsbehörde:</strong><br>
+        Magistrat Linz<br>
+        Hauptstraße 1 - 5, 4041 Linz<br>
+        <a href=\'https://www.linz.at/verwaltung/6208.php\' target=\'_blank\'>https://www.linz.at/verwaltung/6208.php</a>
+      </p>
+
+      <p style=\'margin: 20px 0 0 0;\'>
+        <strong>Datenschutz-Verantwortlicher:</strong><br>
+        Mahmood Tro<br>
+        E-Mail: <a href=\'mailto:shababs.barbershop.linz@gmail.com\'>shababs.barbershop.linz@gmail.com</a><br>
+        Telefon: <a href=\'tel:+4367764275933\'>+43 677 64275933</a>
+      </p>
+
+      <p style=\'font-size: 10px; color: #666; margin-top: 30px;\'>
+        Diese E-Mail enthält vertrauliche Informationen und ist ausschließlich für den/die Empfänger bestimmt. Sollten Sie diese Nachricht irrtümlich erhalten haben, informieren Sie uns bitte umgehend und löschen Sie diese Nachricht.
+      </p>
+    </div>
+  </div>
+';
+
 
         $mail->send();
         logMessage("Confirmation email sent to $to", "INFO");
@@ -512,15 +559,69 @@ function sendDeleteEmail($to,  $name, $date, $startTime)
 
         // Email Content
         $mail->isHTML(true);
-        $mail->Subject = "Terminä nderung - Shababs Barbershop";
-        $mail->Body = "
-            <p>Hallo <strong>$name</strong>,</p>
-            <p>Ihr Termin am <strong>$date um $startTime</strong> wurde leider storniert.</p>
-            <p>Bitte vereinbaren Sie einen neuen Termin. Nutzen Sie dazu folgenden Link:</p>
-            <p><a href='https://shababs-barbershop.com/Termin.php' style='color: #007bff; text-decoration: none;'>Neuen Termin buchen</a></p>
-            <p>Vielen Dank für Ihr Verständnis!</p>
-            <p>Mit freundlichen Grüßen,<br>Shababs Barbershop</p>
-        ";
+        $mail->Subject = "Terminänderung - Shababs Barbershop";
+        $mail->Body = '
+  <div style=\'font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.6; padding: 10px;\'>
+    <p>Hallo <strong>' . $name . '</strong>,</p>
+
+    <p>leider müssen wir Ihnen mitteilen, dass Ihr Termin am <strong>' . $date . ' um ' . $startTime . '</strong> storniert wurde.</p>
+
+    <p>Sie können ganz einfach einen neuen Termin über folgenden Link buchen:</p>
+
+    <p>
+      <a href=\'https://shababs-barbershop.com/Termin.php\'>
+        ➕ Neuen Termin buchen
+      </a>
+    </p>
+
+    <p>Vielen Dank für Ihr Verständnis!</p>
+    <p>Mit freundlichen Grüßen,<br><strong>Shababs Barbershop</strong></p>
+
+    <hr style=\'margin: 30px 0; border: none; border-top: 1px solid #ccc;\'>
+
+    <div style=\'font-size: 12px;\'>
+      <p style=\'margin-bottom: 5px;\'><strong>Mahmood Tro</strong><br>
+      Inhaber | Shababs Barbershop</p>
+
+      <p style=\'margin: 0;\'>
+        Marienstraße 4<br>
+        4020 Linz, Österreich<br>
+        <strong>Telefon:</strong> <a href=\'tel:+4367764275933\'>+43 677 64275933</a><br>
+        <strong>E-Mail:</strong> <a href=\'mailto:shababs.barbershop.linz@gmail.com\'>shababs.barbershop.linz@gmail.com</a>
+      </p>
+
+      <p style=\'margin: 20px 0 0 0;\'>
+        <strong>Unternehmensgegenstand:</strong> MusterDienstleistung<br>
+        <strong>UID-Nummer:</strong> ATU81441637<br>
+        <strong>GLN:</strong> 9110033703418<br>
+        <strong>GISA-Zahl:</strong> 35957522<br>
+        <strong>Mitglied bei:</strong> Wirtschaftskammer Oberösterreich, Sparte Friseure<br>
+        <strong>Berufsrecht:</strong> <a href=\'https://www.ris.bka.gv.at\' target=\'_blank\'>www.ris.bka.gv.at</a><br>
+        <strong>Berufsbezeichnung:</strong> Friseur<br>
+        <strong>Verleihungsstaat:</strong> Österreich
+      </p>
+
+      <p style=\'margin: 20px 0 0 0;\'>
+        <strong>Aufsichtsbehörde:</strong><br>
+        Magistrat Linz<br>
+        Hauptstraße 1 - 5, 4041 Linz<br>
+        <a href=\'https://www.linz.at/verwaltung/6208.php\' target=\'_blank\'>https://www.linz.at/verwaltung/6208.php</a>
+      </p>
+
+      <p style=\'margin: 20px 0 0 0;\'>
+        <strong>Datenschutz-Verantwortlicher:</strong><br>
+        Mahmood Tro<br>
+        E-Mail: <a href=\'mailto:shababs.barbershop.linz@gmail.com\'>shababs.barbershop.linz@gmail.com</a><br>
+        Telefon: <a href=\'tel:+4367764275933\'>+43 677 64275933</a>
+      </p>
+
+      <p style=\'font-size: 10px; color: #666; margin-top: 30px;\'>
+        Diese E-Mail enthält vertrauliche Informationen und ist ausschließlich für den/die Empfänger bestimmt. Sollten Sie diese Nachricht irrtümlich erhalten haben, informieren Sie uns bitte umgehend und löschen Sie diese Nachricht.
+      </p>
+    </div>
+  </div>
+';
+
 
 
         $mail->send();
