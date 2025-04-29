@@ -626,3 +626,330 @@
 [32m[2025-04-14 13:39:07] [INFO] Eintrag 7 erfolgreich gelöscht.[0m
 [32m[2025-04-14 13:39:11] [INFO] Eintrag 3 erfolgreich gelöscht.[0m
 [32m[2025-04-14 13:39:15] [INFO] Eintrag 1 erfolgreich gelöscht.[0m
+[32m[2025-04-14 13:41:35] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 13:41:35] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 13:41:35] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 13:41:35] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 13:41:35] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 13:41:35] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 13:41:35] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 13:41:35] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 13:41:35] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 13:41:35] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 13:41:35] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 13:41:35] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 13:42:24] [INFO] Termin erfolgreich gespeichert. [date: '2025-04-26', startTime: '09:00', endTime: '10:00' , name: 's', email: 's@s.com', phone: '21', barberID: '1'][0m
+[32m[2025-04-14 13:42:27] [INFO] Confirmation email sent to s@s.com[0m
+[32m[2025-04-14 13:42:32] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 13:42:32] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 13:42:32] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 13:42:32] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 13:42:32] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 13:42:32] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 13:42:32] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 13:42:32] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 13:42:32] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 13:42:32] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 13:42:32] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 13:42:32] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 13:42:38] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-14 13:42:40] [INFO] Delete email sent to s@s.com[0m
+[32m[2025-04-14 13:43:01] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-14 13:43:04] [INFO] Delete email sent to a@a.com[0m
+[32m[2025-04-14 13:43:08] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-14 13:43:11] [INFO] Delete email sent to sdfkla@asdf.com[0m
+[32m[2025-04-14 13:43:17] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-14 13:43:19] [INFO] Delete email sent to p.hochhauser@gmail.com[0m
+[32m[2025-04-14 13:43:22] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-14 13:43:25] [INFO] Delete email sent to coastal.xerinae.nvhd@letterhaven.net[0m
+[32m[2025-04-14 13:43:27] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-14 13:43:29] [INFO] Delete email sent to hochhausersmi@gmail.com[0m
+[32m[2025-04-14 13:47:32] [INFO] Termin erfolgreich gespeichert. [date: '2025-04-23', startTime: '16:00', endTime: '17:00' , name: 'a', email: 'hochhausersimi@gmail.com', phone: '067761274295', barberID: '1'][0m
+[32m[2025-04-14 13:47:34] [INFO] Confirmation email sent to hochhausersimi@gmail.com[0m
+[32m[2025-04-14 13:47:44] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 13:47:44] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 13:47:44] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 13:47:44] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 13:47:44] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 13:47:44] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 13:47:44] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 13:47:44] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 13:47:44] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 13:47:44] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 13:47:44] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 13:47:44] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 13:48:15] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-14 13:48:17] [INFO] Delete email sent to hochhausersimi@gmail.com[0m
+[32m[2025-04-14 13:48:52] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 13:48:52] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 13:48:52] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 13:48:52] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 13:48:52] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 13:48:52] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 13:48:52] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 13:48:52] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 13:48:52] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 13:48:52] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 13:48:52] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 13:48:52] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 13:53:37] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-14 13:53:40] [INFO] Delete email sent to homeoffice.hochhauser@gmail.com[0m
+[32m[2025-04-14 13:53:42] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-14 13:53:45] [INFO] Delete email sent to homeoffice.hochhauser@gmail.com[0m
+[32m[2025-04-14 13:53:47] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-14 13:53:50] [INFO] Delete email sent to homeoffice.hochhauser@gmail.com[0m
+[32m[2025-04-14 13:54:10] [INFO] Barber mit ID 1 konnte nicht gelöscht werden: Termin(e) vorhanden.[0m
+[32m[2025-04-14 13:54:33] [INFO] Delete email sent to max@example.com[0m
+[32m[2025-04-14 13:54:35] [INFO] Delete email sent to max@example.com[0m
+[32m[2025-04-14 13:54:36] [INFO] Delete email sent to lisa@example.com[0m
+[32m[2025-04-14 13:54:38] [INFO] Delete email sent to john@example.com[0m
+[32m[2025-04-14 13:54:40] [INFO] Delete email sent to anna@example.com[0m
+[32m[2025-04-14 13:54:43] [INFO] Delete email sent to peter@example.com[0m
+[32m[2025-04-14 13:54:43] [INFO] Successfully closed on '2025-04-07'[0m
+[32m[2025-04-14 13:54:49] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-14 13:54:51] [INFO] Delete email sent to sophie@example.com[0m
+[32m[2025-04-14 13:54:53] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-14 13:54:54] [INFO] Delete email sent to michael@example.com[0m
+[32m[2025-04-14 13:54:59] [INFO] Delete email sent to sarah@example.com[0m
+[32m[2025-04-14 13:55:02] [INFO] Delete email sent to tim@example.com[0m
+[32m[2025-04-14 13:55:03] [INFO] Delete email sent to klara@example.com[0m
+[32m[2025-04-14 13:55:03] [INFO] Successfully closed on '2025-04-08'[0m
+[32m[2025-04-14 13:55:11] [INFO] Delete email sent to tom@example.com[0m
+[32m[2025-04-14 13:55:13] [INFO] Delete email sent to jasmin@example.com[0m
+[32m[2025-04-14 13:55:15] [INFO] Delete email sent to david@example.com[0m
+[32m[2025-04-14 13:55:15] [INFO] Successfully closed on '2025-04-09'[0m
+[32m[2025-04-14 13:55:23] [INFO] Delete email sent to katrin@example.com[0m
+[32m[2025-04-14 13:55:25] [INFO] Delete email sent to niklas@example.com[0m
+[32m[2025-04-14 13:55:26] [INFO] Delete email sent to monika@example.com[0m
+[32m[2025-04-14 13:55:28] [INFO] Delete email sent to tobias@example.com[0m
+[32m[2025-04-14 13:55:31] [INFO] Delete email sent to beatrix@example.com[0m
+[32m[2025-04-14 13:55:31] [INFO] Successfully closed on '2025-04-10'[0m
+[32m[2025-04-14 13:55:40] [INFO] Delete email sent to lena@example.com[0m
+[32m[2025-04-14 13:55:41] [INFO] Delete email sent to oliver@example.com[0m
+[32m[2025-04-14 13:55:43] [INFO] Delete email sent to mia@example.com[0m
+[32m[2025-04-14 13:55:45] [INFO] Delete email sent to df@s.com[0m
+[32m[2025-04-14 13:55:47] [INFO] Delete email sent to felix@example.com[0m
+[32m[2025-04-14 13:55:49] [INFO] Delete email sent to julia@example.com[0m
+[32m[2025-04-14 13:55:49] [INFO] Successfully closed on '2025-04-11'[0m
+[32m[2025-04-14 13:55:58] [INFO] Delete email sent to paul@example.com[0m
+[32m[2025-04-14 13:56:00] [INFO] Delete email sent to nina@example.com[0m
+[32m[2025-04-14 13:56:02] [INFO] Delete email sent to johanna@example.com[0m
+[32m[2025-04-14 13:56:03] [INFO] Delete email sent to matthias@example.com[0m
+[32m[2025-04-14 13:56:05] [INFO] Delete email sent to victoria@example.com[0m
+[32m[2025-04-14 13:56:05] [INFO] Successfully closed on '2025-04-12'[0m
+[32m[2025-04-14 13:56:10] [INFO] Barber mit ID 1 konnte nicht gelöscht werden: Termin(e) vorhanden.[0m
+[32m[2025-04-14 13:56:55] [INFO] Termin erfolgreich gelöscht[0m
+[32m[2025-04-14 13:56:58] [INFO] Delete email sent to sadf@gag.com[0m
+[32m[2025-04-14 13:57:57] [INFO] Successfully closed on '2025-05-31'[0m
+[32m[2025-04-14 13:58:25] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 13:58:25] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 13:58:25] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 13:58:25] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 13:58:25] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 13:58:25] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 13:58:25] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 13:58:25] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 13:58:25] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 13:58:25] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 13:58:25] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 13:58:25] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 13:59:41] [INFO] Barber mit ID 3 konnte nicht gelöscht werden: Termin(e) vorhanden.[0m
+[32m[2025-04-14 14:02:10] [INFO] Barber mit ID 3 konnte nicht gelöscht werden: Termin(e) vorhanden.[0m
+[32m[2025-04-14 14:07:21] [INFO] Successfully opened up on '2025-04-07'[0m
+[32m[2025-04-14 14:07:26] [INFO] Delete email sent to max@example.com[0m
+[32m[2025-04-14 14:07:26] [INFO] Delete Appointment with AppointmentID = ''[0m
+[32m[2025-04-14 14:07:28] [INFO] Delete email sent to max@example.com[0m
+[32m[2025-04-14 14:07:28] [INFO] Delete Appointment with AppointmentID = ''[0m
+[32m[2025-04-14 14:07:30] [INFO] Delete email sent to lisa@example.com[0m
+[32m[2025-04-14 14:07:30] [INFO] Delete Appointment with AppointmentID = ''[0m
+[32m[2025-04-14 14:07:31] [INFO] Delete email sent to john@example.com[0m
+[32m[2025-04-14 14:07:31] [INFO] Delete Appointment with AppointmentID = ''[0m
+[32m[2025-04-14 14:07:33] [INFO] Delete email sent to anna@example.com[0m
+[32m[2025-04-14 14:07:33] [INFO] Delete Appointment with AppointmentID = ''[0m
+[32m[2025-04-14 14:07:35] [INFO] Delete email sent to peter@example.com[0m
+[32m[2025-04-14 14:07:35] [INFO] Delete Appointment with AppointmentID = ''[0m
+[32m[2025-04-14 14:07:35] [INFO] Successfully closed on '2025-04-07'[0m
+[32m[2025-04-14 14:08:57] [INFO] Successfully opened up on '2025-04-07'[0m
+[32m[2025-04-14 14:09:03] [INFO] Delete email sent to max@example.com[0m
+[32m[2025-04-14 14:09:03] [INFO] Delete Appointment with AppointmentID = '130'[0m
+[32m[2025-04-14 14:09:05] [INFO] Delete email sent to max@example.com[0m
+[32m[2025-04-14 14:09:05] [INFO] Delete Appointment with AppointmentID = '131'[0m
+[32m[2025-04-14 14:09:07] [INFO] Delete email sent to lisa@example.com[0m
+[32m[2025-04-14 14:09:07] [INFO] Delete Appointment with AppointmentID = '132'[0m
+[32m[2025-04-14 14:09:09] [INFO] Delete email sent to john@example.com[0m
+[32m[2025-04-14 14:09:09] [INFO] Delete Appointment with AppointmentID = '133'[0m
+[32m[2025-04-14 14:09:11] [INFO] Delete email sent to anna@example.com[0m
+[32m[2025-04-14 14:09:11] [INFO] Delete Appointment with AppointmentID = '134'[0m
+[32m[2025-04-14 14:09:13] [INFO] Delete email sent to peter@example.com[0m
+[32m[2025-04-14 14:09:13] [INFO] Delete Appointment with AppointmentID = '135'[0m
+[32m[2025-04-14 14:09:13] [INFO] Successfully closed on '2025-04-07'[0m
+[32m[2025-04-14 14:10:00] [INFO] Successfully opened up on '2025-04-08'[0m
+[32m[2025-04-14 14:10:10] [INFO] Successfully opened up on '2025-04-09'[0m
+[32m[2025-04-14 14:10:20] [INFO] Successfully opened up on '2025-04-10'[0m
+[32m[2025-04-14 14:10:30] [INFO] Successfully opened up on '2025-04-11'[0m
+[32m[2025-04-14 14:10:38] [INFO] Successfully opened up on '2025-04-12'[0m
+[32m[2025-04-14 14:10:46] [INFO] Successfully opened up on '2025-04-13'[0m
+[32m[2025-04-14 14:10:55] [INFO] Successfully opened up on '2025-04-07'[0m
+[32m[2025-04-14 14:11:02] [INFO] Delete email sent to sarah@example.com[0m
+[32m[2025-04-14 14:11:02] [INFO] Delete Appointment with AppointmentID = '138'[0m
+[32m[2025-04-14 14:11:05] [INFO] Delete email sent to tim@example.com[0m
+[32m[2025-04-14 14:11:05] [INFO] Delete Appointment with AppointmentID = '139'[0m
+[32m[2025-04-14 14:11:07] [INFO] Delete email sent to klara@example.com[0m
+[32m[2025-04-14 14:11:07] [INFO] Delete Appointment with AppointmentID = '140'[0m
+[32m[2025-04-14 14:11:07] [INFO] Successfully closed on '2025-04-08'[0m
+[32m[2025-04-14 14:11:20] [INFO] Delete email sent to tom@example.com[0m
+[32m[2025-04-14 14:11:20] [INFO] Delete Appointment with AppointmentID = '141'[0m
+[32m[2025-04-14 14:11:22] [INFO] Delete email sent to jasmin@example.com[0m
+[32m[2025-04-14 14:11:22] [INFO] Delete Appointment with AppointmentID = '142'[0m
+[32m[2025-04-14 14:11:23] [INFO] Delete email sent to david@example.com[0m
+[32m[2025-04-14 14:11:23] [INFO] Delete Appointment with AppointmentID = '143'[0m
+[32m[2025-04-14 14:11:23] [INFO] Successfully closed on '2025-04-09'[0m
+[32m[2025-04-14 14:11:32] [INFO] Delete email sent to katrin@example.com[0m
+[32m[2025-04-14 14:11:32] [INFO] Delete Appointment with AppointmentID = '146'[0m
+[32m[2025-04-14 14:11:34] [INFO] Delete email sent to niklas@example.com[0m
+[32m[2025-04-14 14:11:34] [INFO] Delete Appointment with AppointmentID = '147'[0m
+[32m[2025-04-14 14:11:36] [INFO] Delete email sent to monika@example.com[0m
+[32m[2025-04-14 14:11:36] [INFO] Delete Appointment with AppointmentID = '148'[0m
+[32m[2025-04-14 14:11:38] [INFO] Delete email sent to tobias@example.com[0m
+[32m[2025-04-14 14:11:38] [INFO] Delete Appointment with AppointmentID = '149'[0m
+[32m[2025-04-14 14:11:40] [INFO] Delete email sent to beatrix@example.com[0m
+[32m[2025-04-14 14:11:40] [INFO] Delete Appointment with AppointmentID = '150'[0m
+[32m[2025-04-14 14:11:40] [INFO] Successfully closed on '2025-04-10'[0m
+[32m[2025-04-14 14:11:48] [INFO] Delete email sent to lena@example.com[0m
+[32m[2025-04-14 14:11:48] [INFO] Delete Appointment with AppointmentID = '151'[0m
+[32m[2025-04-14 14:11:50] [INFO] Delete email sent to oliver@example.com[0m
+[32m[2025-04-14 14:11:50] [INFO] Delete Appointment with AppointmentID = '152'[0m
+[32m[2025-04-14 14:11:52] [INFO] Delete email sent to mia@example.com[0m
+[32m[2025-04-14 14:11:52] [INFO] Delete Appointment with AppointmentID = '153'[0m
+[32m[2025-04-14 14:11:54] [INFO] Delete email sent to felix@example.com[0m
+[32m[2025-04-14 14:11:54] [INFO] Delete Appointment with AppointmentID = '154'[0m
+[32m[2025-04-14 14:11:56] [INFO] Delete email sent to df@s.com[0m
+[32m[2025-04-14 14:11:56] [INFO] Delete Appointment with AppointmentID = '169'[0m
+[32m[2025-04-14 14:11:58] [INFO] Delete email sent to julia@example.com[0m
+[32m[2025-04-14 14:11:58] [INFO] Delete Appointment with AppointmentID = '155'[0m
+[32m[2025-04-14 14:11:58] [INFO] Successfully closed on '2025-04-11'[0m
+[32m[2025-04-14 14:12:09] [INFO] Delete email sent to paul@example.com[0m
+[32m[2025-04-14 14:12:09] [INFO] Delete Appointment with AppointmentID = '156'[0m
+[32m[2025-04-14 14:12:11] [INFO] Delete email sent to nina@example.com[0m
+[32m[2025-04-14 14:12:11] [INFO] Delete Appointment with AppointmentID = '157'[0m
+[32m[2025-04-14 14:12:13] [INFO] Delete email sent to johanna@example.com[0m
+[32m[2025-04-14 14:12:13] [INFO] Delete Appointment with AppointmentID = '158'[0m
+[32m[2025-04-14 14:12:15] [INFO] Delete email sent to matthias@example.com[0m
+[32m[2025-04-14 14:12:15] [INFO] Delete Appointment with AppointmentID = '159'[0m
+[32m[2025-04-14 14:12:17] [INFO] Delete email sent to victoria@example.com[0m
+[32m[2025-04-14 14:12:17] [INFO] Delete Appointment with AppointmentID = '160'[0m
+[32m[2025-04-14 14:12:17] [INFO] Successfully closed on '2025-04-12'[0m
+[32m[2025-04-14 14:12:27] [INFO] Delete email sent to karla@example.com[0m
+[32m[2025-04-14 14:12:27] [INFO] Delete Appointment with AppointmentID = '161'[0m
+[32m[2025-04-14 14:12:29] [INFO] Delete email sent to stefan@example.com[0m
+[32m[2025-04-14 14:12:29] [INFO] Delete Appointment with AppointmentID = '162'[0m
+[32m[2025-04-14 14:12:31] [INFO] Delete email sent to elke@example.com[0m
+[32m[2025-04-14 14:12:31] [INFO] Delete Appointment with AppointmentID = '163'[0m
+[32m[2025-04-14 14:12:33] [INFO] Delete email sent to hans@example.com[0m
+[32m[2025-04-14 14:12:33] [INFO] Delete Appointment with AppointmentID = '164'[0m
+[32m[2025-04-14 14:12:35] [INFO] Delete email sent to joerg@example.com[0m
+[32m[2025-04-14 14:12:35] [INFO] Delete Appointment with AppointmentID = '165'[0m
+[32m[2025-04-14 14:12:35] [INFO] Successfully closed on '2025-04-13'[0m
+[32m[2025-04-14 14:12:39] [INFO] Barber mit ID 1 erfolgreich gelöscht.[0m
+[32m[2025-04-14 14:12:59] [INFO] Barber mit ID 2 erfolgreich gelöscht.[0m
+[32m[2025-04-14 14:13:02] [INFO] Barber mit ID 3 erfolgreich gelöscht.[0m
+[32m[2025-04-14 14:14:06] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:06] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:06] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:06] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:06] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:06] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:06] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:06] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:06] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:06] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:06] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:06] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:12] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:12] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:12] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:12] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:12] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:12] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:12] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:12] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:12] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:12] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:12] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:12] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:50] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:50] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:50] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:50] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:50] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:50] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:50] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:50] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:50] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:50] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:50] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 14:14:50] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:12] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:12] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:12] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:12] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:12] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:12] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:12] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:12] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:12] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:12] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:12] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:12] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:34] [INFO] '2025-04-14' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:34] [INFO] '2025-04-15' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:34] [INFO] '2025-04-16' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:34] [INFO] '2025-04-17' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:34] [INFO] '2025-04-18' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:34] [INFO] '2025-04-19' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:34] [INFO] '2025-04-21' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:34] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:34] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:34] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:34] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-14 14:15:34] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-22 10:14:41] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-22 10:14:41] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-22 10:14:41] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-22 10:14:41] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-22 10:14:41] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-22 10:14:41] [INFO] Öffnungszeiten eingetragen für '2025-04-28'[0m
+[32m[2025-04-22 10:14:41] [INFO] Öffnungszeiten eingetragen für '2025-04-29'[0m
+[32m[2025-04-22 10:14:41] [INFO] Öffnungszeiten eingetragen für '2025-04-30'[0m
+[32m[2025-04-22 10:14:41] [INFO] Öffnungszeiten eingetragen für '2025-05-01'[0m
+[32m[2025-04-22 10:14:41] [INFO] Öffnungszeiten eingetragen für '2025-05-02'[0m
+[32m[2025-04-22 10:14:41] [INFO] Öffnungszeiten eingetragen für '2025-05-03'[0m
+[32m[2025-04-22 10:14:41] [INFO] Öffnungszeiten eingetragen für '2025-05-05'[0m
+[32m[2025-04-22 10:15:01] [INFO] 'Akin' von '2025-04-08' bis '2025-04-10' 'vacation' eingetragen[0m
+[32m[2025-04-22 10:15:43] [INFO] 'Isa' am '2025-04-30' von '09:00' bis '12:00' 'vacation' eingetragen[0m
+[32m[2025-04-22 10:16:21] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-22 10:16:21] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-22 10:16:21] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-22 10:16:21] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-22 10:16:21] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-22 10:16:21] [INFO] '2025-04-28' ist bereits eingetragen[0m
+[32m[2025-04-22 10:16:21] [INFO] '2025-04-29' ist bereits eingetragen[0m
+[32m[2025-04-22 10:16:21] [INFO] '2025-04-30' ist bereits eingetragen[0m
+[32m[2025-04-22 10:16:21] [INFO] '2025-05-01' ist bereits eingetragen[0m
+[32m[2025-04-22 10:16:21] [INFO] '2025-05-02' ist bereits eingetragen[0m
+[32m[2025-04-22 10:16:21] [INFO] '2025-05-03' ist bereits eingetragen[0m
+[32m[2025-04-22 10:16:21] [INFO] '2025-05-05' ist bereits eingetragen[0m
+[32m[2025-04-22 10:19:20] [INFO] 'Isa' von '2025-04-24' bis '2025-04-25' 'sick' eingetragen[0m
+[32m[2025-04-22 10:19:50] [INFO] 'Akin' am '2025-04-27' von '09:00' bis '12:00' 'vacation' eingetragen[0m
+[32m[2025-04-22 10:19:56] [INFO] '2025-04-22' ist bereits eingetragen[0m
+[32m[2025-04-22 10:19:56] [INFO] '2025-04-23' ist bereits eingetragen[0m
+[32m[2025-04-22 10:19:56] [INFO] '2025-04-24' ist bereits eingetragen[0m
+[32m[2025-04-22 10:19:56] [INFO] '2025-04-25' ist bereits eingetragen[0m
+[32m[2025-04-22 10:19:56] [INFO] '2025-04-26' ist bereits eingetragen[0m
+[32m[2025-04-22 10:19:56] [INFO] '2025-04-28' ist bereits eingetragen[0m
+[32m[2025-04-22 10:19:56] [INFO] '2025-04-29' ist bereits eingetragen[0m
+[32m[2025-04-22 10:19:56] [INFO] '2025-04-30' ist bereits eingetragen[0m
+[32m[2025-04-22 10:19:56] [INFO] '2025-05-01' ist bereits eingetragen[0m
+[32m[2025-04-22 10:19:56] [INFO] '2025-05-02' ist bereits eingetragen[0m
+[32m[2025-04-22 10:19:56] [INFO] '2025-05-03' ist bereits eingetragen[0m
+[32m[2025-04-22 10:19:56] [INFO] '2025-05-05' ist bereits eingetragen[0m

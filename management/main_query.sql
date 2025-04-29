@@ -143,7 +143,7 @@ select * from appointment;
 
 SELECT customer_name, start_time, end_time, customer_email, customer_phone, appointment_date, barber_name FROM appointment WHERE appointment_date = '2024-12-27';
 
-SELECT BarberID FROM barber WHERE barber_name = "mahmood";
+SELECT BarberID FROM barber WHERE barber_name = "Mahmood";
 
 
 INSERT INTO appointment (appointment_date, start_time, end_time, customer_name, customer_email, customer_phone, barberID) VALUES ("2025-05-27", "09:00", "10:00", "qkje", "kajdf", "oadfjh", 1);

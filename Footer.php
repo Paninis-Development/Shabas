@@ -26,8 +26,8 @@
         <div class="footer-col">
           <h4>Hilfe</h4>
           <ul>
-            <li><a href="Impressum.php">Datenschutzerklärung</a></li>
-            <li><a href="Datenschutzerklärung.php">Impressum</a></li>
+            <li><a href="Impressum.php">Impressum</a></li>
+            <li><a href="Datenschutzerklärung.php">Datenschutzerklärung</a></li>
             <!-- <li><a href="#cover">Cover</a></li>
             <li><a href="#">returns</a></li>
             <li><a href="#">order status</a></li>

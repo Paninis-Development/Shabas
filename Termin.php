@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             if (!empty($times)) {
                                 // Get the selected barber name from the form submission
                                 $barberName = isset($_POST['barber_select']) ? $_POST['barber_select'] : null;
-                                $barberName ? null : $barberName = "mahmood";
+                                $barberName ? null : $barberName = "Mahmood";
                                 // Generate time slots using the selected barber name
                                 $timeSlots = generateTimeSlotsWithAvailability($times['openTime'], $times['closeTime'], $selectedDate, $barberName);
                                 foreach ($timeSlots as $slot) {

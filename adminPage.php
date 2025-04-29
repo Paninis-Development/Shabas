@@ -36,12 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['opening_time']) && iss
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['closeButton'])) {
     $appointmentDetails = getAppointmentDetails($selectedDate);
-
     foreach ($appointmentDetails as $appointment) {
         $customerEmail = $appointment['customer_email'];
+        $appointmentId = $appointment['AppointmentID'];
         $customerName = $appointment['customer_name'];
         $startTime = $appointment['start_time'];
         sendDeleteEmail($customerEmail, $customerName, $selectedDate, $startTime);
+        deleteAppointment($appointmentId);
+        logMessage("Delete Appointment with AppointmentID = '$appointmentId'");
     }
 
     closeDay($selectedDate);
@@ -260,10 +262,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
                             </tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='3'>Keine Termine für den ausgewählten Tag gefunden.</td></tr>";
+                                    echo "<tr><td colspan='4'>Keine Termine für den ausgewählten Tag gefunden.</td></tr>";
                                 }
                             } else {
-                                echo "<tr><td colspan='3'>Keine Termine für den ausgewählten Tag gefunden.</td></tr>";
+                                echo "<tr><td colspan='4'>Keine Termine für den ausgewählten Tag gefunden.</td></tr>";
                             }
                         }
                     } catch (PDOException $e) {
@@ -310,18 +312,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
         <table class="table table-dark table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>E-Mail</th>
+            
                     <th>Name</th>
+                    <th>E-Mail</th>
                     <th>Aktionen</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($barberDetails as $barber) : ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($barber['BarberID']); ?></td>
-                        <td><?php echo htmlspecialchars($barber['barber_mail']); ?></td>
                         <td><?php echo htmlspecialchars($barber['barber_name']); ?></td>
+                        <td><?php echo htmlspecialchars($barber['barber_mail']); ?></td>
                         <td>
                             <form method="POST" onsubmit="return confirm('Wirklich löschen? \n Barber kann nur gelöscht werden wenn er keine Termine hat');" style="display:inline;">
                                 <input type="hidden" name="BarberID" value="<?php echo $barber['BarberID']; ?>">
@@ -488,6 +489,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
                 }
             });
 
+        
             $(function() {
                 let startDate = null;
                 let endDate = null;
@@ -520,6 +522,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_availability_i
 
                 $("#datepicker-popup").datepicker({
                     dateFormat: "dd.mm.yy",
+                    minDate: 0,
                     numberOfMonths: 1,
                     beforeShowDay: function(date) {
                         const dateString = $.datepicker.formatDate("dd.mm.yy", date);
